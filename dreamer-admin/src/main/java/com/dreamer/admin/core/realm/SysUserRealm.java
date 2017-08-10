@@ -1,5 +1,6 @@
 package com.dreamer.admin.core.realm;
 
+import com.dreamer.admin.component.SpringComponent;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
@@ -7,8 +8,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class SysUserRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String currentUsername = (String) super.getAvailablePrincipal(principalCollection);
-        SysUserPojo user = SpringUtil.getBean(SysUserService.class).findByLoginName(currentUsername);
+        SysUserPojo user = SpringComponent.getBean(SysUserService.class).findByLoginName(currentUsername);
         List<SysMenuPojo> sysMenuPojoBySyserId = SpringUtil.getBean(SysMenuService.class)
                                                            .findSysMenuPojoBySyserId(user.getId());
         List<String> permissionList = Collections3.extractToList(sysMenuPojoBySyserId, "permission");
