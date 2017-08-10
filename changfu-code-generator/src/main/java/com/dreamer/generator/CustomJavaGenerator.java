@@ -1,9 +1,11 @@
 package com.dreamer.generator;
 
-import org.jooq.util.*;
+import org.jooq.util.JavaGenerator;
+import org.jooq.util.JavaWriter;
+import org.jooq.util.TableDefinition;
 
 /**
- * Created by jimmy on 2017/3/7.
+ * Created by jw on 2017/3/7.
  */
 public class CustomJavaGenerator extends JavaGenerator {
     protected void generatePojo(TableDefinition table, JavaWriter out) {

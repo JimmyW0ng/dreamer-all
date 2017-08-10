@@ -1,4 +1,4 @@
-package com.dreamer.common.tools;
+package com.dreamer.common.tool;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.dreamer.common.tools.NumberTools.intValue;
+import static com.dreamer.common.tool.NumberTools.intValue;
 
 
 /**
@@ -677,47 +677,10 @@ public class DateTools {
         Calendar cal = Calendar.getInstance();
         Date date = new Date();
         cal.setTime(date);
-        int lastMonth = cal.get(Calendar.MONTH); // 上个月月份    
-        int thisYear = cal.get(Calendar.YEAR);
-        int thisDay1 = cal.getActualMinimum(Calendar.DAY_OF_MONTH);// 起始天数
-        int thisDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH); // 结束天数       
-        int last = cal.getActualMaximum(Calendar.DATE);
-        System.out.println("thisYear:" + thisYear);
-        System.out.println("lastMonth:" + lastMonth);
-        System.out.println("thisDay1:" + thisDay1);
-        System.out.println("thisDay:" + thisDay);
-        System.out.println("thisMonthDay:" + last);
-
-
         cal.add(Calendar.MONTH, -1);
         int lastDay = cal.getActualMaximum(Calendar.DATE);
 
-        System.out.println("lastMonthDay:" + lastDay);
-
         return lastDay;
-        
-        /*Calendar a = Calendar.getInstance();       
-        a.set(Calendar.DATE, 1); //把日期设置为当月第一天       
-        a.roll(Calendar.DATE, -1); //日期回滚一天，也就是上一个月最后一天   
-        
-        int MaxDate = a.getActualMaximum(Calendar.DATE); 
-        
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-        String ddd = simpleDateFormat.format(a.getTime()); 
-        System.out.println(":"+ddd);
-        System.out.println("该月最大天数:"+MaxDate);*/
-
-        /*
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar calendar = new GregorianCalendar(2000,2,1); 
-        String ddd = simpleDateFormat.format(calendar.getTime()); 
-        System.out.println("2000年3月1号:"+ddd);
-        calendar.add(Calendar.MONTH,-1); 
-        //calendar.set(Calendar.MONTH,calendar.get(Calendar.MONTH)-1); 
-        String ddd2 = simpleDateFormat.format(calendar.getTime()); 
-        System.out.println("2000年2月最后一天:"+ddd2);
-        System.out.println( "2000年3月1号的上个月份最后一天是 "+calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        */
     }
 
     /**
@@ -857,8 +820,6 @@ public class DateTools {
 
         cal.add(Calendar.MONTH, -1);
         int lastDay = cal.getActualMaximum(Calendar.DATE);
-
-        System.out.println("lastMonthDay:" + lastDay);
 
         return lastDay;
     }
@@ -1077,12 +1038,6 @@ public class DateTools {
         }
         return getDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1,
                 calendar.get(Calendar.DATE) + 1);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getDateDiff(new Date(), new Date()));
-
-        // System.out.println(DateTools.getCurrentDateTime());
     }
 
     /**

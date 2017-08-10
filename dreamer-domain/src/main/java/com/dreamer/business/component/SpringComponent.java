@@ -1,4 +1,4 @@
-package com.dreamer.admin.component;
+package com.dreamer.business.component;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -8,7 +8,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by jimmy on 2017/2/17.
+ * Created by jw on 2017/2/17.
  */
 @Component
 @Slf4j

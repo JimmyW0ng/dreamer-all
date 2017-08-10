@@ -1,10 +1,11 @@
 package com.dreamer.generator;
 
 import org.jooq.tools.StringUtils;
-import org.jooq.util.*;
+import org.jooq.util.DefaultGeneratorStrategy;
+import org.jooq.util.Definition;
 
 /**
- * Created by jimmy on 2016/12/10.
+ * Created by jw on 2016/12/10.
  */
 public class CustomGenertor extends DefaultGeneratorStrategy {
 

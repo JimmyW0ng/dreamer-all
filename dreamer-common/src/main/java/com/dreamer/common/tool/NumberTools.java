@@ -1,4 +1,4 @@
-package com.dreamer.common.tools;
+package com.dreamer.common.tool;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,14 +15,12 @@ import java.util.Locale;
 
 public class NumberTools {
 
+    //活期利息
+    public static final BigDecimal CURRENT_DEPOSIT_INTEREST = new BigDecimal("3.56");
     private static final BigDecimal YEAR_DAYS = new BigDecimal(36500);
     private static final BigDecimal MONTH_LEN = new BigDecimal(1200);
     private static final BigDecimal HUNDRED = new BigDecimal(100);
     private static final BigDecimal THOUSAND = new BigDecimal(1000);
-
-    //活期利息
-    public static final BigDecimal CURRENT_DEPOSIT_INTEREST = new BigDecimal("3.56");
-
 
     public static BigDecimal parseBigDecimal(Object o) {
         if (o == null) {

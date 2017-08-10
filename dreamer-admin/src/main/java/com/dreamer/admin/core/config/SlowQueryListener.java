@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by jimmy on 2017/3/22.
+ * Created by jw on 2017/3/22.
  */
 public class SlowQueryListener extends DefaultExecuteListener {
     private Logger logger = LoggerFactory.getLogger(SlowQueryListener.class);

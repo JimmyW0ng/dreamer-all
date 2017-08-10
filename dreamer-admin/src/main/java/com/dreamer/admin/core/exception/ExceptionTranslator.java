@@ -8,7 +8,7 @@ import org.springframework.jdbc.support.SQLExceptionTranslator;
 import org.springframework.jdbc.support.SQLStateSQLExceptionTranslator;
 
 /**
- * Created by jimmy on 2016/11/23.
+ * Created by jw on 2016/11/23.
  */
 public class ExceptionTranslator extends DefaultExecuteListener {
     @Override

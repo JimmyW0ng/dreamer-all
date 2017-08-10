@@ -1,4 +1,4 @@
-package com.dreamer.common.tools;
+package com.dreamer.common.tool;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by jimmy on 2016/12/15.
+ * Created by jw on 2016/12/15.
  */
 public final class StringTools {
     /**

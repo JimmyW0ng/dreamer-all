@@ -7,12 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by jimmy on 2016/12/8.
+ * Created by jw on 2016/12/8.
  */
 public class MainClass {
     public static String EXCLUDES = "QRTZ_FIRED_TRIGGERS|QRTZ_PAUSED_TRIGGER_GRPS|QRTZ_SCHEDULER_STATE|QRTZ_LOCKS" +
             "|QRTZ_SIMPLE_TRIGGERS|QRTZ_SIMPROP_TRIGGERS|QRTZ_CRON_TRIGGERS|QRTZ_CRON_TRIGGERS|QRTZ_TRIGGERS" +
             "|QRTZ_JOB_DETAILS|QRTZ_CALENDARS|QRTZ_BLOB_TRIGGERS";
+
+    public static void main(String[] args) throws Exception {
+        MainClass mainClass = new MainClass();
+        mainClass.codeGgenerator();
+    }
 
     public void codeGgenerator() throws Exception {
         List list = new ArrayList();
@@ -49,10 +54,5 @@ public class MainClass {
 
         GenerationTool.generate(configuration);
 
-    }
-
-    public static void main(String[] args) throws Exception {
-        MainClass mainClass = new MainClass();
-        mainClass.codeGgenerator();
     }
 }
