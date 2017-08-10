@@ -1,7 +1,8 @@
 package com.dreamer.admin.core.config;
 
+import com.dreamer.admin.core.exception.ExceptionTranslator;
+import com.dreamer.admin.core.listener.SlowQueryListener;
 import com.zaxxer.hikari.HikariDataSource;
-import com.dreamer.admin.core.exception.*;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
 import org.jooq.ExecuteListenerProvider;

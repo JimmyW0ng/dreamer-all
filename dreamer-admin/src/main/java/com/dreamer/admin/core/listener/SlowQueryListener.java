@@ -1,4 +1,4 @@
-package com.dreamer.admin.core.config;
+package com.dreamer.admin.core.listener;
 
 
 import org.jooq.ExecuteContext;
