@@ -4,22 +4,15 @@
 package com.dreamer.domain.tables;
 
 
-import com.dreamer.domain.Jw;
+import com.dreamer.domain.Dreamer;
 import com.dreamer.domain.Keys;
 import com.dreamer.domain.tables.records.SysRoleMenuRecord;
-
-import java.util.Arrays;
-import java.util.List;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
 import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.Identity;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -35,45 +28,33 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysRoleMenu extends TableImpl<SysRoleMenuRecord> {
 
-    private static final long serialVersionUID = -1007640234;
-
     /**
-     * The reference instance of <code>jw.sys_role_menu</code>
+     * The reference instance of <code>dreamer.sys_role_menu</code>
      */
     public static final SysRoleMenu SYS_ROLE_MENU = new SysRoleMenu();
-
+    private static final long serialVersionUID = -1779069041;
     /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<SysRoleMenuRecord> getRecordType() {
-        return SysRoleMenuRecord.class;
-    }
-
-    /**
-     * The column <code>jw.sys_role_menu.id</code>.
+     * The column <code>dreamer.sys_role_menu.id</code>.
      */
     public final TableField<SysRoleMenuRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
-
     /**
-     * The column <code>jw.sys_role_menu.sys_role_id</code>. 角色编号
+     * The column <code>dreamer.sys_role_menu.sys_role_id</code>. 角色编号
      */
     public final TableField<SysRoleMenuRecord, Long> SYS_ROLE_ID = createField("sys_role_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "角色编号");
-
     /**
-     * The column <code>jw.sys_role_menu.sys_menu_id</code>. 菜单编号
+     * The column <code>dreamer.sys_role_menu.sys_menu_id</code>. 菜单编号
      */
     public final TableField<SysRoleMenuRecord, Long> SYS_MENU_ID = createField("sys_menu_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "菜单编号");
 
     /**
-     * Create a <code>jw.sys_role_menu</code> table reference
+     * Create a <code>dreamer.sys_role_menu</code> table reference
      */
     public SysRoleMenu() {
         this("sys_role_menu", null);
     }
 
     /**
-     * Create an aliased <code>jw.sys_role_menu</code> table reference
+     * Create an aliased <code>dreamer.sys_role_menu</code> table reference
      */
     public SysRoleMenu(String alias) {
         this(alias, SYS_ROLE_MENU);
@@ -88,11 +69,19 @@ public class SysRoleMenu extends TableImpl<SysRoleMenuRecord> {
     }
 
     /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<SysRoleMenuRecord> getRecordType() {
+        return SysRoleMenuRecord.class;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Schema getSchema() {
-        return Jw.JW;
+        return Dreamer.DREAMER;
     }
 
     /**

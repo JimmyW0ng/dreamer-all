@@ -4,14 +4,13 @@
 package com.dreamer.domain;
 
 
+import org.jooq.Schema;
+import org.jooq.impl.CatalogImpl;
+
+import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Schema;
-import org.jooq.impl.CatalogImpl;
 
 
 /**
@@ -27,17 +26,15 @@ import org.jooq.impl.CatalogImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultCatalog extends CatalogImpl {
 
-    private static final long serialVersionUID = 1891209151;
-
     /**
      * The reference instance of <code></code>
      */
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
-
+    private static final long serialVersionUID = -123910320;
     /**
-     * The schema <code>jw</code>.
+     * The schema <code>dreamer</code>.
      */
-    public final Jw JW = com.dreamer.domain.Jw.JW;
+    public final Dreamer DREAMER = com.dreamer.domain.Dreamer.DREAMER;
 
     /**
      * No further instances allowed
@@ -55,6 +52,6 @@ public class DefaultCatalog extends CatalogImpl {
 
     private final List<Schema> getSchemas0() {
         return Arrays.<Schema>asList(
-            Jw.JW);
+                Dreamer.DREAMER);
     }
 }

@@ -5,16 +5,14 @@ package com.dreamer.domain.tables.records;
 
 
 import com.dreamer.domain.tables.SysLog;
-
-import java.sql.Timestamp;
-
-import javax.annotation.Generated;
-
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record12;
 import org.jooq.Row12;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
+import java.sql.Timestamp;
 
 
 /**
@@ -30,10 +28,44 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements Record12<Long, String, String, String, Long, String, String, String, String, String, String, Timestamp> {
 
-    private static final long serialVersionUID = -1678056151;
+    private static final long serialVersionUID = 733780577;
 
     /**
-     * Setter for <code>jw.sys_log.id</code>. 编号
+     * Create a detached SysLogRecord
+     */
+    public SysLogRecord() {
+        super(SysLog.SYS_LOG);
+    }
+
+    /**
+     * Create a detached, initialised SysLogRecord
+     */
+    public SysLogRecord(Long id, String moduleName, String moduleDesc, String remoteAddr, Long operateId, String operateName, String operateMethod, String requestUrl, String params, String result, String exception, Timestamp operateTime) {
+        super(SysLog.SYS_LOG);
+
+        set(0, id);
+        set(1, moduleName);
+        set(2, moduleDesc);
+        set(3, remoteAddr);
+        set(4, operateId);
+        set(5, operateName);
+        set(6, operateMethod);
+        set(7, requestUrl);
+        set(8, params);
+        set(9, result);
+        set(10, exception);
+        set(11, operateTime);
+    }
+
+    /**
+     * Getter for <code>dreamer.sys_log.id</code>. 编号
+     */
+    public Long getId() {
+        return (Long) get(0);
+    }
+
+    /**
+     * Setter for <code>dreamer.sys_log.id</code>. 编号
      */
     public SysLogRecord setId(Long value) {
         set(0, value);
@@ -41,14 +73,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.id</code>. 编号
+     * Getter for <code>dreamer.sys_log.module_name</code>. 模块名称
      */
-    public Long getId() {
-        return (Long) get(0);
+    public String getModuleName() {
+        return (String) get(1);
     }
 
     /**
-     * Setter for <code>jw.sys_log.module_name</code>. 模块名称
+     * Setter for <code>dreamer.sys_log.module_name</code>. 模块名称
      */
     public SysLogRecord setModuleName(String value) {
         set(1, value);
@@ -56,14 +88,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.module_name</code>. 模块名称
+     * Getter for <code>dreamer.sys_log.module_desc</code>. 日志描述
      */
-    public String getModuleName() {
-        return (String) get(1);
+    public String getModuleDesc() {
+        return (String) get(2);
     }
 
     /**
-     * Setter for <code>jw.sys_log.module_desc</code>. 日志描述
+     * Setter for <code>dreamer.sys_log.module_desc</code>. 日志描述
      */
     public SysLogRecord setModuleDesc(String value) {
         set(2, value);
@@ -71,14 +103,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.module_desc</code>. 日志描述
+     * Getter for <code>dreamer.sys_log.remote_addr</code>. 操作IP地址
      */
-    public String getModuleDesc() {
-        return (String) get(2);
+    public String getRemoteAddr() {
+        return (String) get(3);
     }
 
     /**
-     * Setter for <code>jw.sys_log.remote_addr</code>. 操作IP地址
+     * Setter for <code>dreamer.sys_log.remote_addr</code>. 操作IP地址
      */
     public SysLogRecord setRemoteAddr(String value) {
         set(3, value);
@@ -86,14 +118,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.remote_addr</code>. 操作IP地址
+     * Getter for <code>dreamer.sys_log.operate_id</code>. 操作者ID
      */
-    public String getRemoteAddr() {
-        return (String) get(3);
+    public Long getOperateId() {
+        return (Long) get(4);
     }
 
     /**
-     * Setter for <code>jw.sys_log.operate_id</code>. 操作者ID
+     * Setter for <code>dreamer.sys_log.operate_id</code>. 操作者ID
      */
     public SysLogRecord setOperateId(Long value) {
         set(4, value);
@@ -101,14 +133,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.operate_id</code>. 操作者ID
+     * Getter for <code>dreamer.sys_log.operate_name</code>. 操作者姓名
      */
-    public Long getOperateId() {
-        return (Long) get(4);
+    public String getOperateName() {
+        return (String) get(5);
     }
 
     /**
-     * Setter for <code>jw.sys_log.operate_name</code>. 操作者姓名
+     * Setter for <code>dreamer.sys_log.operate_name</code>. 操作者姓名
      */
     public SysLogRecord setOperateName(String value) {
         set(5, value);
@@ -116,14 +148,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.operate_name</code>. 操作者姓名
+     * Getter for <code>dreamer.sys_log.operate_method</code>. 操作方法
      */
-    public String getOperateName() {
-        return (String) get(5);
+    public String getOperateMethod() {
+        return (String) get(6);
     }
 
     /**
-     * Setter for <code>jw.sys_log.operate_method</code>. 操作方法
+     * Setter for <code>dreamer.sys_log.operate_method</code>. 操作方法
      */
     public SysLogRecord setOperateMethod(String value) {
         set(6, value);
@@ -131,14 +163,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.operate_method</code>. 操作方法
+     * Getter for <code>dreamer.sys_log.request_url</code>. 请求URL
      */
-    public String getOperateMethod() {
-        return (String) get(6);
+    public String getRequestUrl() {
+        return (String) get(7);
     }
 
     /**
-     * Setter for <code>jw.sys_log.request_url</code>. 请求URL
+     * Setter for <code>dreamer.sys_log.request_url</code>. 请求URL
      */
     public SysLogRecord setRequestUrl(String value) {
         set(7, value);
@@ -146,14 +178,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.request_url</code>. 请求URL
+     * Getter for <code>dreamer.sys_log.params</code>. 操作提交的数据
      */
-    public String getRequestUrl() {
-        return (String) get(7);
+    public String getParams() {
+        return (String) get(8);
     }
 
     /**
-     * Setter for <code>jw.sys_log.params</code>. 操作提交的数据
+     * Setter for <code>dreamer.sys_log.params</code>. 操作提交的数据
      */
     public SysLogRecord setParams(String value) {
         set(8, value);
@@ -161,14 +193,14 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.params</code>. 操作提交的数据
+     * Getter for <code>dreamer.sys_log.result</code>. 操作返回的结果
      */
-    public String getParams() {
-        return (String) get(8);
+    public String getResult() {
+        return (String) get(9);
     }
 
     /**
-     * Setter for <code>jw.sys_log.result</code>. 操作返回的结果
+     * Setter for <code>dreamer.sys_log.result</code>. 操作返回的结果
      */
     public SysLogRecord setResult(String value) {
         set(9, value);
@@ -176,45 +208,42 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     }
 
     /**
-     * Getter for <code>jw.sys_log.result</code>. 操作返回的结果
-     */
-    public String getResult() {
-        return (String) get(9);
-    }
-
-    /**
-     * Setter for <code>jw.sys_log.exception</code>. 异常信息
-     */
-    public SysLogRecord setException(String value) {
-        set(10, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jw.sys_log.exception</code>. 异常信息
+     * Getter for <code>dreamer.sys_log.exception</code>. 异常信息
      */
     public String getException() {
         return (String) get(10);
     }
 
     /**
-     * Setter for <code>jw.sys_log.operate_time</code>. 操作时间
+     * Setter for <code>dreamer.sys_log.exception</code>. 异常信息
      */
-    public SysLogRecord setOperateTime(Timestamp value) {
-        set(11, value);
+    public SysLogRecord setException(String value) {
+        set(10, value);
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Primary key information
+    // -------------------------------------------------------------------------
+
     /**
-     * Getter for <code>jw.sys_log.operate_time</code>. 操作时间
+     * Getter for <code>dreamer.sys_log.operate_time</code>. 操作时间
      */
     public Timestamp getOperateTime() {
         return (Timestamp) get(11);
     }
 
     // -------------------------------------------------------------------------
-    // Primary key information
+    // Record12 type implementation
     // -------------------------------------------------------------------------
+
+    /**
+     * Setter for <code>dreamer.sys_log.operate_time</code>. 操作时间
+     */
+    public SysLogRecord setOperateTime(Timestamp value) {
+        set(11, value);
+        return this;
+    }
 
     /**
      * {@inheritDoc}
@@ -223,10 +252,6 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
     public Record1<Long> key() {
         return (Record1) super.key();
     }
-
-    // -------------------------------------------------------------------------
-    // Record12 type implementation
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -535,6 +560,10 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
     /**
      * {@inheritDoc}
      */
@@ -562,36 +591,5 @@ public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements R
         value11(value11);
         value12(value12);
         return this;
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    /**
-     * Create a detached SysLogRecord
-     */
-    public SysLogRecord() {
-        super(SysLog.SYS_LOG);
-    }
-
-    /**
-     * Create a detached, initialised SysLogRecord
-     */
-    public SysLogRecord(Long id, String moduleName, String moduleDesc, String remoteAddr, Long operateId, String operateName, String operateMethod, String requestUrl, String params, String result, String exception, Timestamp operateTime) {
-        super(SysLog.SYS_LOG);
-
-        set(0, id);
-        set(1, moduleName);
-        set(2, moduleDesc);
-        set(3, remoteAddr);
-        set(4, operateId);
-        set(5, operateName);
-        set(6, operateMethod);
-        set(7, requestUrl);
-        set(8, params);
-        set(9, result);
-        set(10, exception);
-        set(11, operateTime);
     }
 }

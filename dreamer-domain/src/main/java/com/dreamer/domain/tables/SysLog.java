@@ -4,23 +4,16 @@
 package com.dreamer.domain.tables;
 
 
-import com.dreamer.domain.Jw;
+import com.dreamer.domain.Dreamer;
 import com.dreamer.domain.Keys;
 import com.dreamer.domain.tables.records.SysLogRecord;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
+import javax.annotation.Generated;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.Identity;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
 
 
 /**
@@ -36,90 +29,69 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysLog extends TableImpl<SysLogRecord> {
 
-    private static final long serialVersionUID = -306202156;
-
     /**
-     * The reference instance of <code>jw.sys_log</code>
+     * The reference instance of <code>dreamer.sys_log</code>
      */
     public static final SysLog SYS_LOG = new SysLog();
-
+    private static final long serialVersionUID = -562305654;
     /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<SysLogRecord> getRecordType() {
-        return SysLogRecord.class;
-    }
-
-    /**
-     * The column <code>jw.sys_log.id</code>. 编号
+     * The column <code>dreamer.sys_log.id</code>. 编号
      */
     public final TableField<SysLogRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "编号");
-
     /**
-     * The column <code>jw.sys_log.module_name</code>. 模块名称
+     * The column <code>dreamer.sys_log.module_name</code>. 模块名称
      */
     public final TableField<SysLogRecord, String> MODULE_NAME = createField("module_name", org.jooq.impl.SQLDataType.VARCHAR.length(256), this, "模块名称");
-
     /**
-     * The column <code>jw.sys_log.module_desc</code>. 日志描述
+     * The column <code>dreamer.sys_log.module_desc</code>. 日志描述
      */
     public final TableField<SysLogRecord, String> MODULE_DESC = createField("module_desc", org.jooq.impl.SQLDataType.VARCHAR.length(1000), this, "日志描述");
-
     /**
-     * The column <code>jw.sys_log.remote_addr</code>. 操作IP地址
+     * The column <code>dreamer.sys_log.remote_addr</code>. 操作IP地址
      */
     public final TableField<SysLogRecord, String> REMOTE_ADDR = createField("remote_addr", org.jooq.impl.SQLDataType.VARCHAR.length(256), this, "操作IP地址");
-
     /**
-     * The column <code>jw.sys_log.operate_id</code>. 操作者ID
+     * The column <code>dreamer.sys_log.operate_id</code>. 操作者ID
      */
     public final TableField<SysLogRecord, Long> OPERATE_ID = createField("operate_id", org.jooq.impl.SQLDataType.BIGINT, this, "操作者ID");
-
     /**
-     * The column <code>jw.sys_log.operate_name</code>. 操作者姓名
+     * The column <code>dreamer.sys_log.operate_name</code>. 操作者姓名
      */
     public final TableField<SysLogRecord, String> OPERATE_NAME = createField("operate_name", org.jooq.impl.SQLDataType.VARCHAR.length(64), this, "操作者姓名");
-
     /**
-     * The column <code>jw.sys_log.operate_method</code>. 操作方法
+     * The column <code>dreamer.sys_log.operate_method</code>. 操作方法
      */
     public final TableField<SysLogRecord, String> OPERATE_METHOD = createField("operate_method", org.jooq.impl.SQLDataType.VARCHAR.length(1000), this, "操作方法");
-
     /**
-     * The column <code>jw.sys_log.request_url</code>. 请求URL
+     * The column <code>dreamer.sys_log.request_url</code>. 请求URL
      */
     public final TableField<SysLogRecord, String> REQUEST_URL = createField("request_url", org.jooq.impl.SQLDataType.VARCHAR.length(256), this, "请求URL");
-
     /**
-     * The column <code>jw.sys_log.params</code>. 操作提交的数据
+     * The column <code>dreamer.sys_log.params</code>. 操作提交的数据
      */
     public final TableField<SysLogRecord, String> PARAMS = createField("params", org.jooq.impl.SQLDataType.VARCHAR.length(3000), this, "操作提交的数据");
-
     /**
-     * The column <code>jw.sys_log.result</code>. 操作返回的结果
+     * The column <code>dreamer.sys_log.result</code>. 操作返回的结果
      */
     public final TableField<SysLogRecord, String> RESULT = createField("result", org.jooq.impl.SQLDataType.VARCHAR.length(3000), this, "操作返回的结果");
-
     /**
-     * The column <code>jw.sys_log.exception</code>. 异常信息
+     * The column <code>dreamer.sys_log.exception</code>. 异常信息
      */
     public final TableField<SysLogRecord, String> EXCEPTION = createField("exception", org.jooq.impl.SQLDataType.VARCHAR.length(3000), this, "异常信息");
-
     /**
-     * The column <code>jw.sys_log.operate_time</code>. 操作时间
+     * The column <code>dreamer.sys_log.operate_time</code>. 操作时间
      */
     public final TableField<SysLogRecord, Timestamp> OPERATE_TIME = createField("operate_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "操作时间");
 
     /**
-     * Create a <code>jw.sys_log</code> table reference
+     * Create a <code>dreamer.sys_log</code> table reference
      */
     public SysLog() {
         this("sys_log", null);
     }
 
     /**
-     * Create an aliased <code>jw.sys_log</code> table reference
+     * Create an aliased <code>dreamer.sys_log</code> table reference
      */
     public SysLog(String alias) {
         this(alias, SYS_LOG);
@@ -134,11 +106,19 @@ public class SysLog extends TableImpl<SysLogRecord> {
     }
 
     /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<SysLogRecord> getRecordType() {
+        return SysLogRecord.class;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Schema getSchema() {
-        return Jw.JW;
+        return Dreamer.DREAMER;
     }
 
     /**

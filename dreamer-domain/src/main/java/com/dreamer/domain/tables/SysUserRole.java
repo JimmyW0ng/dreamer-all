@@ -4,22 +4,15 @@
 package com.dreamer.domain.tables;
 
 
-import com.dreamer.domain.Jw;
+import com.dreamer.domain.Dreamer;
 import com.dreamer.domain.Keys;
 import com.dreamer.domain.tables.records.SysUserRoleRecord;
-
-import java.util.Arrays;
-import java.util.List;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
 import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.Identity;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -35,45 +28,33 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysUserRole extends TableImpl<SysUserRoleRecord> {
 
-    private static final long serialVersionUID = -760656462;
-
     /**
-     * The reference instance of <code>jw.sys_user_role</code>
+     * The reference instance of <code>dreamer.sys_user_role</code>
      */
     public static final SysUserRole SYS_USER_ROLE = new SysUserRole();
-
+    private static final long serialVersionUID = 1540718917;
     /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<SysUserRoleRecord> getRecordType() {
-        return SysUserRoleRecord.class;
-    }
-
-    /**
-     * The column <code>jw.sys_user_role.id</code>.
+     * The column <code>dreamer.sys_user_role.id</code>.
      */
     public final TableField<SysUserRoleRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
-
     /**
-     * The column <code>jw.sys_user_role.sys_user_id</code>. 用户编号
+     * The column <code>dreamer.sys_user_role.sys_user_id</code>. 用户编号
      */
     public final TableField<SysUserRoleRecord, Long> SYS_USER_ID = createField("sys_user_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "用户编号");
-
     /**
-     * The column <code>jw.sys_user_role.sys_role_id</code>. 角色编号
+     * The column <code>dreamer.sys_user_role.sys_role_id</code>. 角色编号
      */
     public final TableField<SysUserRoleRecord, Long> SYS_ROLE_ID = createField("sys_role_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "角色编号");
 
     /**
-     * Create a <code>jw.sys_user_role</code> table reference
+     * Create a <code>dreamer.sys_user_role</code> table reference
      */
     public SysUserRole() {
         this("sys_user_role", null);
     }
 
     /**
-     * Create an aliased <code>jw.sys_user_role</code> table reference
+     * Create an aliased <code>dreamer.sys_user_role</code> table reference
      */
     public SysUserRole(String alias) {
         this(alias, SYS_USER_ROLE);
@@ -88,11 +69,19 @@ public class SysUserRole extends TableImpl<SysUserRoleRecord> {
     }
 
     /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<SysUserRoleRecord> getRecordType() {
+        return SysUserRoleRecord.class;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Schema getSchema() {
-        return Jw.JW;
+        return Dreamer.DREAMER;
     }
 
     /**

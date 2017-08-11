@@ -33,8 +33,7 @@ public class SysUserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String currentUsername = (String) super.getAvailablePrincipal(principalCollection);
         SysUserPojo user = SpringComponent.getBean(SysUserService.class).findByLoginName(currentUsername);
-        List<SysMenuPojo> sysMenuPojoBySyserId = SpringComponent.getBean(SysMenuService.class)
-                                                                .findSysMenuPojoBySyserId(user.getId());
+        List<SysMenuPojo> sysMenuPojoBySyserId = SpringComponent.getBean(SysMenuService.class).findSysMenuPojoBySyserId(user.getId());
         List<String> permissionList = CollectionsTools.extractToList(sysMenuPojoBySyserId, "permission");
         List<String> roleList = Lists.newArrayList();
         SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
@@ -61,8 +60,6 @@ public class SysUserRealm extends AuthorizingRealm {
         if (user.getStatus().equals(SysUserStatus.disabled)) {
             throw new UnknownAccountException("当前用户不可用！");
         }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getLoginName(), user.getPassword(), getName());
-
-        return info;
+        return new SimpleAuthenticationInfo(user.getLoginName(), user.getPassword(), getName());
     }
 }

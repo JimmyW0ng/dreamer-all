@@ -4,25 +4,18 @@
 package com.dreamer.domain.tables;
 
 
-import com.dreamer.domain.Jw;
+import com.dreamer.domain.Dreamer;
 import com.dreamer.domain.Keys;
 import com.dreamer.domain.enums.SysMenuStatus;
 import com.dreamer.domain.enums.SysMenuType;
 import com.dreamer.domain.tables.records.SysMenuRecord;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
+import javax.annotation.Generated;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.Identity;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
 
 
 /**
@@ -38,105 +31,81 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysMenu extends TableImpl<SysMenuRecord> {
 
-    private static final long serialVersionUID = -799216349;
-
     /**
-     * The reference instance of <code>jw.sys_menu</code>
+     * The reference instance of <code>dreamer.sys_menu</code>
      */
     public static final SysMenu SYS_MENU = new SysMenu();
-
+    private static final long serialVersionUID = -1769225620;
     /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<SysMenuRecord> getRecordType() {
-        return SysMenuRecord.class;
-    }
-
-    /**
-     * The column <code>jw.sys_menu.id</code>. 编号
+     * The column <code>dreamer.sys_menu.id</code>. 编号
      */
     public final TableField<SysMenuRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "编号");
-
     /**
-     * The column <code>jw.sys_menu.parent_id</code>. 父级编号
+     * The column <code>dreamer.sys_menu.parent_id</code>. 父级编号
      */
     public final TableField<SysMenuRecord, Long> PARENT_ID = createField("parent_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "父级编号");
-
     /**
-     * The column <code>jw.sys_menu.type</code>. 类型一级菜单，页面，功能按钮
+     * The column <code>dreamer.sys_menu.type</code>. 类型一级菜单，页面，功能按钮
      */
     public final TableField<SysMenuRecord, SysMenuType> TYPE = createField("type", org.jooq.util.mysql.MySQLDataType.VARCHAR.asEnumDataType(com.dreamer.domain.enums.SysMenuType.class), this, "类型一级菜单，页面，功能按钮");
-
     /**
-     * The column <code>jw.sys_menu.name</code>. 菜单名称
+     * The column <code>dreamer.sys_menu.name</code>. 菜单名称
      */
     public final TableField<SysMenuRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(255).nullable(false), this, "菜单名称");
-
     /**
-     * The column <code>jw.sys_menu.href</code>. 链接
+     * The column <code>dreamer.sys_menu.href</code>. 链接
      */
     public final TableField<SysMenuRecord, String> HREF = createField("href", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "链接");
-
     /**
-     * The column <code>jw.sys_menu.target</code>. 目标
+     * The column <code>dreamer.sys_menu.target</code>. 目标
      */
     public final TableField<SysMenuRecord, String> TARGET = createField("target", org.jooq.impl.SQLDataType.VARCHAR.length(20), this, "目标");
-
     /**
-     * The column <code>jw.sys_menu.icon</code>. 图标
+     * The column <code>dreamer.sys_menu.icon</code>. 图标
      */
     public final TableField<SysMenuRecord, String> ICON = createField("icon", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "图标");
-
     /**
-     * The column <code>jw.sys_menu.sort</code>. 排序（升序）
+     * The column <code>dreamer.sys_menu.sort</code>. 排序（升序）
      */
     public final TableField<SysMenuRecord, Integer> SORT = createField("sort", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "排序（升序）");
-
     /**
-     * The column <code>jw.sys_menu.status</code>. 状态
+     * The column <code>dreamer.sys_menu.status</code>. 状态
      */
     public final TableField<SysMenuRecord, SysMenuStatus> STATUS = createField("status", org.jooq.util.mysql.MySQLDataType.VARCHAR.asEnumDataType(com.dreamer.domain.enums.SysMenuStatus.class), this, "状态");
-
     /**
-     * The column <code>jw.sys_menu.permission</code>. 权限标识
+     * The column <code>dreamer.sys_menu.permission</code>. 权限标识
      */
     public final TableField<SysMenuRecord, String> PERMISSION = createField("permission", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "权限标识");
-
     /**
-     * The column <code>jw.sys_menu.create_at</code>. 创建时间
+     * The column <code>dreamer.sys_menu.create_at</code>. 创建时间
      */
     public final TableField<SysMenuRecord, Timestamp> CREATE_AT = createField("create_at", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "创建时间");
-
     /**
-     * The column <code>jw.sys_menu.update_at</code>. 更新时间
+     * The column <code>dreamer.sys_menu.update_at</code>. 更新时间
      */
     public final TableField<SysMenuRecord, Timestamp> UPDATE_AT = createField("update_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "更新时间");
-
     /**
-     * The column <code>jw.sys_menu.remarks</code>. 备注信息
+     * The column <code>dreamer.sys_menu.remarks</code>. 备注信息
      */
     public final TableField<SysMenuRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
-
     /**
-     * The column <code>jw.sys_menu.del_flag</code>. 删除标记
+     * The column <code>dreamer.sys_menu.del_flag</code>. 删除标记
      */
     public final TableField<SysMenuRecord, Boolean> DEL_FLAG = createField("del_flag", org.jooq.impl.SQLDataType.BIT.nullable(false), this, "删除标记");
-
     /**
-     * The column <code>jw.sys_menu.version</code>.
+     * The column <code>dreamer.sys_menu.version</code>.
      */
     public final TableField<SysMenuRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * Create a <code>jw.sys_menu</code> table reference
+     * Create a <code>dreamer.sys_menu</code> table reference
      */
     public SysMenu() {
         this("sys_menu", null);
     }
 
     /**
-     * Create an aliased <code>jw.sys_menu</code> table reference
+     * Create an aliased <code>dreamer.sys_menu</code> table reference
      */
     public SysMenu(String alias) {
         this(alias, SYS_MENU);
@@ -151,11 +120,19 @@ public class SysMenu extends TableImpl<SysMenuRecord> {
     }
 
     /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<SysMenuRecord> getRecordType() {
+        return SysMenuRecord.class;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Schema getSchema() {
-        return Jw.JW;
+        return Dreamer.DREAMER;
     }
 
     /**

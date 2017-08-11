@@ -5,13 +5,12 @@ package com.dreamer.domain.tables.records;
 
 
 import com.dreamer.domain.tables.SysUserRole;
-
-import javax.annotation.Generated;
-
 import org.jooq.Field;
 import org.jooq.Record3;
 import org.jooq.Row3;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
 
 
 /**
@@ -27,10 +26,35 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysUserRoleRecord extends UpdatableRecordImpl<SysUserRoleRecord> implements Record3<Long, Long, Long> {
 
-    private static final long serialVersionUID = 1608764034;
+    private static final long serialVersionUID = 281105006;
 
     /**
-     * Setter for <code>jw.sys_user_role.id</code>.
+     * Create a detached SysUserRoleRecord
+     */
+    public SysUserRoleRecord() {
+        super(SysUserRole.SYS_USER_ROLE);
+    }
+
+    /**
+     * Create a detached, initialised SysUserRoleRecord
+     */
+    public SysUserRoleRecord(Long id, Long sysUserId, Long sysRoleId) {
+        super(SysUserRole.SYS_USER_ROLE);
+
+        set(0, id);
+        set(1, sysUserId);
+        set(2, sysRoleId);
+    }
+
+    /**
+     * Getter for <code>dreamer.sys_user_role.id</code>.
+     */
+    public Long getId() {
+        return (Long) get(0);
+    }
+
+    /**
+     * Setter for <code>dreamer.sys_user_role.id</code>.
      */
     public SysUserRoleRecord setId(Long value) {
         set(0, value);
@@ -38,45 +62,42 @@ public class SysUserRoleRecord extends UpdatableRecordImpl<SysUserRoleRecord> im
     }
 
     /**
-     * Getter for <code>jw.sys_user_role.id</code>.
-     */
-    public Long getId() {
-        return (Long) get(0);
-    }
-
-    /**
-     * Setter for <code>jw.sys_user_role.sys_user_id</code>. 用户编号
-     */
-    public SysUserRoleRecord setSysUserId(Long value) {
-        set(1, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jw.sys_user_role.sys_user_id</code>. 用户编号
+     * Getter for <code>dreamer.sys_user_role.sys_user_id</code>. 用户编号
      */
     public Long getSysUserId() {
         return (Long) get(1);
     }
 
     /**
-     * Setter for <code>jw.sys_user_role.sys_role_id</code>. 角色编号
+     * Setter for <code>dreamer.sys_user_role.sys_user_id</code>. 用户编号
      */
-    public SysUserRoleRecord setSysRoleId(Long value) {
-        set(2, value);
+    public SysUserRoleRecord setSysUserId(Long value) {
+        set(1, value);
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Primary key information
+    // -------------------------------------------------------------------------
+
     /**
-     * Getter for <code>jw.sys_user_role.sys_role_id</code>. 角色编号
+     * Getter for <code>dreamer.sys_user_role.sys_role_id</code>. 角色编号
      */
     public Long getSysRoleId() {
         return (Long) get(2);
     }
 
     // -------------------------------------------------------------------------
-    // Primary key information
+    // Record3 type implementation
     // -------------------------------------------------------------------------
+
+    /**
+     * Setter for <code>dreamer.sys_user_role.sys_role_id</code>. 角色编号
+     */
+    public SysUserRoleRecord setSysRoleId(Long value) {
+        set(2, value);
+        return this;
+    }
 
     /**
      * {@inheritDoc}
@@ -85,10 +106,6 @@ public class SysUserRoleRecord extends UpdatableRecordImpl<SysUserRoleRecord> im
     public Record3<Long, Long, Long> key() {
         return (Record3) super.key();
     }
-
-    // -------------------------------------------------------------------------
-    // Record3 type implementation
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -172,6 +189,10 @@ public class SysUserRoleRecord extends UpdatableRecordImpl<SysUserRoleRecord> im
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
     /**
      * {@inheritDoc}
      */
@@ -190,27 +211,5 @@ public class SysUserRoleRecord extends UpdatableRecordImpl<SysUserRoleRecord> im
         value2(value2);
         value3(value3);
         return this;
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    /**
-     * Create a detached SysUserRoleRecord
-     */
-    public SysUserRoleRecord() {
-        super(SysUserRole.SYS_USER_ROLE);
-    }
-
-    /**
-     * Create a detached, initialised SysUserRoleRecord
-     */
-    public SysUserRoleRecord(Long id, Long sysUserId, Long sysRoleId) {
-        super(SysUserRole.SYS_USER_ROLE);
-
-        set(0, id);
-        set(1, sysUserId);
-        set(2, sysRoleId);
     }
 }

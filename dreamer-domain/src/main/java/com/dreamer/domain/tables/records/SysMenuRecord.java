@@ -7,16 +7,14 @@ package com.dreamer.domain.tables.records;
 import com.dreamer.domain.enums.SysMenuStatus;
 import com.dreamer.domain.enums.SysMenuType;
 import com.dreamer.domain.tables.SysMenu;
-
-import java.sql.Timestamp;
-
-import javax.annotation.Generated;
-
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record15;
 import org.jooq.Row15;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
+import java.sql.Timestamp;
 
 
 /**
@@ -32,10 +30,47 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements Record15<Long, Long, SysMenuType, String, String, String, String, Integer, SysMenuStatus, String, Timestamp, Timestamp, String, Boolean, Long> {
 
-    private static final long serialVersionUID = 1100376482;
+    private static final long serialVersionUID = -357740588;
 
     /**
-     * Setter for <code>jw.sys_menu.id</code>. 编号
+     * Create a detached SysMenuRecord
+     */
+    public SysMenuRecord() {
+        super(SysMenu.SYS_MENU);
+    }
+
+    /**
+     * Create a detached, initialised SysMenuRecord
+     */
+    public SysMenuRecord(Long id, Long parentId, SysMenuType type, String name, String href, String target, String icon, Integer sort, SysMenuStatus status, String permission, Timestamp createAt, Timestamp updateAt, String remarks, Boolean delFlag, Long version) {
+        super(SysMenu.SYS_MENU);
+
+        set(0, id);
+        set(1, parentId);
+        set(2, type);
+        set(3, name);
+        set(4, href);
+        set(5, target);
+        set(6, icon);
+        set(7, sort);
+        set(8, status);
+        set(9, permission);
+        set(10, createAt);
+        set(11, updateAt);
+        set(12, remarks);
+        set(13, delFlag);
+        set(14, version);
+    }
+
+    /**
+     * Getter for <code>dreamer.sys_menu.id</code>. 编号
+     */
+    public Long getId() {
+        return (Long) get(0);
+    }
+
+    /**
+     * Setter for <code>dreamer.sys_menu.id</code>. 编号
      */
     public SysMenuRecord setId(Long value) {
         set(0, value);
@@ -43,14 +78,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.id</code>. 编号
+     * Getter for <code>dreamer.sys_menu.parent_id</code>. 父级编号
      */
-    public Long getId() {
-        return (Long) get(0);
+    public Long getParentId() {
+        return (Long) get(1);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.parent_id</code>. 父级编号
+     * Setter for <code>dreamer.sys_menu.parent_id</code>. 父级编号
      */
     public SysMenuRecord setParentId(Long value) {
         set(1, value);
@@ -58,14 +93,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.parent_id</code>. 父级编号
+     * Getter for <code>dreamer.sys_menu.type</code>. 类型一级菜单，页面，功能按钮
      */
-    public Long getParentId() {
-        return (Long) get(1);
+    public SysMenuType getType() {
+        return (SysMenuType) get(2);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.type</code>. 类型一级菜单，页面，功能按钮
+     * Setter for <code>dreamer.sys_menu.type</code>. 类型一级菜单，页面，功能按钮
      */
     public SysMenuRecord setType(SysMenuType value) {
         set(2, value);
@@ -73,14 +108,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.type</code>. 类型一级菜单，页面，功能按钮
+     * Getter for <code>dreamer.sys_menu.name</code>. 菜单名称
      */
-    public SysMenuType getType() {
-        return (SysMenuType) get(2);
+    public String getName() {
+        return (String) get(3);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.name</code>. 菜单名称
+     * Setter for <code>dreamer.sys_menu.name</code>. 菜单名称
      */
     public SysMenuRecord setName(String value) {
         set(3, value);
@@ -88,14 +123,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.name</code>. 菜单名称
+     * Getter for <code>dreamer.sys_menu.href</code>. 链接
      */
-    public String getName() {
-        return (String) get(3);
+    public String getHref() {
+        return (String) get(4);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.href</code>. 链接
+     * Setter for <code>dreamer.sys_menu.href</code>. 链接
      */
     public SysMenuRecord setHref(String value) {
         set(4, value);
@@ -103,14 +138,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.href</code>. 链接
+     * Getter for <code>dreamer.sys_menu.target</code>. 目标
      */
-    public String getHref() {
-        return (String) get(4);
+    public String getTarget() {
+        return (String) get(5);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.target</code>. 目标
+     * Setter for <code>dreamer.sys_menu.target</code>. 目标
      */
     public SysMenuRecord setTarget(String value) {
         set(5, value);
@@ -118,14 +153,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.target</code>. 目标
+     * Getter for <code>dreamer.sys_menu.icon</code>. 图标
      */
-    public String getTarget() {
-        return (String) get(5);
+    public String getIcon() {
+        return (String) get(6);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.icon</code>. 图标
+     * Setter for <code>dreamer.sys_menu.icon</code>. 图标
      */
     public SysMenuRecord setIcon(String value) {
         set(6, value);
@@ -133,14 +168,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.icon</code>. 图标
+     * Getter for <code>dreamer.sys_menu.sort</code>. 排序（升序）
      */
-    public String getIcon() {
-        return (String) get(6);
+    public Integer getSort() {
+        return (Integer) get(7);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.sort</code>. 排序（升序）
+     * Setter for <code>dreamer.sys_menu.sort</code>. 排序（升序）
      */
     public SysMenuRecord setSort(Integer value) {
         set(7, value);
@@ -148,14 +183,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.sort</code>. 排序（升序）
+     * Getter for <code>dreamer.sys_menu.status</code>. 状态
      */
-    public Integer getSort() {
-        return (Integer) get(7);
+    public SysMenuStatus getStatus() {
+        return (SysMenuStatus) get(8);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.status</code>. 状态
+     * Setter for <code>dreamer.sys_menu.status</code>. 状态
      */
     public SysMenuRecord setStatus(SysMenuStatus value) {
         set(8, value);
@@ -163,14 +198,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.status</code>. 状态
+     * Getter for <code>dreamer.sys_menu.permission</code>. 权限标识
      */
-    public SysMenuStatus getStatus() {
-        return (SysMenuStatus) get(8);
+    public String getPermission() {
+        return (String) get(9);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.permission</code>. 权限标识
+     * Setter for <code>dreamer.sys_menu.permission</code>. 权限标识
      */
     public SysMenuRecord setPermission(String value) {
         set(9, value);
@@ -178,14 +213,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.permission</code>. 权限标识
+     * Getter for <code>dreamer.sys_menu.create_at</code>. 创建时间
      */
-    public String getPermission() {
-        return (String) get(9);
+    public Timestamp getCreateAt() {
+        return (Timestamp) get(10);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.create_at</code>. 创建时间
+     * Setter for <code>dreamer.sys_menu.create_at</code>. 创建时间
      */
     public SysMenuRecord setCreateAt(Timestamp value) {
         set(10, value);
@@ -193,14 +228,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.create_at</code>. 创建时间
+     * Getter for <code>dreamer.sys_menu.update_at</code>. 更新时间
      */
-    public Timestamp getCreateAt() {
-        return (Timestamp) get(10);
+    public Timestamp getUpdateAt() {
+        return (Timestamp) get(11);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.update_at</code>. 更新时间
+     * Setter for <code>dreamer.sys_menu.update_at</code>. 更新时间
      */
     public SysMenuRecord setUpdateAt(Timestamp value) {
         set(11, value);
@@ -208,14 +243,14 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.update_at</code>. 更新时间
+     * Getter for <code>dreamer.sys_menu.remarks</code>. 备注信息
      */
-    public Timestamp getUpdateAt() {
-        return (Timestamp) get(11);
+    public String getRemarks() {
+        return (String) get(12);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.remarks</code>. 备注信息
+     * Setter for <code>dreamer.sys_menu.remarks</code>. 备注信息
      */
     public SysMenuRecord setRemarks(String value) {
         set(12, value);
@@ -223,45 +258,42 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_menu.remarks</code>. 备注信息
-     */
-    public String getRemarks() {
-        return (String) get(12);
-    }
-
-    /**
-     * Setter for <code>jw.sys_menu.del_flag</code>. 删除标记
-     */
-    public SysMenuRecord setDelFlag(Boolean value) {
-        set(13, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jw.sys_menu.del_flag</code>. 删除标记
+     * Getter for <code>dreamer.sys_menu.del_flag</code>. 删除标记
      */
     public Boolean getDelFlag() {
         return (Boolean) get(13);
     }
 
     /**
-     * Setter for <code>jw.sys_menu.version</code>.
+     * Setter for <code>dreamer.sys_menu.del_flag</code>. 删除标记
      */
-    public SysMenuRecord setVersion(Long value) {
-        set(14, value);
+    public SysMenuRecord setDelFlag(Boolean value) {
+        set(13, value);
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Primary key information
+    // -------------------------------------------------------------------------
+
     /**
-     * Getter for <code>jw.sys_menu.version</code>.
+     * Getter for <code>dreamer.sys_menu.version</code>.
      */
     public Long getVersion() {
         return (Long) get(14);
     }
 
     // -------------------------------------------------------------------------
-    // Primary key information
+    // Record15 type implementation
     // -------------------------------------------------------------------------
+
+    /**
+     * Setter for <code>dreamer.sys_menu.version</code>.
+     */
+    public SysMenuRecord setVersion(Long value) {
+        set(14, value);
+        return this;
+    }
 
     /**
      * {@inheritDoc}
@@ -270,10 +302,6 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     public Record1<Long> key() {
         return (Record1) super.key();
     }
-
-    // -------------------------------------------------------------------------
-    // Record15 type implementation
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -657,6 +685,10 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
     /**
      * {@inheritDoc}
      */
@@ -687,39 +719,5 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
         value14(value14);
         value15(value15);
         return this;
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    /**
-     * Create a detached SysMenuRecord
-     */
-    public SysMenuRecord() {
-        super(SysMenu.SYS_MENU);
-    }
-
-    /**
-     * Create a detached, initialised SysMenuRecord
-     */
-    public SysMenuRecord(Long id, Long parentId, SysMenuType type, String name, String href, String target, String icon, Integer sort, SysMenuStatus status, String permission, Timestamp createAt, Timestamp updateAt, String remarks, Boolean delFlag, Long version) {
-        super(SysMenu.SYS_MENU);
-
-        set(0, id);
-        set(1, parentId);
-        set(2, type);
-        set(3, name);
-        set(4, href);
-        set(5, target);
-        set(6, icon);
-        set(7, sort);
-        set(8, status);
-        set(9, permission);
-        set(10, createAt);
-        set(11, updateAt);
-        set(12, remarks);
-        set(13, delFlag);
-        set(14, version);
     }
 }

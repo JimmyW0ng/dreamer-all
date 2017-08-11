@@ -1,6 +1,5 @@
 package com.dreamer.business.repository;
 
-import com.dreamer.domain.Jw;
 import com.dreamer.domain.tables.records.SysLogRecord;
 import com.dreamer.pojo.po.SysLogPojo;
 import org.jooq.DSLContext;
@@ -15,6 +14,6 @@ import static com.dreamer.domain.Tables.SYS_LOG;
 public class SysLogRepository extends AbstractCRUDRepository<SysLogRecord, Long, SysLogPojo> {
 
     public SysLogRepository(DSLContext dslContext) {
-        super(dslContext, Jw.JW.SYS_LOG, SYS_LOG.ID, SysLogPojo.class);
+        super(dslContext, SYS_LOG, SYS_LOG.ID, SysLogPojo.class);
     }
 }

@@ -5,16 +5,14 @@ package com.dreamer.domain.tables.records;
 
 
 import com.dreamer.domain.tables.SysRole;
-
-import java.sql.Timestamp;
-
-import javax.annotation.Generated;
-
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record8;
 import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
+import java.sql.Timestamp;
 
 
 /**
@@ -30,10 +28,40 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements Record8<Long, String, String, Timestamp, String, Timestamp, String, Boolean> {
 
-    private static final long serialVersionUID = 2017719721;
+    private static final long serialVersionUID = 931298811;
 
     /**
-     * Setter for <code>jw.sys_role.id</code>. 编号
+     * Create a detached SysRoleRecord
+     */
+    public SysRoleRecord() {
+        super(SysRole.SYS_ROLE);
+    }
+
+    /**
+     * Create a detached, initialised SysRoleRecord
+     */
+    public SysRoleRecord(Long id, String name, String createBy, Timestamp createAt, String updateBy, Timestamp updateAt, String remarks, Boolean delFlag) {
+        super(SysRole.SYS_ROLE);
+
+        set(0, id);
+        set(1, name);
+        set(2, createBy);
+        set(3, createAt);
+        set(4, updateBy);
+        set(5, updateAt);
+        set(6, remarks);
+        set(7, delFlag);
+    }
+
+    /**
+     * Getter for <code>dreamer.sys_role.id</code>. 编号
+     */
+    public Long getId() {
+        return (Long) get(0);
+    }
+
+    /**
+     * Setter for <code>dreamer.sys_role.id</code>. 编号
      */
     public SysRoleRecord setId(Long value) {
         set(0, value);
@@ -41,14 +69,14 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_role.id</code>. 编号
+     * Getter for <code>dreamer.sys_role.name</code>. 角色名称
      */
-    public Long getId() {
-        return (Long) get(0);
+    public String getName() {
+        return (String) get(1);
     }
 
     /**
-     * Setter for <code>jw.sys_role.name</code>. 角色名称
+     * Setter for <code>dreamer.sys_role.name</code>. 角色名称
      */
     public SysRoleRecord setName(String value) {
         set(1, value);
@@ -56,14 +84,14 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_role.name</code>. 角色名称
+     * Getter for <code>dreamer.sys_role.create_by</code>. 创建者
      */
-    public String getName() {
-        return (String) get(1);
+    public String getCreateBy() {
+        return (String) get(2);
     }
 
     /**
-     * Setter for <code>jw.sys_role.create_by</code>. 创建者
+     * Setter for <code>dreamer.sys_role.create_by</code>. 创建者
      */
     public SysRoleRecord setCreateBy(String value) {
         set(2, value);
@@ -71,14 +99,14 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_role.create_by</code>. 创建者
+     * Getter for <code>dreamer.sys_role.create_at</code>. 创建时间
      */
-    public String getCreateBy() {
-        return (String) get(2);
+    public Timestamp getCreateAt() {
+        return (Timestamp) get(3);
     }
 
     /**
-     * Setter for <code>jw.sys_role.create_at</code>. 创建时间
+     * Setter for <code>dreamer.sys_role.create_at</code>. 创建时间
      */
     public SysRoleRecord setCreateAt(Timestamp value) {
         set(3, value);
@@ -86,14 +114,14 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_role.create_at</code>. 创建时间
+     * Getter for <code>dreamer.sys_role.update_by</code>. 更新者
      */
-    public Timestamp getCreateAt() {
-        return (Timestamp) get(3);
+    public String getUpdateBy() {
+        return (String) get(4);
     }
 
     /**
-     * Setter for <code>jw.sys_role.update_by</code>. 更新者
+     * Setter for <code>dreamer.sys_role.update_by</code>. 更新者
      */
     public SysRoleRecord setUpdateBy(String value) {
         set(4, value);
@@ -101,14 +129,14 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_role.update_by</code>. 更新者
+     * Getter for <code>dreamer.sys_role.update_at</code>. 更新时间
      */
-    public String getUpdateBy() {
-        return (String) get(4);
+    public Timestamp getUpdateAt() {
+        return (Timestamp) get(5);
     }
 
     /**
-     * Setter for <code>jw.sys_role.update_at</code>. 更新时间
+     * Setter for <code>dreamer.sys_role.update_at</code>. 更新时间
      */
     public SysRoleRecord setUpdateAt(Timestamp value) {
         set(5, value);
@@ -116,45 +144,42 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_role.update_at</code>. 更新时间
-     */
-    public Timestamp getUpdateAt() {
-        return (Timestamp) get(5);
-    }
-
-    /**
-     * Setter for <code>jw.sys_role.remarks</code>. 备注信息
-     */
-    public SysRoleRecord setRemarks(String value) {
-        set(6, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jw.sys_role.remarks</code>. 备注信息
+     * Getter for <code>dreamer.sys_role.remarks</code>. 备注信息
      */
     public String getRemarks() {
         return (String) get(6);
     }
 
     /**
-     * Setter for <code>jw.sys_role.del_flag</code>. 删除标记
+     * Setter for <code>dreamer.sys_role.remarks</code>. 备注信息
      */
-    public SysRoleRecord setDelFlag(Boolean value) {
-        set(7, value);
+    public SysRoleRecord setRemarks(String value) {
+        set(6, value);
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Primary key information
+    // -------------------------------------------------------------------------
+
     /**
-     * Getter for <code>jw.sys_role.del_flag</code>. 删除标记
+     * Getter for <code>dreamer.sys_role.del_flag</code>. 删除标记
      */
     public Boolean getDelFlag() {
         return (Boolean) get(7);
     }
 
     // -------------------------------------------------------------------------
-    // Primary key information
+    // Record8 type implementation
     // -------------------------------------------------------------------------
+
+    /**
+     * Setter for <code>dreamer.sys_role.del_flag</code>. 删除标记
+     */
+    public SysRoleRecord setDelFlag(Boolean value) {
+        set(7, value);
+        return this;
+    }
 
     /**
      * {@inheritDoc}
@@ -163,10 +188,6 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     public Record1<Long> key() {
         return (Record1) super.key();
     }
-
-    // -------------------------------------------------------------------------
-    // Record8 type implementation
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -375,6 +396,10 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
     /**
      * {@inheritDoc}
      */
@@ -398,32 +423,5 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
         value7(value7);
         value8(value8);
         return this;
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    /**
-     * Create a detached SysRoleRecord
-     */
-    public SysRoleRecord() {
-        super(SysRole.SYS_ROLE);
-    }
-
-    /**
-     * Create a detached, initialised SysRoleRecord
-     */
-    public SysRoleRecord(Long id, String name, String createBy, Timestamp createAt, String updateBy, Timestamp updateAt, String remarks, Boolean delFlag) {
-        super(SysRole.SYS_ROLE);
-
-        set(0, id);
-        set(1, name);
-        set(2, createBy);
-        set(3, createAt);
-        set(4, updateBy);
-        set(5, updateAt);
-        set(6, remarks);
-        set(7, delFlag);
     }
 }

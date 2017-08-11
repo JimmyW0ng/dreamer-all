@@ -5,13 +5,12 @@ package com.dreamer.domain.tables.records;
 
 
 import com.dreamer.domain.tables.SysRoleMenu;
-
-import javax.annotation.Generated;
-
 import org.jooq.Field;
 import org.jooq.Record3;
 import org.jooq.Row3;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
 
 
 /**
@@ -27,10 +26,35 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysRoleMenuRecord extends UpdatableRecordImpl<SysRoleMenuRecord> implements Record3<Long, Long, Long> {
 
-    private static final long serialVersionUID = 1080056190;
+    private static final long serialVersionUID = 2044696718;
 
     /**
-     * Setter for <code>jw.sys_role_menu.id</code>.
+     * Create a detached SysRoleMenuRecord
+     */
+    public SysRoleMenuRecord() {
+        super(SysRoleMenu.SYS_ROLE_MENU);
+    }
+
+    /**
+     * Create a detached, initialised SysRoleMenuRecord
+     */
+    public SysRoleMenuRecord(Long id, Long sysRoleId, Long sysMenuId) {
+        super(SysRoleMenu.SYS_ROLE_MENU);
+
+        set(0, id);
+        set(1, sysRoleId);
+        set(2, sysMenuId);
+    }
+
+    /**
+     * Getter for <code>dreamer.sys_role_menu.id</code>.
+     */
+    public Long getId() {
+        return (Long) get(0);
+    }
+
+    /**
+     * Setter for <code>dreamer.sys_role_menu.id</code>.
      */
     public SysRoleMenuRecord setId(Long value) {
         set(0, value);
@@ -38,45 +62,42 @@ public class SysRoleMenuRecord extends UpdatableRecordImpl<SysRoleMenuRecord> im
     }
 
     /**
-     * Getter for <code>jw.sys_role_menu.id</code>.
-     */
-    public Long getId() {
-        return (Long) get(0);
-    }
-
-    /**
-     * Setter for <code>jw.sys_role_menu.sys_role_id</code>. 角色编号
-     */
-    public SysRoleMenuRecord setSysRoleId(Long value) {
-        set(1, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jw.sys_role_menu.sys_role_id</code>. 角色编号
+     * Getter for <code>dreamer.sys_role_menu.sys_role_id</code>. 角色编号
      */
     public Long getSysRoleId() {
         return (Long) get(1);
     }
 
     /**
-     * Setter for <code>jw.sys_role_menu.sys_menu_id</code>. 菜单编号
+     * Setter for <code>dreamer.sys_role_menu.sys_role_id</code>. 角色编号
      */
-    public SysRoleMenuRecord setSysMenuId(Long value) {
-        set(2, value);
+    public SysRoleMenuRecord setSysRoleId(Long value) {
+        set(1, value);
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Primary key information
+    // -------------------------------------------------------------------------
+
     /**
-     * Getter for <code>jw.sys_role_menu.sys_menu_id</code>. 菜单编号
+     * Getter for <code>dreamer.sys_role_menu.sys_menu_id</code>. 菜单编号
      */
     public Long getSysMenuId() {
         return (Long) get(2);
     }
 
     // -------------------------------------------------------------------------
-    // Primary key information
+    // Record3 type implementation
     // -------------------------------------------------------------------------
+
+    /**
+     * Setter for <code>dreamer.sys_role_menu.sys_menu_id</code>. 菜单编号
+     */
+    public SysRoleMenuRecord setSysMenuId(Long value) {
+        set(2, value);
+        return this;
+    }
 
     /**
      * {@inheritDoc}
@@ -85,10 +106,6 @@ public class SysRoleMenuRecord extends UpdatableRecordImpl<SysRoleMenuRecord> im
     public Record3<Long, Long, Long> key() {
         return (Record3) super.key();
     }
-
-    // -------------------------------------------------------------------------
-    // Record3 type implementation
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -172,6 +189,10 @@ public class SysRoleMenuRecord extends UpdatableRecordImpl<SysRoleMenuRecord> im
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
     /**
      * {@inheritDoc}
      */
@@ -190,27 +211,5 @@ public class SysRoleMenuRecord extends UpdatableRecordImpl<SysRoleMenuRecord> im
         value2(value2);
         value3(value3);
         return this;
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    /**
-     * Create a detached SysRoleMenuRecord
-     */
-    public SysRoleMenuRecord() {
-        super(SysRoleMenu.SYS_ROLE_MENU);
-    }
-
-    /**
-     * Create a detached, initialised SysRoleMenuRecord
-     */
-    public SysRoleMenuRecord(Long id, Long sysRoleId, Long sysMenuId) {
-        super(SysRoleMenu.SYS_ROLE_MENU);
-
-        set(0, id);
-        set(1, sysRoleId);
-        set(2, sysMenuId);
     }
 }

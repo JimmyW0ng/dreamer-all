@@ -1,9 +1,14 @@
 package com.dreamer.admin.controller;
 
+import com.dreamer.admin.core.constant.Constant;
+import com.dreamer.business.service.SysUserService;
 import com.dreamer.common.tool.CryptTools;
+import com.dreamer.pojo.po.SysUserPojo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +21,11 @@ import javax.servlet.http.HttpServletRequest;
  * Created by J.W on 2017/8/8 0008.
  */
 @Controller
+@Slf4j
 public class LoginController extends BaseController {
+
+    @Autowired
+    private SysUserService sysUserService;
 
     /**
      * 跳转到登录页面
@@ -36,48 +45,55 @@ public class LoginController extends BaseController {
                             @RequestParam(value = "remember", required = false) String remember,
                             HttpServletRequest request) {
 
-        Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, CryptTools.encryptByase(password));
-//        String username = super.getPara("username").trim();
-//        String password = super.getPara("password").trim();
-//        String remember = super.getPara("remember");
-//
-//        //验证验证码是否正确
-//        if (ToolUtil.getKaptchaOnOff()) {
-//            String kaptcha = super.getPara("kaptcha").trim();
-//            String code = (String) super.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-//            if (ToolUtil.isEmpty(kaptcha) || !kaptcha.equals(code)) {
-//                throw new InvalidKaptchaException();
-//            }
-//        }
-//
-//        Subject currentUser = ShiroKit.getSubject();
-//        UsernamePasswordToken token = new UsernamePasswordToken(username, password.toCharArray());
-//
-//        if ("on".equals(remember)) {
-//            token.setRememberMe(true);
-//        } else {
-//            token.setRememberMe(false);
-//        }
-//
-//        currentUser.login(token);
-//
-//        ShiroUser shiroUser = ShiroKit.getUser();
-//        super.getSession().setAttribute("shiroUser", shiroUser);
-//        super.getSession().setAttribute("username", shiroUser.getAccount());
-//
-//        LogManager.me().executeLog(LogTaskFactory.loginLog(shiroUser.getId(), getIp()));
-//
-//        ShiroKit.getSession().setAttribute("sessionFlag", true);
-
-        return REDIRECT + "/";
+        Subject currentUser = SecurityUtils.getSubject();
+        if ("on".equals(remember)) {
+            token.setRememberMe(true);
+        } else {
+            token.setRememberMe(false);
+        }
+        String resultPageURL = "/login.html";
+        try {
+            log.debug("对用户[" + username + "]进行登录验证..验证开始");
+            currentUser.login(token);
+            log.debug("对用户[" + username + "]进行登录验证..验证通过");
+            resultPageURL = REDIRECT + "/index";
+        } catch (UnknownAccountException uae) {
+            log.debug("对用户[" + username + "]进行登录验证..验证未通过,未知账户");
+            model.addAttribute("tips", "未知账户");
+        } catch (IncorrectCredentialsException ice) {
+            log.debug("对用户[" + username + "]进行登录验证..验证未通过,错误的凭证");
+            model.addAttribute("tips", "密码不正确");
+        } catch (LockedAccountException lae) {
+            log.debug("对用户[" + username + "]进行登录验证..验证未通过,账户已锁定");
+            model.addAttribute("tips", "账户已锁定");
+        } catch (ExcessiveAttemptsException eae) {
+            log.debug("对用户[" + username + "]进行登录验证..验证未通过,错误次数过多");
+            model.addAttribute("tips", "用户名或密码错误次数过多");
+        } catch (AuthenticationException ae) {
+            // 通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
+            log.debug("对用户[" + username + "]进行登录验证..验证未通过,堆栈轨迹如下");
+            model.addAttribute("tips", "用户名或密码不正确");
+        }
+        // 验证是否登录成功
+        if (currentUser.isAuthenticated()) {
+            log.info("登录系统成功-" + username);
+            Subject subject = SecurityUtils.getSubject();
+            SysUserPojo user = sysUserService.findByLoginName(token.getUsername());
+            subject.getSession().setAttribute(Constant.CURRENT_USER, user);
+        } else {
+            token.clear();
+        }
+        return resultPageURL;
     }
 
-//    /**
-//     * 跳转到主页
-//     */
-//    @RequestMapping(value = "/", method = RequestMethod.GET)
-//    public String index(Model model) {
+    /**
+     * 跳转到主页
+     */
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(Model model) {
+        SysUserPojo user = (SysUserPojo) SecurityUtils.getSubject().getSession().getAttribute(Constant.CURRENT_USER);
+        SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
 //        //获取菜单列表
 //        List<Integer> roleList = ShiroKit.getUser().getRoleList();
 //        if (roleList == null || roleList.size() == 0) {
@@ -94,7 +110,7 @@ public class LoginController extends BaseController {
 //        User user = userMapper.selectById(id);
 //        String avatar = user.getAvatar();
 //        model.addAttribute("avatar", avatar);
-//
-//        return "/index.html";
-//    }
+
+        return "/index.html";
+    }
 }

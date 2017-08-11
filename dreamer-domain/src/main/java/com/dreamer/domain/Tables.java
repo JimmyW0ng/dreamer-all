@@ -4,19 +4,13 @@
 package com.dreamer.domain;
 
 
-import com.dreamer.domain.tables.SysDict;
-import com.dreamer.domain.tables.SysLog;
-import com.dreamer.domain.tables.SysMenu;
-import com.dreamer.domain.tables.SysRole;
-import com.dreamer.domain.tables.SysRoleMenu;
-import com.dreamer.domain.tables.SysUser;
-import com.dreamer.domain.tables.SysUserRole;
+import com.dreamer.domain.tables.*;
 
 import javax.annotation.Generated;
 
 
 /**
- * Convenience access to all tables in jw
+ * Convenience access to all tables in dreamer
  */
 @Generated(
     value = {

@@ -22,7 +22,7 @@ public class MainClass {
     public void codeGgenerator() throws Exception {
         List list = new ArrayList();
         Schema schema = new Schema();
-        schema.setInputSchema("jw");
+        schema.setInputSchema("dreamer");
         list.add(schema);
         schema = new Schema();
         schema.setOutputSchemaToDefault(true);
@@ -31,7 +31,7 @@ public class MainClass {
         Configuration configuration = new Configuration()
                 .withJdbc(new Jdbc()
                         .withDriver("com.mysql.jdbc.Driver")
-                        .withUrl("jdbc:mysql://127.0.0.1:3306/jw?useUnicode=true&amp;" +
+                        .withUrl("jdbc:mysql://127.0.0.1:3306/dreamer?useUnicode=true&amp;" +
                                 "characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true")
                         .withUser("root")
                         .withPassword("root"))

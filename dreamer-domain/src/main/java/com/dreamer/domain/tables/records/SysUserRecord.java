@@ -6,16 +6,14 @@ package com.dreamer.domain.tables.records;
 
 import com.dreamer.domain.enums.SysUserStatus;
 import com.dreamer.domain.tables.SysUser;
-
-import java.sql.Timestamp;
-
-import javax.annotation.Generated;
-
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record16;
 import org.jooq.Row16;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
+import java.sql.Timestamp;
 
 
 /**
@@ -31,10 +29,48 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements Record16<Long, String, String, String, String, String, String, String, SysUserStatus, String, Timestamp, String, Timestamp, Timestamp, String, Boolean> {
 
-    private static final long serialVersionUID = -392761537;
+    private static final long serialVersionUID = 1890003059;
 
     /**
-     * Setter for <code>jw.sys_user.id</code>. 编号
+     * Create a detached SysUserRecord
+     */
+    public SysUserRecord() {
+        super(SysUser.SYS_USER);
+    }
+
+    /**
+     * Create a detached, initialised SysUserRecord
+     */
+    public SysUserRecord(Long id, String loginName, String password, String no, String name, String email, String phone, String mobile, SysUserStatus status, String loginIp, Timestamp loginTime, String avatars, Timestamp createAt, Timestamp updateAt, String remarks, Boolean delFlag) {
+        super(SysUser.SYS_USER);
+
+        set(0, id);
+        set(1, loginName);
+        set(2, password);
+        set(3, no);
+        set(4, name);
+        set(5, email);
+        set(6, phone);
+        set(7, mobile);
+        set(8, status);
+        set(9, loginIp);
+        set(10, loginTime);
+        set(11, avatars);
+        set(12, createAt);
+        set(13, updateAt);
+        set(14, remarks);
+        set(15, delFlag);
+    }
+
+    /**
+     * Getter for <code>dreamer.sys_user.id</code>. 编号
+     */
+    public Long getId() {
+        return (Long) get(0);
+    }
+
+    /**
+     * Setter for <code>dreamer.sys_user.id</code>. 编号
      */
     public SysUserRecord setId(Long value) {
         set(0, value);
@@ -42,14 +78,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.id</code>. 编号
+     * Getter for <code>dreamer.sys_user.login_name</code>. 登录名
      */
-    public Long getId() {
-        return (Long) get(0);
+    public String getLoginName() {
+        return (String) get(1);
     }
 
     /**
-     * Setter for <code>jw.sys_user.login_name</code>. 登录名
+     * Setter for <code>dreamer.sys_user.login_name</code>. 登录名
      */
     public SysUserRecord setLoginName(String value) {
         set(1, value);
@@ -57,14 +93,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.login_name</code>. 登录名
+     * Getter for <code>dreamer.sys_user.password</code>. 密码
      */
-    public String getLoginName() {
-        return (String) get(1);
+    public String getPassword() {
+        return (String) get(2);
     }
 
     /**
-     * Setter for <code>jw.sys_user.password</code>. 密码
+     * Setter for <code>dreamer.sys_user.password</code>. 密码
      */
     public SysUserRecord setPassword(String value) {
         set(2, value);
@@ -72,14 +108,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.password</code>. 密码
+     * Getter for <code>dreamer.sys_user.no</code>. 工号
      */
-    public String getPassword() {
-        return (String) get(2);
+    public String getNo() {
+        return (String) get(3);
     }
 
     /**
-     * Setter for <code>jw.sys_user.no</code>. 工号
+     * Setter for <code>dreamer.sys_user.no</code>. 工号
      */
     public SysUserRecord setNo(String value) {
         set(3, value);
@@ -87,14 +123,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.no</code>. 工号
+     * Getter for <code>dreamer.sys_user.name</code>. 姓名
      */
-    public String getNo() {
-        return (String) get(3);
+    public String getName() {
+        return (String) get(4);
     }
 
     /**
-     * Setter for <code>jw.sys_user.name</code>. 姓名
+     * Setter for <code>dreamer.sys_user.name</code>. 姓名
      */
     public SysUserRecord setName(String value) {
         set(4, value);
@@ -102,14 +138,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.name</code>. 姓名
+     * Getter for <code>dreamer.sys_user.email</code>. 邮箱
      */
-    public String getName() {
-        return (String) get(4);
+    public String getEmail() {
+        return (String) get(5);
     }
 
     /**
-     * Setter for <code>jw.sys_user.email</code>. 邮箱
+     * Setter for <code>dreamer.sys_user.email</code>. 邮箱
      */
     public SysUserRecord setEmail(String value) {
         set(5, value);
@@ -117,14 +153,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.email</code>. 邮箱
+     * Getter for <code>dreamer.sys_user.phone</code>. 电话
      */
-    public String getEmail() {
-        return (String) get(5);
+    public String getPhone() {
+        return (String) get(6);
     }
 
     /**
-     * Setter for <code>jw.sys_user.phone</code>. 电话
+     * Setter for <code>dreamer.sys_user.phone</code>. 电话
      */
     public SysUserRecord setPhone(String value) {
         set(6, value);
@@ -132,14 +168,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.phone</code>. 电话
+     * Getter for <code>dreamer.sys_user.mobile</code>. 手机
      */
-    public String getPhone() {
-        return (String) get(6);
+    public String getMobile() {
+        return (String) get(7);
     }
 
     /**
-     * Setter for <code>jw.sys_user.mobile</code>. 手机
+     * Setter for <code>dreamer.sys_user.mobile</code>. 手机
      */
     public SysUserRecord setMobile(String value) {
         set(7, value);
@@ -147,14 +183,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.mobile</code>. 手机
+     * Getter for <code>dreamer.sys_user.status</code>. 状态
      */
-    public String getMobile() {
-        return (String) get(7);
+    public SysUserStatus getStatus() {
+        return (SysUserStatus) get(8);
     }
 
     /**
-     * Setter for <code>jw.sys_user.status</code>. 状态
+     * Setter for <code>dreamer.sys_user.status</code>. 状态
      */
     public SysUserRecord setStatus(SysUserStatus value) {
         set(8, value);
@@ -162,14 +198,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.status</code>. 状态
+     * Getter for <code>dreamer.sys_user.login_ip</code>. 最后登陆IP
      */
-    public SysUserStatus getStatus() {
-        return (SysUserStatus) get(8);
+    public String getLoginIp() {
+        return (String) get(9);
     }
 
     /**
-     * Setter for <code>jw.sys_user.login_ip</code>. 最后登陆IP
+     * Setter for <code>dreamer.sys_user.login_ip</code>. 最后登陆IP
      */
     public SysUserRecord setLoginIp(String value) {
         set(9, value);
@@ -177,14 +213,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.login_ip</code>. 最后登陆IP
+     * Getter for <code>dreamer.sys_user.login_time</code>. 最后登陆时间
      */
-    public String getLoginIp() {
-        return (String) get(9);
+    public Timestamp getLoginTime() {
+        return (Timestamp) get(10);
     }
 
     /**
-     * Setter for <code>jw.sys_user.login_time</code>. 最后登陆时间
+     * Setter for <code>dreamer.sys_user.login_time</code>. 最后登陆时间
      */
     public SysUserRecord setLoginTime(Timestamp value) {
         set(10, value);
@@ -192,14 +228,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.login_time</code>. 最后登陆时间
+     * Getter for <code>dreamer.sys_user.avatars</code>. 头像URL
      */
-    public Timestamp getLoginTime() {
-        return (Timestamp) get(10);
+    public String getAvatars() {
+        return (String) get(11);
     }
 
     /**
-     * Setter for <code>jw.sys_user.avatars</code>. 头像URL
+     * Setter for <code>dreamer.sys_user.avatars</code>. 头像URL
      */
     public SysUserRecord setAvatars(String value) {
         set(11, value);
@@ -207,14 +243,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.avatars</code>. 头像URL
+     * Getter for <code>dreamer.sys_user.create_at</code>. 创建时间
      */
-    public String getAvatars() {
-        return (String) get(11);
+    public Timestamp getCreateAt() {
+        return (Timestamp) get(12);
     }
 
     /**
-     * Setter for <code>jw.sys_user.create_at</code>. 创建时间
+     * Setter for <code>dreamer.sys_user.create_at</code>. 创建时间
      */
     public SysUserRecord setCreateAt(Timestamp value) {
         set(12, value);
@@ -222,14 +258,14 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.create_at</code>. 创建时间
+     * Getter for <code>dreamer.sys_user.update_at</code>. 更新时间
      */
-    public Timestamp getCreateAt() {
-        return (Timestamp) get(12);
+    public Timestamp getUpdateAt() {
+        return (Timestamp) get(13);
     }
 
     /**
-     * Setter for <code>jw.sys_user.update_at</code>. 更新时间
+     * Setter for <code>dreamer.sys_user.update_at</code>. 更新时间
      */
     public SysUserRecord setUpdateAt(Timestamp value) {
         set(13, value);
@@ -237,45 +273,42 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>jw.sys_user.update_at</code>. 更新时间
-     */
-    public Timestamp getUpdateAt() {
-        return (Timestamp) get(13);
-    }
-
-    /**
-     * Setter for <code>jw.sys_user.remarks</code>. 备注信息
-     */
-    public SysUserRecord setRemarks(String value) {
-        set(14, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jw.sys_user.remarks</code>. 备注信息
+     * Getter for <code>dreamer.sys_user.remarks</code>. 备注信息
      */
     public String getRemarks() {
         return (String) get(14);
     }
 
     /**
-     * Setter for <code>jw.sys_user.del_flag</code>. 删除标志
+     * Setter for <code>dreamer.sys_user.remarks</code>. 备注信息
      */
-    public SysUserRecord setDelFlag(Boolean value) {
-        set(15, value);
+    public SysUserRecord setRemarks(String value) {
+        set(14, value);
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Primary key information
+    // -------------------------------------------------------------------------
+
     /**
-     * Getter for <code>jw.sys_user.del_flag</code>. 删除标志
+     * Getter for <code>dreamer.sys_user.del_flag</code>. 删除标志
      */
     public Boolean getDelFlag() {
         return (Boolean) get(15);
     }
 
     // -------------------------------------------------------------------------
-    // Primary key information
+    // Record16 type implementation
     // -------------------------------------------------------------------------
+
+    /**
+     * Setter for <code>dreamer.sys_user.del_flag</code>. 删除标志
+     */
+    public SysUserRecord setDelFlag(Boolean value) {
+        set(15, value);
+        return this;
+    }
 
     /**
      * {@inheritDoc}
@@ -284,10 +317,6 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     public Record1<Long> key() {
         return (Record1) super.key();
     }
-
-    // -------------------------------------------------------------------------
-    // Record16 type implementation
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -696,6 +725,10 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
         return this;
     }
 
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
     /**
      * {@inheritDoc}
      */
@@ -727,40 +760,5 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
         value15(value15);
         value16(value16);
         return this;
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    /**
-     * Create a detached SysUserRecord
-     */
-    public SysUserRecord() {
-        super(SysUser.SYS_USER);
-    }
-
-    /**
-     * Create a detached, initialised SysUserRecord
-     */
-    public SysUserRecord(Long id, String loginName, String password, String no, String name, String email, String phone, String mobile, SysUserStatus status, String loginIp, Timestamp loginTime, String avatars, Timestamp createAt, Timestamp updateAt, String remarks, Boolean delFlag) {
-        super(SysUser.SYS_USER);
-
-        set(0, id);
-        set(1, loginName);
-        set(2, password);
-        set(3, no);
-        set(4, name);
-        set(5, email);
-        set(6, phone);
-        set(7, mobile);
-        set(8, status);
-        set(9, loginIp);
-        set(10, loginTime);
-        set(11, avatars);
-        set(12, createAt);
-        set(13, updateAt);
-        set(14, remarks);
-        set(15, delFlag);
     }
 }
