@@ -7,6 +7,7 @@ import com.dreamer.pojo.po.SysUserPojo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "/login.html";
+        return "/login";
     }
 
     /**
@@ -41,23 +42,15 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginVali(Model model,
                             @RequestParam(value = "username", required = true) String username,
-                            @RequestParam(value = "password", required = true) String password,
-                            @RequestParam(value = "remember", required = false) String remember,
-                            HttpServletRequest request) {
-
+                            @RequestParam(value = "password", required = true) String password) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, CryptTools.encryptByase(password));
         Subject currentUser = SecurityUtils.getSubject();
-        if ("on".equals(remember)) {
-            token.setRememberMe(true);
-        } else {
-            token.setRememberMe(false);
-        }
-        String resultPageURL = "/login.html";
+        String retURL = "/login";
         try {
             log.debug("对用户[" + username + "]进行登录验证..验证开始");
             currentUser.login(token);
             log.debug("对用户[" + username + "]进行登录验证..验证通过");
-            resultPageURL = REDIRECT + "/index";
+            retURL = REDIRECT + "/index";
         } catch (UnknownAccountException uae) {
             log.debug("对用户[" + username + "]进行登录验证..验证未通过,未知账户");
             model.addAttribute("tips", "未知账户");
@@ -84,13 +77,14 @@ public class LoginController extends BaseController {
         } else {
             token.clear();
         }
-        return resultPageURL;
+        return retURL;
     }
 
     /**
      * 跳转到主页
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequiresPermissions("system:index")
     public String index(Model model) {
         SysUserPojo user = (SysUserPojo) SecurityUtils.getSubject().getSession().getAttribute(Constant.CURRENT_USER);
         SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
@@ -111,6 +105,14 @@ public class LoginController extends BaseController {
 //        String avatar = user.getAvatar();
 //        model.addAttribute("avatar", avatar);
 
-        return "/index.html";
+        return "/index";
+    }
+
+    /**
+     * 跳转到主页
+     */
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String home(Model model) {
+        return "/home";
     }
 }

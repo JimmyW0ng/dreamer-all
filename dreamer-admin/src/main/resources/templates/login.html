@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="shortcut icon" th:href="@{/img/favico.png}" />
+        <link th:href="@{/css/bootstrap.min14ed.css}" rel="stylesheet" />
+        <link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet" />
+        <link th:href="@{/css/animate.min.css}" rel="stylesheet" />
+        <link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet" />
+        <title>Dreamer后台管理系统 - 登录</title>
+        <script type="text/javascript">
+            if (window.top !== window.self) {
+                window.top.location = window.location;
+            }
+        </script>
+    </head>
+    <body class="gray-bg">
+        <div class="middle-box text-center loginscreen  animated fadeInDown">
+            <div>
+                <div>
+                    <h1 class="logo-name">Dm</h1>
+                </div>
+                <h3>欢迎使用Dreamer后台管理系统</h3>
+
+                <form class="m-t" role="form" method="post" action="/login">
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="用户名" required="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="密码" required="" />
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                </form>
+            </div>
+        </div>
+        <script src="js/jquery.min.js?v=2.1.4"></script>
+        <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    </body>
+</html>

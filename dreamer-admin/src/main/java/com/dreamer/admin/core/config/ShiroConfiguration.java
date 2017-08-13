@@ -21,6 +21,7 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfiguration {
+    
 
     /**
      * 身份认证realm; (这个需要自己写，账号密码校验；权限等)
@@ -68,10 +69,10 @@ public class ShiroConfiguration {
          */
         Map<String, String> filterChainMap = new LinkedHashMap<>();
         filterChainMap.put("/static/**", "anon");
-        filterChainMap.put("/login", "anon");
-        filterChainMap.put("/global/sessionError", "anon");
-        filterChainMap.put("/kaptcha", "anon");
-        filterChainMap.put("/**", "user");
+//        filterChainMap.put("/login", "anon");
+//        filterChainMap.put("/global/sessionError", "anon");
+//        filterChainMap.put("/kaptcha", "anon");
+//        filterChainMap.put("/auth/**", "user");
         shiroFilter.setFilterChainDefinitionMap(filterChainMap);
         return shiroFilter;
     }

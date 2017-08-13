@@ -1,6 +1,5 @@
 package com.dreamer.admin.core.realm;
 
-import com.dreamer.business.component.SpringComponent;
 import com.dreamer.business.service.SysMenuService;
 import com.dreamer.business.service.SysUserService;
 import com.dreamer.common.tool.CollectionsTools;
@@ -8,20 +7,25 @@ import com.dreamer.domain.enums.SysUserStatus;
 import com.dreamer.pojo.po.SysMenuPojo;
 import com.dreamer.pojo.po.SysUserPojo;
 import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
  * Created by J.W on 2017/8/9 0009.
  */
-@Slf4j
 public class SysUserRealm extends AuthorizingRealm {
+
+    @Autowired
+    private SysUserService sysUserService;
+
+    @Autowired
+    private SysMenuService sysMenuService;
 
     /**
      * 授权
@@ -32,8 +36,8 @@ public class SysUserRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String currentUsername = (String) super.getAvailablePrincipal(principalCollection);
-        SysUserPojo user = SpringComponent.getBean(SysUserService.class).findByLoginName(currentUsername);
-        List<SysMenuPojo> sysMenuPojoBySyserId = SpringComponent.getBean(SysMenuService.class).findSysMenuPojoBySyserId(user.getId());
+        SysUserPojo user = sysUserService.findByLoginName(currentUsername);
+        List<SysMenuPojo> sysMenuPojoBySyserId = sysMenuService.findSysMenuPojoBySyserId(user.getId());
         List<String> permissionList = CollectionsTools.extractToList(sysMenuPojoBySyserId, "permission");
         List<String> roleList = Lists.newArrayList();
         SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
@@ -53,7 +57,7 @@ public class SysUserRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken upt = (UsernamePasswordToken) token;
         String userName = upt.getUsername();
-        SysUserPojo user = SpringComponent.getBean(SysUserService.class).findByLoginName(userName);
+        SysUserPojo user = sysUserService.findByLoginName(userName);
         if (user == null) {
             throw new UnknownAccountException("用户不存在！");
         }
