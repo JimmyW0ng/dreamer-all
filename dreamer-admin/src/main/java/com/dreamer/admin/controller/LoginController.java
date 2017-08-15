@@ -99,23 +99,6 @@ public class LoginController extends BaseController {
         List<RoleMenuVo> userMenus = sysMenuService.getUserAllMenu(user.getId());
         model.addAttribute("userMenus", userMenus);
         model.addAttribute("userName", user.getName());
-//        //获取菜单列表
-//        List<Integer> roleList = ShiroKit.getUser().getRoleList();
-//        if (roleList == null || roleList.size() == 0) {
-//            ShiroKit.getSubject().logout();
-//            model.addAttribute("tips", "该用户没有角色，无法登陆");
-//            return "/login.html";
-//        }
-//        List<MenuNode> menus = menuDao.getMenusByRoleIds(roleList);
-//        List<MenuNode> titles = MenuNode.buildTitle(menus);
-//        model.addAttribute("titles", titles);
-//
-//        //获取用户头像
-//        Integer id = ShiroKit.getUser().getId();
-//        User user = userMapper.selectById(id);
-//        String avatar = user.getAvatar();
-//        model.addAttribute("avatar", avatar);
-
         return "/index";
     }
 
