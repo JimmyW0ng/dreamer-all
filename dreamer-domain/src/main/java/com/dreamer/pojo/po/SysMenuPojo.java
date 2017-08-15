@@ -6,6 +6,7 @@ package com.dreamer.pojo.po;
 
 import com.dreamer.domain.enums.SysMenuStatus;
 import com.dreamer.domain.enums.SysMenuType;
+import com.dreamer.pojo.AbstractBasePojo;
 import lombok.Data;
 
 import javax.annotation.Generated;

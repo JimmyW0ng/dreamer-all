@@ -1,5 +1,8 @@
 package com.dreamer.business.repository;
 
+import com.dreamer.domain.enums.SysMenuStatus;
+import com.dreamer.domain.enums.SysMenuType;
+import com.dreamer.domain.tables.SysRoleMenu;
 import com.dreamer.domain.tables.records.SysRoleMenuRecord;
 import com.dreamer.pojo.po.SysMenuPojo;
 import com.dreamer.pojo.po.SysRoleMenuPojo;
@@ -56,5 +59,23 @@ public class SysRoleMenuRepository extends AbstractCRUDRepository<SysRoleMenuRec
     }
 
 
+    /**
+     * 根据父级菜单和角色获取菜单
+     *
+     * @param rols
+     * @return
+     */
+    public List<SysMenuPojo> getMenusWithRoleAndParentId(List<Long> rols, SysMenuType menuType, Long parentId) {
+        // 获取菜单
+        return dslContext.selectFrom(SYS_MENU.innerJoin(SysRoleMenu.SYS_ROLE_MENU)
+                                             .on(SysRoleMenu.SYS_ROLE_MENU.SYS_MENU_ID.eq(SYS_MENU.ID))
+                                             .and(SysRoleMenu.SYS_ROLE_MENU.SYS_ROLE_ID.in(rols)))
+                         .where(SYS_MENU.STATUS.eq(SysMenuStatus.enable))
+                         .and(SYS_MENU.TYPE.eq(menuType))
+                         .and(SYS_MENU.DEL_FLAG.eq(false))
+                         .and(SYS_MENU.PARENT_ID.eq(parentId))
+                         .orderBy(SYS_MENU.SORT)
+                         .fetchInto(SysMenuPojo.class);
+    }
 }
 

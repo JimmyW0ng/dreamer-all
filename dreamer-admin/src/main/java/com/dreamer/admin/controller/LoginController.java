@@ -1,9 +1,11 @@
 package com.dreamer.admin.controller;
 
 import com.dreamer.admin.core.constant.Constant;
+import com.dreamer.business.service.SysMenuService;
 import com.dreamer.business.service.SysUserService;
 import com.dreamer.common.tool.CryptTools;
 import com.dreamer.pojo.po.SysUserPojo;
+import com.dreamer.pojo.vo.RoleMenuVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by J.W on 2017/8/8 0008.
@@ -27,6 +32,9 @@ public class LoginController extends BaseController {
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private SysMenuService sysMenuService;
 
     /**
      * 跳转到登录页面
@@ -88,6 +96,9 @@ public class LoginController extends BaseController {
     public String index(Model model) {
         SysUserPojo user = (SysUserPojo) SecurityUtils.getSubject().getSession().getAttribute(Constant.CURRENT_USER);
         SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
+        List<RoleMenuVo> userMenus = sysMenuService.getUserAllMenu(user.getId());
+        model.addAttribute("userMenus", userMenus);
+        model.addAttribute("userName", user.getName());
 //        //获取菜单列表
 //        List<Integer> roleList = ShiroKit.getUser().getRoleList();
 //        if (roleList == null || roleList.size() == 0) {
@@ -106,6 +117,15 @@ public class LoginController extends BaseController {
 //        model.addAttribute("avatar", avatar);
 
         return "/index";
+    }
+
+    @RequestMapping(value = "/logout")
+    public String loginOut(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout();
+        }
+        return "redirect:/login";
     }
 
     /**
