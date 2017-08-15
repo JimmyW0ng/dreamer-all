@@ -2,7 +2,7 @@ package com.dreamer.business.repository;
 
 import com.dreamer.common.tool.DateTools;
 import com.dreamer.common.tool.NumberTools;
-import com.dreamer.pojo.po.AbstractBasePojo;
+import com.dreamer.pojo.AbstractBasePojo;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.*;

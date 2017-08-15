@@ -1,4 +1,4 @@
-package com.dreamer.pojo.po;
+package com.dreamer.pojo;
 
 import java.io.Serializable;
 

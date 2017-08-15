@@ -58,7 +58,7 @@ public class ShiroConfiguration {
         /**
          * 没有权限跳转的url
          */
-        shiroFilter.setUnauthorizedUrl("/global/error");
+        shiroFilter.setUnauthorizedUrl("/error");
         /**
          * 配置shiro拦截器链
          *
@@ -68,11 +68,12 @@ public class ShiroConfiguration {
          *
          */
         Map<String, String> filterChainMap = new LinkedHashMap<>();
+        filterChainMap.put("/css/**", "anon");
+        filterChainMap.put("/fonts/**", "anon");
+        filterChainMap.put("/img/**", "anon");
+        filterChainMap.put("/js/**", "anon");
         filterChainMap.put("/static/**", "anon");
-//        filterChainMap.put("/login", "anon");
-//        filterChainMap.put("/global/sessionError", "anon");
-//        filterChainMap.put("/kaptcha", "anon");
-//        filterChainMap.put("/auth/**", "user");
+        filterChainMap.put("/**", "user");
         shiroFilter.setFilterChainDefinitionMap(filterChainMap);
         return shiroFilter;
     }

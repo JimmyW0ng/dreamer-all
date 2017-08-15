@@ -3,11 +3,14 @@ package com.dreamer.business.service;
 import com.dreamer.business.component.SpringComponent;
 import com.dreamer.business.repository.SysMenuRepository;
 import com.dreamer.business.repository.SysRoleMenuRepository;
+import com.dreamer.business.repository.SysUserRoleRepository;
 import com.dreamer.common.tool.CollectionsTools;
 import com.dreamer.common.tool.StringTools;
 import com.dreamer.domain.enums.SysMenuStatus;
 import com.dreamer.domain.enums.SysMenuType;
 import com.dreamer.pojo.po.SysMenuPojo;
+import com.dreamer.pojo.po.SysUserRolePojo;
+import com.dreamer.pojo.vo.RoleMenuVo;
 import com.google.common.collect.Lists;
 import org.jooq.Condition;
 import org.json.JSONArray;
@@ -33,14 +36,17 @@ public class SysMenuService {
     public static String REDIS_KEY = "allchildKey";
 
     @Autowired
-    private SysMenuRepository sysMenuDao;
+    private SysMenuRepository sysMenuRepository;
 
     @Autowired
     private SysRoleMenuRepository sysRoleMenuRepository;
 
+    @Autowired
+    private SysUserRoleRepository sysUserRoleRepository;
+
 
     public SysMenuPojo findById(Long id) {
-        return sysMenuDao.getById(id);
+        return sysMenuRepository.getById(id);
     }
 
     private String messageSource(String code) {
@@ -55,7 +61,7 @@ public class SysMenuService {
         }
         pojo.setDelFlag(false);
         pojo.setStatus(SysMenuStatus.enable);
-        return sysMenuDao.create(pojo);
+        return sysMenuRepository.create(pojo);
     }
 
     @CacheEvict(value = "SysMenuPojo", key = "'allchildKey'")
@@ -63,21 +69,21 @@ public class SysMenuService {
         if (pojo.getType().equals(SysMenuType.menu) && StringTools.isBlank(pojo.getIcon())) {
             pojo.setIcon(this.messageSource("sysMenuIcon.menu"));
         }
-        sysMenuDao.update(pojo);
+        sysMenuRepository.update(pojo);
         return pojo;
     }
 
     public List<SysMenuPojo> findSysMenuPojoBySyserId(Long userid) {
-        return sysMenuDao.findSysMenuPojoBySyserId(userid);
+        return sysMenuRepository.findSysMenuPojoBySyserId(userid);
     }
 
     public List<SysMenuPojo> findAll() {
-        return sysMenuDao.findAll();
+        return sysMenuRepository.findAll();
     }
 
     @Cacheable(value = "SysMenuPojo", key = "'allchildKey'")
     public List<SysMenuPojo> findChild() {
-        return sysMenuDao.findChild();
+        return sysMenuRepository.findChild();
     }
 
     @CacheEvict(value = "SysMenuPojo", key = "'allchildKey'")
@@ -85,7 +91,7 @@ public class SysMenuService {
     public void deleteByIdLogical(List<Long> menuIds) throws Exception {
         if (!menuIds.isEmpty()) {
             for (Long id : menuIds) {
-                sysMenuDao.deleteByIdLogical(id);
+                sysMenuRepository.deleteByIdLogical(id);
                 sysRoleMenuRepository.deleteByMenuId(id);
             }
 
@@ -98,13 +104,13 @@ public class SysMenuService {
         List<String> menuName = Lists.newArrayList();
 
 
-        SysMenuPojo sysMenuPojo = sysMenuDao.getParentPojo(id);
+        SysMenuPojo sysMenuPojo = sysMenuRepository.getParentPojo(id);
         menuName.add(sysMenuPojo.getName());
 
 
-        while (!sysMenuDao.getParentPojo(childId).getParentId().equals(new Long(0))) {
-            childId = sysMenuDao.getParentPojo(childId).getParentId();
-            menuName.add(sysMenuDao.getParentPojo(childId).getName());
+        while (!sysMenuRepository.getParentPojo(childId).getParentId().equals(new Long(0))) {
+            childId = sysMenuRepository.getParentPojo(childId).getParentId();
+            menuName.add(sysMenuRepository.getParentPojo(childId).getName());
         }
         for (int i = 0; menuName.size() - i > 0; i++) {
             fullPath.append("/" + menuName.get(menuName.size() - i));
@@ -199,5 +205,32 @@ public class SysMenuService {
 
 
         return list;
+    }
+
+    /**
+     * 获取用户所有菜单
+     *
+     * @param userId
+     * @return
+     */
+    public List<RoleMenuVo> getUserAllMenu(Long userId) {
+        List<RoleMenuVo> userMenus = Lists.newArrayList();
+        List<SysUserRolePojo> userRols = sysUserRoleRepository.findByUserId(userId);
+        if (CollectionsTools.isEmpty(userRols)) {
+            return userMenus;
+        }
+        List<Long> rols = CollectionsTools.extractToList(userRols, "sysRoleId");
+        List<SysMenuPojo> allMenus = sysRoleMenuRepository.getMenusWithRoleAndParentId(rols, SysMenuType.menu, 1L);
+        if (CollectionsTools.isEmpty(allMenus)) {
+            return userMenus;
+        }
+        allMenus.forEach(sysMenuPojo -> {
+            RoleMenuVo roleMenuVo = new RoleMenuVo();
+            roleMenuVo.setFisrtMenu(sysMenuPojo);
+            List<SysMenuPojo> subMenus = sysRoleMenuRepository.getMenusWithRoleAndParentId(rols, SysMenuType.page, sysMenuPojo.getId());
+            roleMenuVo.setSubMenu(subMenus);
+            userMenus.add(roleMenuVo);
+        });
+        return userMenus;
     }
 }

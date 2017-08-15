@@ -5,6 +5,7 @@ package com.dreamer.pojo.po;
 
 
 import com.dreamer.domain.enums.SysDictStatus;
+import com.dreamer.pojo.AbstractBasePojo;
 import lombok.Data;
 
 import java.sql.Timestamp;

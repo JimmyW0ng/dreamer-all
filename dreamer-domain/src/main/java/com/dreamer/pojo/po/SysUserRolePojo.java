@@ -4,6 +4,7 @@
 package com.dreamer.pojo.po;
 
 
+import com.dreamer.pojo.AbstractBasePojo;
 import lombok.Data;
 
 
