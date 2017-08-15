@@ -48,7 +48,7 @@
                             <span class="nav-label" th:text="${item.fisrtMenu.name}"></span>
                             <span class="fa arrow"></span>
                         </a>
-                        <ul class="nav nav-second-level">
+                        <ul class="nav nav-second-level collapse">
                             <li th:each="subItem:${item.subMenu}">
                                 <a class="J_menuItem" th:href="${subItem.href}" th:text="${subItem.name}"></a>
                             </li>
@@ -94,28 +94,6 @@
             </div>
         </div>
         <!--右侧部分结束-->
-        <!--右侧边栏开始-->
-        <div id="right-sidebar">
-            <div class="sidebar-container">
-
-                <ul class="nav nav-tabs navs-3">
-
-                    <li class="active">
-                        <a data-toggle="tab" href="#tab-1">
-                            <i class="fa fa-gear"></i> 主题
-                        </a>
-                    </li>
-                    <li class=""><a data-toggle="tab" href="#tab-2">
-                        通知
-                    </a>
-                    </li>
-                    <li><a data-toggle="tab" href="#tab-3">
-                        项目进度
-                    </a>
-                    </li>
-                </ul>
-
-            </div>
         </div>
     </div>
     <script src="/js/jquery.min.js?v=2.1.4"></script>
