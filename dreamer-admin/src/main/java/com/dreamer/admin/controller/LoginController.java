@@ -41,7 +41,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "/login";
+        return "/backend/login";
     }
 
     /**
@@ -53,7 +53,7 @@ public class LoginController extends BaseController {
                             @RequestParam(value = "password", required = true) String password) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, CryptTools.encryptByase(password));
         Subject currentUser = SecurityUtils.getSubject();
-        String retURL = "/login";
+        String retURL = "/backend/login";
         try {
             log.debug("对用户[" + username + "]进行登录验证..验证开始");
             currentUser.login(token);
@@ -99,7 +99,7 @@ public class LoginController extends BaseController {
         List<RoleMenuVo> userMenus = sysMenuService.getUserAllMenu(user.getId());
         model.addAttribute("userMenus", userMenus);
         model.addAttribute("userName", user.getName());
-        return "/index";
+        return "/backend/index";
     }
 
     @RequestMapping(value = "/logout")
@@ -116,6 +116,6 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
-        return "/home";
+        return "/backend/home";
     }
 }
