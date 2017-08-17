@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Controller
 @Slf4j
-public class LoginController extends BaseController {
+public class LoginController extends BaseBackendController {
 
     @Autowired
     private SysUserService sysUserService;
@@ -41,7 +41,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "/backend/login";
+        return PAGE_URL_PREFIX + "index";
     }
 
     /**
@@ -53,7 +53,7 @@ public class LoginController extends BaseController {
                             @RequestParam(value = "password", required = true) String password) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, CryptTools.encryptByase(password));
         Subject currentUser = SecurityUtils.getSubject();
-        String retURL = "/backend/login";
+        String retURL = PAGE_URL_PREFIX + "index";
         try {
             log.debug("对用户[" + username + "]进行登录验证..验证开始");
             currentUser.login(token);
@@ -99,7 +99,7 @@ public class LoginController extends BaseController {
         List<RoleMenuVo> userMenus = sysMenuService.getUserAllMenu(user.getId());
         model.addAttribute("userMenus", userMenus);
         model.addAttribute("userName", user.getName());
-        return "/backend/index";
+        return PAGE_URL_PREFIX + "index";
     }
 
     @RequestMapping(value = "/logout")
@@ -108,7 +108,7 @@ public class LoginController extends BaseController {
         if (subject.isAuthenticated()) {
             subject.logout();
         }
-        return "redirect:/login";
+        return REDIRECT + "/login";
     }
 
     /**
@@ -116,6 +116,6 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
-        return "/backend/home";
+        return PAGE_URL_PREFIX + "home";
     }
 }
