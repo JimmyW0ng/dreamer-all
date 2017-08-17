@@ -16,11 +16,17 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>查询列表</h5>
-                </div>
                 <div class="ibox-content">
-
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <input type="text" placeholder="请输入用户名" name="loginName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="请输入姓名" name="userName" class="form-control">
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-success" type="submit">查询</button>
+                    </form>
                     <div id="editable_wrapper" class="dataTables_wrapper form-inline" role="grid"
                          sd:page-object="${page}">
                         <!--Userlist start-->
@@ -50,9 +56,7 @@
                                 <td th:text="${sysUser.mobile}">Lorem Ipsum dorolo imit</td>
                                 <td th:text="${sysUser.status} ">Lorem Ipsum dorolo imit</td>
                                 <td th:text="${sysUser.createAt}">Lorem Ipsum dorolo imit</td>
-                                <td>
-                                    1
-                                </td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>

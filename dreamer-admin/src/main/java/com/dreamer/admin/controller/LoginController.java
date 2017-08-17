@@ -41,7 +41,7 @@ public class LoginController extends BaseBackendController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return PAGE_URL_PREFIX + "index";
+        return PAGE_URL_PREFIX + "login";
     }
 
     /**

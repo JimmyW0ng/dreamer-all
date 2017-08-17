@@ -1,6 +1,7 @@
 package com.dreamer.admin.controller;
 
 import com.dreamer.business.service.SysUserService;
+import com.dreamer.common.tool.StringTools;
 import com.dreamer.pojo.po.SysUserPojo;
 import com.google.common.collect.Lists;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
@@ -40,9 +42,17 @@ public class SysUserController extends BaseBackendController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     @RequiresPermissions("sysUser:index")
     public String index(Model model,
+                        @RequestParam(value = "loginName", required = false) String loginName,
+                        @RequestParam(value = "userName", required = false) String userName,
                         @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Collection<Condition> collections = Lists.newArrayList();
         collections.add(SYS_USER.DEL_FLAG.eq(false));
+        if (StringTools.isNotBlank(loginName)) {
+            collections.add(SYS_USER.LOGIN_NAME.eq(loginName));
+        }
+        if (StringTools.isNotBlank(userName)) {
+            collections.add(SYS_USER.NAME.eq(userName));
+        }
         Page<SysUserPojo> page = sysUserService.findbyPageAndCondition(pageable, collections);
         model.addAttribute("page", page);
         return PAGE_URL_PREFIX + MODULE_PREFIX + "index";
