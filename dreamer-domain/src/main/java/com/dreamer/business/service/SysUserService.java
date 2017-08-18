@@ -40,6 +40,18 @@ public class SysUserService {
         return sysUserRepository.findByLoginName(loginName);
     }
 
+    /**
+     * 保存用户
+     *
+     * @param pojo
+     * @return
+     * @throws Exception
+     */
+    public Long insert(SysUserPojo pojo) throws Exception {
+        pojo.setStatus(SysUserStatus.enable);
+        return sysUserRepository.create(pojo).getId();
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public Long insert(SysUserPojo pojo, List<Long> roleIds) throws Exception {
         pojo.setStatus(SysUserStatus.enable);

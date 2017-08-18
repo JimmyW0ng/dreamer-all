@@ -9,4 +9,8 @@ $(function () {
             .removeAttr('selected');
     });
 
+
+    $("#showsimple").click(function () {
+        toastr.success("Without any options", "Simple notification!")
+    });
 });
