@@ -54,6 +54,8 @@ public class SysUserController extends BaseBackendController {
             collections.add(SYS_USER.NAME.eq(userName));
         }
         Page<SysUserPojo> page = sysUserService.findbyPageAndCondition(pageable, collections);
+        model.addAttribute("loginName", loginName);
+        model.addAttribute("userName", userName);
         model.addAttribute("page", page);
         return PAGE_URL_PREFIX + MODULE_PREFIX + "index";
     }
