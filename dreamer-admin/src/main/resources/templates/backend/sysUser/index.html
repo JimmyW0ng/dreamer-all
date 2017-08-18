@@ -17,7 +17,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <form role="form" class="form-inline">
+                    <form id="query-form" role="form" class="form-inline">
                         <div class="form-group">
                             <input type="text" placeholder="请输入用户名" name="loginName" class="form-control"
                                    th:value="${loginName}">
@@ -28,7 +28,7 @@
                         </div>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-success" type="submit">查询</button>
-                        <button class="btn btn-info" type="reset">重置</button>
+                        <button id="resetBtn" class="btn btn-info" type="button">重置</button>
                     </form>
                     <div id="editable_wrapper" class="dataTables_wrapper form-inline" role="grid"
                          sd:page-object="${page}">
@@ -102,6 +102,7 @@
 <script th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
 <script th:src="@{/js/plugins/footable/footable.all.min.js}"></script>
 <script th:src="@{/js/content.min.js?v=1.0.0}"></script>
+<script th:src="@{/js/core.js?v=1.0.0}"></script>
 <script th:inline="javascript">
 
 </script>
