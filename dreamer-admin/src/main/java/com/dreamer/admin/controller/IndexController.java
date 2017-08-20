@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 @Controller
 @Slf4j
-public class LoginController extends BaseBackendController {
+public class IndexController extends BaseBackendController {
 
     @Autowired
     private SysUserService sysUserService;
@@ -117,5 +118,10 @@ public class LoginController extends BaseBackendController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
         return PAGE_URL_PREFIX + "home";
+    }
+
+    @RequestMapping(value = "/error1", method = RequestMethod.GET)
+    public ModelAndView error() {
+        return new ModelAndView("error1");
     }
 }

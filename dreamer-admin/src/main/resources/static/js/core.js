@@ -14,3 +14,7 @@ $(function () {
         toastr.success("Without any options", "Simple notification!")
     });
 });
+
+function toUrl(url) {
+    self.location = url;
+}

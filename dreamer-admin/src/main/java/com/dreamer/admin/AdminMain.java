@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  */
 @SpringBootApplication
 @EnableAsync
-@ComponentScan(basePackages = {"com.dreamer.business", "com.dreamer.admin"})
+@ComponentScan(basePackages = {"com.dreamer.business", "com.dreamer.admin", "com.dreamer.common"})
 public class AdminMain {
 
     public static void main(String[] args) {
