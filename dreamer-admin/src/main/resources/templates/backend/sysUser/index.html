@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sd="http://www.thymeleaf.org/spring-data">
+      xmlns:sd="http://www.thymeleaf.org/spring-data"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,7 +9,7 @@
     <link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet">
     <link th:href="@{/css/animate.min.css}" rel="stylesheet">
     <link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet">
-    <link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/toastr/toastr.min.css?v=1.0.0}" rel="stylesheet">
 </head>
 <style>
     .ibox .open > .dropdown-menu {
@@ -73,8 +74,14 @@
                                 <td th:text="${sysUser.status} "></td>
                                 <td th:text="${sysUser.createAt}"></td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm btn-outline" type="button" th:onclick="'toUrl(\'/sysUser/toForm?id=' + ${sysUser.id} + '\')'">编辑</button>
-                                    <button class="btn btn-danger btn-sm btn-outline" type="button">删除</button>
+                                    <button class="btn btn-warning btn-sm btn-outline" type="button"
+                                            shiro:hasPermission="sysUser:maintenance"
+                                            th:onclick="'toUrl(\'/sysUser/toForm?id=' + ${sysUser.id} + '\')'">编辑
+                                    </button>
+                                    <button class="btn btn-danger btn-sm btn-outline" type="button"
+                                            shiro:hasPermission="sysUser:maintenance"
+                                            th:onclick="'del(' + ${sysUser.id} +')'">删除
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -121,6 +128,32 @@
 <script th:src="@{/js/plugins/toastr/toastr.min.js?v=1.0.0}"></script>
 <script th:src="@{/js/core.js?v=1.0.0}"></script>
 <script th:inline="javascript">
+
+    function del(id) {
+        var flag = confirm("确定要删除此用户吗？");
+        if (!flag) {
+            return;
+        }
+        $.ajax({
+            url: "/sysUser/delete",
+            type: "post",
+            data: {
+                "id": id
+            },
+            success: function (r) {
+                if (r.success) {
+                    toastr.success("操作成功！");
+                    setTimeout(
+                        function () {
+                            toUrl('/sysUser/index');
+                        }, 1000
+                    );
+                } else {
+                    toastr.error("操作失败：" + r.errorDescription)
+                }
+            }
+        });
+    }
 
 </script>
 </body>

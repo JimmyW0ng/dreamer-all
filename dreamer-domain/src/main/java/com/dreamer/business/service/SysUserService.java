@@ -47,23 +47,9 @@ public class SysUserService {
      * @return
      * @throws Exception
      */
-    public Long insert(SysUserPojo pojo) throws Exception {
+    public Long insert(SysUserPojo pojo) {
         pojo.setStatus(SysUserStatus.enable);
         return sysUserRepository.create(pojo).getId();
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public Long insert(SysUserPojo pojo, List<Long> roleIds) throws Exception {
-        pojo.setStatus(SysUserStatus.enable);
-        pojo.setCreateAt(DateTools.getCurrentDateTime());
-        pojo.setDelFlag(false);
-        Long userId = sysUserRepository.create(pojo).getId();
-        if (null != roleIds) {
-            for (Long roleId : roleIds) {
-                sysUserRoleRepository.create(new SysUserRolePojo(null, userId, new Long((long) roleId)));
-            }
-        }
-        return userId;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -97,7 +83,7 @@ public class SysUserService {
 
     }
 
-    public void settingSave(SysUserPojo sysUserPojo) throws Exception {
+    public void settingSave(SysUserPojo sysUserPojo) {
         SysUserPojo sysUserPojoTar = this.findById(sysUserPojo.getId());
         BeanTools.copyPropertiesIgnoreNull(sysUserPojo, sysUserPojoTar);
         sysUserPojoTar.setUpdateAt(DateTools.getCurrentDateTime());

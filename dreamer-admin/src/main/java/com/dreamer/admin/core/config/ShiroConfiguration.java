@@ -1,5 +1,6 @@
 package com.dreamer.admin.core.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.dreamer.admin.core.realm.SysUserRealm;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.mgt.SecurityManager;
@@ -102,6 +103,11 @@ public class ShiroConfiguration {
         AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();
         aasa.setSecurityManager(securityManager());
         return aasa;
+    }
+
+    @Bean(name = "shiroDialect")
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 
     @Bean(name = "passwordService")

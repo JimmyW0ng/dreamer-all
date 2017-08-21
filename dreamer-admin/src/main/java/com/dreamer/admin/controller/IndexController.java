@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Controller
 @Slf4j
-public class IndexController extends BaseBackendController {
+public class IndexController extends BaseController {
 
     @Autowired
     private SysUserService sysUserService;

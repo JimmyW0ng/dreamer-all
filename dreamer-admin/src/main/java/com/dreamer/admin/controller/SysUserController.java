@@ -1,10 +1,15 @@
 package com.dreamer.admin.controller;
 
+import com.dreamer.admin.core.constant.MessageCodeConstant;
+import com.dreamer.admin.pojo.ResultDo;
+import com.dreamer.admin.pojo.dto.SysUserDto;
+import com.dreamer.business.service.SysRoleService;
+import com.dreamer.business.service.SysUserRoleService;
 import com.dreamer.business.service.SysUserService;
 import com.dreamer.common.tool.CryptTools;
 import com.dreamer.common.tool.StringTools;
-import com.dreamer.admin.core.pojo.ResultDo;
 import com.dreamer.pojo.po.SysUserPojo;
+import com.dreamer.pojo.po.SysUserRolePojo;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -29,13 +34,18 @@ import static com.dreamer.domain.Tables.SYS_USER;
 @Controller
 @RequestMapping("sysUser")
 @Slf4j
-@RequiresPermissions("sysUser:index")
-public class SysUserController extends BaseBackendController {
+public class SysUserController extends BaseController {
 
     private static final String MODULE_PREFIX = "sysUser/";
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private SysRoleService sysRoleService;
+
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
 
     /**
      * 用户查询列表
@@ -47,6 +57,7 @@ public class SysUserController extends BaseBackendController {
      * @return
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequiresPermissions("sysUser:index")
     public String index(Model model,
                         @RequestParam(value = "loginName", required = false) String loginName,
                         @RequestParam(value = "userName", required = false) String userName,
@@ -63,21 +74,31 @@ public class SysUserController extends BaseBackendController {
         model.addAttribute("loginName", loginName);
         model.addAttribute("userName", userName);
         model.addAttribute("page", page);
-        page.getContent().get(100);
         return PAGE_URL_PREFIX + MODULE_PREFIX + "index";
     }
 
+    /**
+     * 用户编辑页（新增/编辑）
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/toForm", method = RequestMethod.GET)
+    @RequiresPermissions("sysUser:maintenance")
     public String toForm(Model model,
                          @RequestParam(value = "id", required = false) Long id) {
         SysUserPojo sysUser;
         if (id != null && id > 0L) {
             sysUser = sysUserService.findById(id);
             sysUser.setPassword(CryptTools.decryptByase(sysUser.getPassword()));
+            SysUserRolePojo sysUserRolePojo = sysUserRoleService.getSysUserRolePojoByUserId(id);
+            model.addAttribute("roleId", sysUserRolePojo != null ? sysUserRolePojo.getSysRoleId() : null);
         } else {
             sysUser = new SysUserPojo();
         }
         model.addAttribute("sysUser", sysUser);
+        model.addAttribute("roles", sysRoleService.findAll());
         return PAGE_URL_PREFIX + MODULE_PREFIX + "form";
     }
 
@@ -88,20 +109,36 @@ public class SysUserController extends BaseBackendController {
      * @return
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequiresPermissions("sysUser:maintenance")
     @ResponseBody
-    public ResultDo save(@RequestBody SysUserPojo inputParam) {
-        ResultDo<?> resultDo = ResultDo.build();
-        inputParam.setPassword(null);
-        inputParam.setPassword(CryptTools.encryptByase(inputParam.getPassword()));
-        try {
-            if (inputParam.getId() != null && inputParam.getId() > 0) {
-                sysUserService.settingSave(inputParam);
-            } else {
-                sysUserService.insert(inputParam);
-            }
-        } catch (Exception e) {
-            log.error("[用户管理]保存用户失败。", e);
+    public ResultDo save(@RequestBody SysUserDto inputParam) {
+        SysUserPojo sysUserPojo = inputParam.getSysUserPojo();
+        sysUserPojo.setPassword(CryptTools.encryptByase(sysUserPojo.getPassword()));
+        if (sysUserPojo.getId() != null && sysUserPojo.getId() > 0) {
+            sysUserService.settingSave(sysUserPojo);
+            sysUserRoleService.insert(sysUserPojo.getId(), inputParam.getRoleId());
+        } else {
+            Long userId = sysUserService.insert(sysUserPojo);
+            sysUserRoleService.insert(userId, inputParam.getRoleId());
         }
-        return resultDo;
+        return ResultDo.build();
     }
+
+    /**
+     * 删除用户
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequiresPermissions("sysUser:maintenance")
+    @ResponseBody
+    public ResultDo delete(@RequestParam(value = "id", required = true) Long id) {
+        if (sysUserService.deleteByIdLogical(id) == 1) {
+            return ResultDo.build();
+        } else {
+            return ResultDo.build(MessageCodeConstant.ERROR_SYS_USER_NOTEXIST);
+        }
+    }
+
 }

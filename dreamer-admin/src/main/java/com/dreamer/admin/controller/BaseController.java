@@ -5,9 +5,8 @@ package com.dreamer.admin.controller;
  */
 public abstract class BaseController {
 
-    protected static final String SUCCESS = "SUCCESS";
-    protected static final String ERROR = "ERROR";
     protected static final String REDIRECT = "redirect:";
-    protected static final String FORWARD = "forward:";
+
+    protected static final String PAGE_URL_PREFIX = "/backend/";
 
 }

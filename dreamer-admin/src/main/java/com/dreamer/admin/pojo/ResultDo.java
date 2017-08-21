@@ -1,4 +1,4 @@
-package com.dreamer.admin.core.pojo;
+package com.dreamer.admin.pojo;
 
 import com.dreamer.admin.core.util.SpringUtil;
 import com.dreamer.common.tool.StringTools;
@@ -39,6 +39,16 @@ public class ResultDo<T> extends AbstractBasePojo {
         return resultDo;
     }
 
+    /**
+     * 获取messageSource的消息
+     *
+     * @param code
+     * @return
+     */
+    private static String messageSource(String code) {
+        return SpringUtil.getBean(MessageSource.class).getMessage(code, null, code, null);
+    }
+
     public String getErrorDescription() {
         return errorDescription;
     }
@@ -55,14 +65,6 @@ public class ResultDo<T> extends AbstractBasePojo {
         return error;
     }
 
-    public ResultDo setError(String error) {
-        this.error = error;
-        if (StringTools.isNotEmpty(this.error)) {
-            this.isSuccess = false;
-        }
-        return this;
-    }
-
     public T getResult() {
         return result;
     }
@@ -75,24 +77,21 @@ public class ResultDo<T> extends AbstractBasePojo {
         return isSuccess;
     }
 
-    public boolean isError() {
-        return !isSuccess;
-    }
-
     public ResultDo setSuccess(boolean success) {
         isSuccess = success;
         return this;
     }
 
+    public boolean isError() {
+        return !isSuccess;
+    }
 
-    /**
-     * 获取messageSource的消息
-     *
-     * @param code
-     * @return
-     */
-    private static String messageSource(String code) {
-        return SpringUtil.getBean(MessageSource.class).getMessage(code, null, code, null);
+    public ResultDo setError(String error) {
+        this.error = error;
+        if (StringTools.isNotEmpty(this.error)) {
+            this.isSuccess = false;
+        }
+        return this;
     }
 
 

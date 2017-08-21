@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -60,9 +61,21 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">角色：</label>
+                            <div class="col-sm-3">
+                                <select id="roleId" name="roleId" class="form-control" required>
+                                    <option value="">请选择</option>
+                                    <option th:each="role:${roles}" th:value="${role.id}"
+                                            th:text="${role.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-3">
                                 <button class="btn btn-white" type="button" onclick="toUrl('/sysUser/index')">返回</button>
-                                <button class="btn btn-primary" type="submit" >提交</button>
+                                <button class="btn btn-primary" type="submit" shiro:hasPermission="sysUser:maintenance">
+                                    提交
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -81,6 +94,13 @@
 <script th:src="@{/js/core.js?v=1.0.0}"></script>
 <script th:inline="javascript">
 
+    $(function () {
+        var userRoleId = [[${roleId}]];
+        if (typeof(userRoleId) != undefined) {
+            $("#roleId").val(userRoleId);
+        }
+    });
+
     $("#commentForm").validate({
         submitHandler: function(form) {
             var id = $("#id").val();
@@ -89,18 +109,22 @@
             var mobile = $("#mobile").val();
             var email = $("#email").val();
             var password = $("#password").val();
+            var roleId = $("#roleId").val();
             $.ajax({
                 url : "/sysUser/save",
                 type : "post",
                 dataType : "json",
                 contentType: 'application/json;charset=utf-8',
                 data: JSON.stringify({
-                    "id" : id,
-                    "loginName": loginName,
-                    "name": name,
-                    "mobile": mobile,
-                    "email": email,
-                    "password": password
+                    roleId: roleId,
+                    sysUserPojo: {
+                        "id": id,
+                        "loginName": loginName,
+                        "name": name,
+                        "mobile": mobile,
+                        "email": email,
+                        "password": password
+                    }
                 }),
                 success : function(r) {
                     if (r.success) {

@@ -17,6 +17,14 @@ public class SysUserRoleService {
 
     public SysUserRolePojo getSysUserRolePojoByUserId(Long userId) {
         return sysUserRoleRepository.findByUserId(userId).get(0);
+    }
 
+    public Long insert(Long userId, Long roleId) {
+        sysUserRoleRepository.deleteByUserId(userId);
+        SysUserRolePojo sysUserRolePojo = new SysUserRolePojo();
+        sysUserRolePojo.setSysUserId(userId);
+        sysUserRolePojo.setSysRoleId(roleId);
+        sysUserRoleRepository.insert(sysUserRolePojo);
+        return sysUserRolePojo.getId();
     }
 }
