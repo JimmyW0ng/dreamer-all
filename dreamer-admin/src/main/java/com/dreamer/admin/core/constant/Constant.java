@@ -7,4 +7,6 @@ package com.dreamer.admin.core.constant;
 public class Constant {
 
     public static String CURRENT_USER = "currentUser";
+
+    public static Long ADMIN_MENU_HEAD_ID = 1L;
 }

@@ -1,0 +1,78 @@
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" th:href="@{/img/favico.png}"/>
+    <link th:href="@{/css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet">
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet">
+    <link th:href="@{/css/plugins/toastr/toastr.min.css?v=1.0.0}" rel="stylesheet">
+    <link th:href="@{/css/plugins/treeview/bootstrap-treeview.css}" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>菜单列表</h5>
+            </div>
+            <div class="ibox-content">
+                <div id="menuTree"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+<script th:src="@{/js/content.min.js?v=1.0.0}"></script>
+<script th:src="@{/js/plugins/toastr/toastr.min.js?v=1.0.0}"></script>
+<script th:src="@{/js/plugins/treeview/bootstrap-treeview.js?v=1.0.0}"></script>
+<script th:src="@{/js/core.js?v=1.0.0}"></script>
+<script th:inline="javascript">
+
+    $('#menuTree').treeview({data: getTree()});
+
+    function getTree() {
+        var tree = [
+            {
+                text: "Parent 1",
+                nodes: [
+                    {
+                        text: "Child 1",
+                        nodes: [
+                            {
+                                text: "Grandchild 1"
+                            },
+                            {
+                                text: "Grandchild 2"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Child 2"
+                    }
+                ]
+            },
+            {
+                text: "Parent 2"
+            },
+            {
+                text: "Parent 3"
+            },
+            {
+                text: "Parent 4"
+            },
+            {
+                text: "Parent 5"
+            }
+        ];
+        return tree;
+    }
+
+</script>
+</body>
+</html>
