@@ -32,46 +32,56 @@
 <script th:src="@{/js/plugins/toastr/toastr.min.js?v=1.0.0}"></script>
 <script th:src="@{/js/plugins/treeview/bootstrap-treeview.js?v=1.0.0}"></script>
 <script th:src="@{/js/core.js?v=1.0.0}"></script>
+<th:block th:if="${menuTree != null}">
+    <script th:inline="javascript">
+
+        $('#menuTree').treeview({data: getTree()});
+
+        function getTree() {
+            var allMenu = [[${menuTree}]];
+            var head = {
+                text: allMenu.name,
+                icon: getMenuClass(allMenu.sysMenuType)
+            };
+            if (allMenu.hasChild) {
+                head.nodes = getNodes(allMenu.sysMenuDtoList);
+            }
+//                nodes: [
+//                    {
+//                        text: "Child 1",
+//                        nodes: [
+//                            {
+//                                text: "Grandchild 1"
+//                            },
+//                            {
+//                                text: "Grandchild 2"
+//                            }
+//                        ]
+//                    },
+//                    {
+//                        text: "Child 2"
+//                    }
+//                ]
+//            };
+            var tree = [head];
+            return tree;
+        }
+
+        function getMenuClass(type) {
+            if (type === "menu") {
+                return "glyphicon glyphicon-menu-hamburger";
+            }
+            return "";
+        }
+
+        function getNode(obj) {
+
+        }
+
+    </script>
+</th:block>
 <script th:inline="javascript">
 
-    $('#menuTree').treeview({data: getTree()});
-
-    function getTree() {
-        var tree = [
-            {
-                text: "Parent 1",
-                nodes: [
-                    {
-                        text: "Child 1",
-                        nodes: [
-                            {
-                                text: "Grandchild 1"
-                            },
-                            {
-                                text: "Grandchild 2"
-                            }
-                        ]
-                    },
-                    {
-                        text: "Child 2"
-                    }
-                ]
-            },
-            {
-                text: "Parent 2"
-            },
-            {
-                text: "Parent 3"
-            },
-            {
-                text: "Parent 4"
-            },
-            {
-                text: "Parent 5"
-            }
-        ];
-        return tree;
-    }
 
 </script>
 </body>

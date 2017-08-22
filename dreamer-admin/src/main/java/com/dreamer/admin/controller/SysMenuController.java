@@ -3,8 +3,9 @@ package com.dreamer.admin.controller;
 import com.dreamer.admin.core.constant.Constant;
 import com.dreamer.admin.pojo.dto.SysMenuDto;
 import com.dreamer.business.service.SysMenuService;
+import com.dreamer.common.tool.CollectionsTools;
 import com.dreamer.pojo.po.SysMenuPojo;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -42,7 +42,7 @@ public class SysMenuController extends BaseController {
     @RequiresPermissions("sysMenu:index")
     public String index(Model model) {
         List<SysMenuPojo> allMenus = sysMenuService.findAll();
-        model.addAttribute("menuTree", buildMenuMap(allMenus));
+        model.addAttribute("menuTree", buildMenuList(allMenus));
         return PAGE_URL_PREFIX + MODULE_PREFIX + "index";
     }
 
@@ -52,7 +52,7 @@ public class SysMenuController extends BaseController {
      * @param allMenus
      * @return
      */
-    private SysMenuDto buildMenuMap(List<SysMenuPojo> allMenus) {
+    private SysMenuDto buildMenuList(List<SysMenuPojo> allMenus) {
         SysMenuDto sysMenuDto = new SysMenuDto();
         Optional<SysMenuPojo> optOfHead = allMenus.stream().filter(item -> item.getId().equals(Constant.ADMIN_MENU_HEAD_ID)).findFirst();
         if (!optOfHead.isPresent()) {
@@ -62,39 +62,46 @@ public class SysMenuController extends BaseController {
         SysMenuPojo sysMenuPojo = optOfHead.get();
         sysMenuDto.setName(sysMenuPojo.getName());
         sysMenuDto.setHref(sysMenuPojo.getHref());
+        sysMenuDto.setSysMenuType(sysMenuPojo.getType().getLiteral());
         allMenus.remove(sysMenuPojo);
-        Map<Long, SysMenuDto> subMenuMap = buidSubMenuMap(sysMenuPojo.getId(), allMenus);
-        if (subMenuMap.isEmpty()) {
+        List<SysMenuDto> subMenuList = buidSubMenuList(sysMenuPojo.getId(), allMenus);
+        if (CollectionsTools.isEmpty(subMenuList)) {
             sysMenuDto.setHasChild(false);
         } else {
             sysMenuDto.setHasChild(true);
-            sysMenuDto.setSysMenuDtoMap(subMenuMap);
+            sysMenuDto.setSysMenuDtoList(subMenuList);
         }
         return sysMenuDto;
     }
 
-    private Map<Long, SysMenuDto> buidSubMenuMap(Long parentId, List<SysMenuPojo> allMenus) {
-        Map<Long, SysMenuDto> subMenuMap = Maps.newTreeMap();
-        Long index = 0L;
+    /**
+     * 递归生成子菜单
+     *
+     * @param parentId
+     * @param allMenus
+     * @return
+     */
+    private List<SysMenuDto> buidSubMenuList(Long parentId, List<SysMenuPojo> allMenus) {
+        List<SysMenuDto> subMenuList = Lists.newArrayList();
         for (int i = 0; i < allMenus.size(); i++) {
             SysMenuPojo sysMenuPojo = allMenus.get(i);
             if (!sysMenuPojo.getParentId().equals(parentId)) {
                 continue;
             }
-            index++;
             SysMenuDto sysMenuDto = new SysMenuDto();
             sysMenuDto.setName(sysMenuPojo.getName());
             sysMenuDto.setHref(sysMenuPojo.getHref());
+            sysMenuDto.setSysMenuType(sysMenuPojo.getType().getLiteral());
             allMenus.remove(sysMenuPojo);
-            Map<Long, SysMenuDto> leafMap = buidSubMenuMap(sysMenuPojo.getId(), allMenus);
-            if (leafMap.isEmpty()) {
+            List<SysMenuDto> leafList = buidSubMenuList(sysMenuPojo.getId(), allMenus);
+            if (CollectionsTools.isEmpty(leafList)) {
                 sysMenuDto.setHasChild(false);
             } else {
                 sysMenuDto.setHasChild(true);
-                sysMenuDto.setSysMenuDtoMap(leafMap);
+                sysMenuDto.setSysMenuDtoList(leafList);
             }
-            subMenuMap.put(index, sysMenuDto);
+            subMenuList.add(sysMenuDto);
         }
-        return subMenuMap;
+        return subMenuList;
     }
 }
