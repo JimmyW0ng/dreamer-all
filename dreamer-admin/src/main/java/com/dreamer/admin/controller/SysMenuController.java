@@ -60,6 +60,7 @@ public class SysMenuController extends BaseController {
             return sysMenuDto;
         }
         SysMenuPojo sysMenuPojo = optOfHead.get();
+        sysMenuDto.setId(sysMenuPojo.getId());
         sysMenuDto.setName(sysMenuPojo.getName());
         sysMenuDto.setHref(sysMenuPojo.getHref());
         sysMenuDto.setSysMenuType(sysMenuPojo.getType().getLiteral());
@@ -89,6 +90,7 @@ public class SysMenuController extends BaseController {
                 continue;
             }
             SysMenuDto sysMenuDto = new SysMenuDto();
+            sysMenuDto.setId(sysMenuPojo.getId());
             sysMenuDto.setName(sysMenuPojo.getName());
             sysMenuDto.setHref(sysMenuPojo.getHref());
             sysMenuDto.setSysMenuType(sysMenuPojo.getType().getLiteral());

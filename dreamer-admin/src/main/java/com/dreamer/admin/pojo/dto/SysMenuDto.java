@@ -13,6 +13,8 @@ public class SysMenuDto extends AbstractBasePojo {
 
     private Boolean hasChild;
 
+    private Long id;
+
     private String name;
 
     private String href;

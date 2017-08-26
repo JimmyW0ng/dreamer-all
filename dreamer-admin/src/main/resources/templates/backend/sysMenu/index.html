@@ -23,6 +23,33 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>收起</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="buttons.html#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="buttons.html#">选项1</a>
+                        </li>
+                        <li><a href="buttons.html#">选项2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div id="treeview2" class="test"></div>
+            </div>
+        </div>
+    </div>
 
 
 </div>
@@ -41,28 +68,12 @@
             var allMenu = [[${menuTree}]];
             var head = {
                 text: allMenu.name,
-                icon: getMenuClass(allMenu.sysMenuType)
+                icon: getMenuClass(allMenu.sysMenuType),
+                href: "selectThisMenuId()"
             };
             if (allMenu.hasChild) {
                 head.nodes = getNodes(allMenu.sysMenuDtoList);
             }
-//                nodes: [
-//                    {
-//                        text: "Child 1",
-//                        nodes: [
-//                            {
-//                                text: "Grandchild 1"
-//                            },
-//                            {
-//                                text: "Grandchild 2"
-//                            }
-//                        ]
-//                    },
-//                    {
-//                        text: "Child 2"
-//                    }
-//                ]
-//            };
             var tree = [head];
             return tree;
         }
@@ -70,19 +81,36 @@
         function getMenuClass(type) {
             if (type === "menu") {
                 return "glyphicon glyphicon-menu-hamburger";
+            } else if (type === "page") {
+                return "glyphicon glyphicon-list-alt";
+            } else if (type === "action") {
+                return "glyphicon glyphicon-edit";
             }
             return "";
         }
 
-        function getNode(obj) {
+        function getNodes(menus) {
+            var nodes = new Array();
+            for (index in menus) {
+                var menu = menus[index];
+                var node = {
+                    text: menu.name,
+                    icon: getMenuClass(menu.sysMenuType)
+                };
+                if (menu.hasChild) {
+                    node.nodes = getNodes(menu.sysMenuDtoList);
+                }
+                nodes.push(node)
+            }
+            return nodes;
+        }
+
+        var thisMenuId;
+        function selectThisMenuId(id) {
 
         }
 
     </script>
 </th:block>
-<script th:inline="javascript">
-
-
-</script>
 </body>
 </html>
