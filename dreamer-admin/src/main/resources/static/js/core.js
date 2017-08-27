@@ -18,3 +18,12 @@ $(function () {
 function toUrl(url) {
     self.location = url;
 }
+
+function formToJson(arr) {
+    var obj = {};
+    for (index in arr) {
+        var data = arr[index];
+        obj[data.name] = data.value;
+    }
+    return obj;
+}

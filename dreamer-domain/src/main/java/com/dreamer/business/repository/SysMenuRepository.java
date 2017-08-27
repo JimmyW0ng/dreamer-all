@@ -52,7 +52,7 @@ public class SysMenuRepository extends AbstractCRUDRepository<SysMenuRecord, Lon
 
     public List<SysMenuPojo> findAll() {
         List<SysMenuPojo> menuPojos = dslContext.selectFrom(SYS_MENU)
-                                                .where(SYS_MENU.STATUS.eq(SysMenuStatus.enable)).and(SYS_MENU.DEL_FLAG.eq(false))
+                                                .where(SYS_MENU.DEL_FLAG.eq(false))
                                                 .orderBy(SYS_MENU.SORT)
                                                 .fetchInto(SysMenuPojo.class);
         return menuPojos;

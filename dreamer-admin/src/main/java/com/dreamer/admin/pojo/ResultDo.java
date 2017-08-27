@@ -69,8 +69,9 @@ public class ResultDo<T> extends AbstractBasePojo {
         return result;
     }
 
-    public void setResult(T result) {
+    public ResultDo setResult(T result) {
         this.result = result;
+        return this;
     }
 
     public boolean isSuccess() {

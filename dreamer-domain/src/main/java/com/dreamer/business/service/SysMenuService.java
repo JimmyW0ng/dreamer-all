@@ -56,19 +56,12 @@ public class SysMenuService {
     @CacheEvict(value = "SysMenuPojo", key = "'allchildKey'")
     @Transactional
     public SysMenuPojo insert(SysMenuPojo pojo) {
-        if (pojo.getType().equals(SysMenuType.menu) && StringTools.isBlank(pojo.getIcon())) {
-            pojo.setIcon(this.messageSource("sysMenuIcon.menu"));
-        }
         pojo.setDelFlag(false);
-        pojo.setStatus(SysMenuStatus.enable);
         return sysMenuRepository.create(pojo);
     }
 
     @CacheEvict(value = "SysMenuPojo", key = "'allchildKey'")
     public SysMenuPojo update(SysMenuPojo pojo) {
-        if (pojo.getType().equals(SysMenuType.menu) && StringTools.isBlank(pojo.getIcon())) {
-            pojo.setIcon(this.messageSource("sysMenuIcon.menu"));
-        }
         sysMenuRepository.update(pojo);
         return pojo;
     }
@@ -86,9 +79,9 @@ public class SysMenuService {
         return sysMenuRepository.findChild();
     }
 
-    @CacheEvict(value = "SysMenuPojo", key = "'allchildKey'")
+    //@CacheEvict(value = "SysMenuPojo", key = "'allchildKey'")
     @Transactional(rollbackFor = Exception.class)
-    public void deleteByIdLogical(List<Long> menuIds) throws Exception {
+    public void deleteByIdsLogical(List<Long> menuIds) throws Exception {
         if (!menuIds.isEmpty()) {
             for (Long id : menuIds) {
                 sysMenuRepository.deleteByIdLogical(id);
@@ -96,6 +89,12 @@ public class SysMenuService {
             }
 
         }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteByIdLogical(Long menuId) {
+        sysMenuRepository.deleteByIdLogical(menuId);
+        sysRoleMenuRepository.deleteByMenuId(menuId);
     }
 
     public String getFullMenuById(Long id) {
