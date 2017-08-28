@@ -44,7 +44,7 @@ public class SysMenuController extends BaseController {
     @RequiresPermissions("sysMenu:index")
     public String index(Model model) {
         List<SysMenuPojo> allMenus = sysMenuService.findAll();
-        model.addAttribute("menuTree", buildMenuList(allMenus));
+        model.addAttribute("menuTree", buildMenuList(Constant.ADMIN_MENU_HEAD_ID, allMenus));
         return PAGE_URL_PREFIX + MODULE_PREFIX + "index";
     }
 
@@ -100,9 +100,9 @@ public class SysMenuController extends BaseController {
      * @param allMenus
      * @return
      */
-    private SysMenuDto buildMenuList(List<SysMenuPojo> allMenus) {
+    private SysMenuDto buildMenuList(Long parentId, List<SysMenuPojo> allMenus) {
         SysMenuDto sysMenuDto = new SysMenuDto();
-        Optional<SysMenuPojo> optOfHead = allMenus.stream().filter(item -> item.getId().equals(Constant.ADMIN_MENU_HEAD_ID)).findFirst();
+        Optional<SysMenuPojo> optOfHead = allMenus.stream().filter(item -> item.getId().equals(parentId)).findFirst();
         if (!optOfHead.isPresent()) {
             sysMenuDto.setHasChild(true);
             return sysMenuDto;
@@ -131,12 +131,14 @@ public class SysMenuController extends BaseController {
      * @return
      */
     private List<SysMenuDto> buidSubMenuList(Long parentId, List<SysMenuPojo> allMenus) {
-        List<SysMenuDto> subMenuList = Lists.newArrayList();
-        for (int i = 0; i < allMenus.size(); i++) {
-            SysMenuPojo sysMenuPojo = allMenus.get(i);
-            if (!sysMenuPojo.getParentId().equals(parentId)) {
-                continue;
+        List<SysMenuPojo> menus = Lists.newArrayList();
+        for (SysMenuPojo sysMenuPojo : allMenus) {
+            if (sysMenuPojo.getParentId().equals(parentId)) {
+                menus.add(sysMenuPojo);
             }
+        }
+        List<SysMenuDto> subMenuList = Lists.newArrayList();
+        for (SysMenuPojo sysMenuPojo : menus) {
             SysMenuDto sysMenuDto = new SysMenuDto();
             sysMenuDto.setId(sysMenuPojo.getId());
             sysMenuDto.setName(sysMenuPojo.getName());

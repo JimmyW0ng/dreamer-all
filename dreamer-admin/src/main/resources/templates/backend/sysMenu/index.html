@@ -247,6 +247,29 @@
                 toastr.error("请选择一个菜单！");
                 return;
             }
+            var flag = confirm("确定要删除此菜单吗？");
+            if (!flag) {
+                return;
+            }
+            $.ajax({
+                url: "/sysMenu/del",
+                type: "post",
+                data: {
+                    "id": selectedTreeId
+                },
+                success: function (r) {
+                    if (r.success) {
+                        toastr.success("操作成功！");
+                        setTimeout(
+                            function () {
+                                toUrl('/sysMenu/index');
+                            }, 1000
+                        );
+                    } else {
+                        toastr.error("操作失败：" + r.errorDescription)
+                    }
+                }
+            });
         }
 
         $("#commentForm").validate({
