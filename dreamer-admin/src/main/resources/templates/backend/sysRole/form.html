@@ -1,0 +1,272 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" th:href="@{/img/favico.png}"/>
+    <link th:href="@{/css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet">
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet">
+    <link th:href="@{/css/plugins/toastr/toastr.min.css?v=1.0.0}" rel="stylesheet">
+    <link th:href="@{/css/plugins/treeview/bootstrap-treeview.css}" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>菜单列表</h5>
+            </div>
+            <div class="ibox-content">
+                <div id="menuTree"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8" id="div-form" style="display: none;">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" id="div-form-title">
+                <h5>收起</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="commentForm">
+                    <input id="id" name="id" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">角色名称：</label>
+                        <div class="col-sm-8">
+                            <input id="name" name="name" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button id="sbmt" class="btn btn-primary" type="submit" shiro:hasPermission="sysMenu:maintenance">
+                                提交
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+<script th:src="@{/js/content.min.js?v=1.0.0}"></script>
+<script th:src="@{/js/plugins/toastr/toastr.min.js?v=1.0.0}"></script>
+<script th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
+<script th:src="@{/js/plugins/validate/messages_zh.min.js}"></script>
+<script th:src="@{/js/plugins/treeview/bootstrap-treeview.js?v=1.0.0}"></script>
+<script th:src="@{/js/core.js?v=1.0.0}"></script>
+<th:block th:if="${menuTree != null}">
+    <script th:inline="javascript">
+
+        var selectedTreeId;
+
+        $('#menuTree').treeview({
+            data: getTree(),
+            level: 2,
+            onNodeSelected: function(event, data) {
+                selectedTreeId = data.id;
+                console.log(selectedTreeId);
+            }
+        });
+
+        function getTree() {
+            var allMenu = [[${menuTree}]];
+            var head = {
+                id: allMenu.id,
+                text: allMenu.name,
+                icon: getMenuClass(allMenu.sysMenuType)
+            };
+            if (allMenu.hasChild) {
+                head.nodes = getNodes(allMenu.sysMenuDtoList);
+            }
+            var tree = [head];
+            return tree;
+        }
+
+        function getMenuClass(type) {
+            if (type === "menu") {
+                return "glyphicon glyphicon-menu-hamburger";
+            } else if (type === "page") {
+                return "glyphicon glyphicon-list-alt";
+            } else if (type === "action") {
+                return "glyphicon glyphicon-edit";
+            }
+            return "";
+        }
+
+        function getNodes(menus) {
+            var nodes = new Array();
+            for (index in menus) {
+                var menu = menus[index];
+                var node = {
+                    id: menu.id,
+                    text: menu.name,
+                    icon: getMenuClass(menu.sysMenuType)
+                };
+                if (menu.hasChild) {
+                    node.nodes = getNodes(menu.sysMenuDtoList);
+                }
+                nodes.push(node)
+            }
+            return nodes;
+        }
+
+        function info() {
+            if (typeof(selectedTreeId) === "undefined") {
+                toastr.error("请选择一个菜单！");
+                return;
+            }
+            $("#div-form-title").text("详情");
+            $("#commentForm")[0].reset();
+            $.ajax({
+                url : "/sysMenu/info",
+                type : "post",
+                data: {
+                    id: selectedTreeId
+                },
+                success : function(r) {
+                    if (r.success) {
+                        var menu = r.result;
+                        var values = $("#commentForm").serializeArray();
+                        for (index in values) {
+                            var param = values[index].name;
+                            $("#" + param).val(menu[param]);
+                        }
+                        $("#sbmt").hide();
+                        $("#div-form").show();
+                    } else {
+                        toastr.error("获取菜单失败:" + r.errorDescription);
+                    }
+                }
+            });
+        }
+
+        function add() {
+            if (typeof(selectedTreeId) === "undefined") {
+                toastr.error("请选择一个菜单！");
+                return;
+            }
+            $("#div-form-title").text("新增");
+            $("#commentForm")[0].reset();
+            $("#parentId").val(selectedTreeId);
+            $("#sbmt").show();
+            $("#div-form").show();
+        }
+
+        function edit() {
+            if (typeof(selectedTreeId) === "undefined") {
+                toastr.error("请选择一个菜单！");
+                return;
+            }
+            $("#div-form-title").text("编辑");
+            $("#commentForm")[0].reset();
+            $.ajax({
+                url : "/sysMenu/info",
+                type : "post",
+                data: {
+                    id: selectedTreeId
+                },
+                success : function(r) {
+                    if (r.success) {
+                        var menu = r.result;
+                        var values = $("#commentForm").serializeArray();
+                        for (index in values) {
+                            var param = values[index].name;
+                            $("#" + param).val(menu[param]);
+                        }
+                        $("#sbmt").show();
+                        $("#div-form").show();
+                    } else {
+                        toastr.error("获取菜单失败:" + r.errorDescription);
+                    }
+                }
+            });
+        }
+
+        function del() {
+            if (typeof(selectedTreeId) === "undefined") {
+                toastr.error("请选择一个菜单！");
+                return;
+            }
+            var flag = confirm("确定要删除此菜单吗？");
+            if (!flag) {
+                return;
+            }
+            $.ajax({
+                url: "/sysMenu/del",
+                type: "post",
+                data: {
+                    "id": selectedTreeId
+                },
+                success: function (r) {
+                    if (r.success) {
+                        toastr.success("操作成功！");
+                        setTimeout(
+                            function () {
+                                toUrl('/sysMenu/index');
+                            }, 1000
+                        );
+                    } else {
+                        toastr.error("操作失败：" + r.errorDescription)
+                    }
+                }
+            });
+        }
+
+        $("#commentForm").validate({
+            submitHandler: function(form) {
+                var formData = $("#commentForm").serializeArray();
+                var jsonObj = formToJson(formData);
+                $.ajax({
+                    url : "/sysMenu/save",
+                    type : "post",
+                    dataType : "json",
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(jsonObj),
+                    success : function(r) {
+                        if (r.success) {
+                            toastr.success("操作成功！");
+                            setTimeout(
+                                function () {
+                                    toUrl('/sysMenu/index');
+                                }, 1000
+                            );
+                        } else {
+                            toastr.error("操作失败：" + r.errorDescription)
+                        }
+                    }
+                });
+            }
+        });
+
+        function getMenuInfo() {
+            $.ajax({
+                url: "/sysUser/delete",
+                type: "post",
+                data: {
+                    "id": id
+                },
+                success: function (r) {
+                    if (r.success) {
+                        toastr.success("操作成功！");
+                        setTimeout(
+                            function () {
+                                toUrl('/sysUser/index');
+                            }, 1000
+                        );
+                    } else {
+                        toastr.error("操作失败：" + r.errorDescription)
+                    }
+                }
+            });
+        }
+
+
+    </script>
+</th:block>
+</body>
+</html>

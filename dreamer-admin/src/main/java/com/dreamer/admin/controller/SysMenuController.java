@@ -100,7 +100,7 @@ public class SysMenuController extends BaseController {
      * @param allMenus
      * @return
      */
-    private SysMenuDto buildMenuList(Long parentId, List<SysMenuPojo> allMenus) {
+    public static SysMenuDto buildMenuList(Long parentId, List<SysMenuPojo> allMenus) {
         SysMenuDto sysMenuDto = new SysMenuDto();
         Optional<SysMenuPojo> optOfHead = allMenus.stream().filter(item -> item.getId().equals(parentId)).findFirst();
         if (!optOfHead.isPresent()) {
@@ -130,7 +130,7 @@ public class SysMenuController extends BaseController {
      * @param allMenus
      * @return
      */
-    private List<SysMenuDto> buidSubMenuList(Long parentId, List<SysMenuPojo> allMenus) {
+    private static List<SysMenuDto> buidSubMenuList(Long parentId, List<SysMenuPojo> allMenus) {
         List<SysMenuPojo> menus = Lists.newArrayList();
         for (SysMenuPojo sysMenuPojo : allMenus) {
             if (sysMenuPojo.getParentId().equals(parentId)) {
