@@ -1,7 +1,6 @@
 package com.dreamer.admin.controller;
 
 import com.dreamer.admin.core.constant.Constant;
-import com.dreamer.admin.pojo.ResultDo;
 import com.dreamer.admin.pojo.dto.SysMenuDto;
 import com.dreamer.admin.pojo.dto.SysRoleDto;
 import com.dreamer.business.service.SysMenuService;
@@ -21,9 +20,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +47,69 @@ public class SysRoleController extends BaseController {
 
     @Autowired
     private SysMenuService sysMenuService;
+
+    /**
+     * 生成菜单树状结构
+     *
+     * @param allMenus
+     * @return
+     */
+    public static SysMenuDto buildMenuList(Long parentId, List<SysMenuPojo> allMenus, List<Long> roleMenus) {
+        SysMenuDto sysMenuDto = new SysMenuDto();
+        Optional<SysMenuPojo> optOfHead = allMenus.stream().filter(item -> item.getId().equals(parentId)).findFirst();
+        if (!optOfHead.isPresent()) {
+            sysMenuDto.setHasChild(true);
+            return sysMenuDto;
+        }
+        SysMenuPojo sysMenuPojo = optOfHead.get();
+        sysMenuDto.setId(sysMenuPojo.getId());
+        sysMenuDto.setName(sysMenuPojo.getName());
+        sysMenuDto.setHref(sysMenuPojo.getHref());
+        sysMenuDto.setSysMenuType(sysMenuPojo.getType().getLiteral());
+        allMenus.remove(sysMenuPojo);
+        List<SysMenuDto> subMenuList = buidSubMenuList(sysMenuPojo.getId(), allMenus);
+        if (CollectionsTools.isEmpty(subMenuList)) {
+            sysMenuDto.setHasChild(false);
+        } else {
+            sysMenuDto.setHasChild(true);
+            sysMenuDto.setSysMenuDtoList(subMenuList);
+        }
+        return sysMenuDto;
+    }
+
+    /**
+     * 递归生成子菜单
+     *
+     * @param parentId
+     * @param allMenus
+     * @return
+     */
+    private static List<SysMenuDto> buidSubMenuList(Long parentId, List<SysMenuPojo> allMenus) {
+        List<SysMenuPojo> menus = Lists.newArrayList();
+        for (SysMenuPojo sysMenuPojo : allMenus) {
+            if (sysMenuPojo.getParentId().equals(parentId)) {
+                menus.add(sysMenuPojo);
+            }
+        }
+        List<SysMenuDto> subMenuList = Lists.newArrayList();
+        for (SysMenuPojo sysMenuPojo : menus) {
+            SysMenuDto sysMenuDto = new SysMenuDto();
+            sysMenuDto.setId(sysMenuPojo.getId());
+            sysMenuDto.setName(sysMenuPojo.getName());
+            sysMenuDto.setHref(sysMenuPojo.getHref());
+            sysMenuDto.setSysMenuType(sysMenuPojo.getType().getLiteral());
+            allMenus.remove(sysMenuPojo);
+            List<SysMenuDto> leafList = buidSubMenuList(sysMenuPojo.getId(), allMenus);
+            if (CollectionsTools.isEmpty(leafList)) {
+                sysMenuDto.setHasChild(false);
+            } else {
+                sysMenuDto.setHasChild(true);
+                sysMenuDto.setSysMenuDtoList(leafList);
+            }
+            subMenuList.add(sysMenuDto);
+        }
+        return subMenuList;
+    }
 
     /**
      * 角色列表
@@ -89,7 +151,7 @@ public class SysRoleController extends BaseController {
         } else {
             model.addAttribute("sysRoleDto", new SysRoleDto());
         }
-        model.addAttribute("menuTree", SysMenuController.buildMenuList(Constant.ADMIN_MENU_HEAD_ID, sysMenuService.findAll()));
+        model.addAttribute("menuTree", buildMenuList(Constant.ADMIN_MENU_HEAD_ID, sysMenuService.findAll(), null));
         return PAGE_URL_PREFIX + MODULE_PREFIX + "form";
     }
 

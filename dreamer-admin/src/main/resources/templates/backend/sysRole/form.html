@@ -62,14 +62,33 @@
 <th:block th:if="${menuTree != null}">
     <script th:inline="javascript">
 
-        var selectedTreeId;
-
         $('#menuTree').treeview({
+            showIcon: false,
+            showCheckbox: true,
             data: getTree(),
             level: 2,
-            onNodeSelected: function(event, data) {
-                selectedTreeId = data.id;
-                console.log(selectedTreeId);
+            onNodeChecked: function (event, node) { //选中节点
+                var selectNodes = getChildNodeIdArr(node); //获取所有子节点
+                if (selectNodes) { //子节点不为空，则选中所有子节点
+                    $('#menuTree').treeview('checkNode', [selectNodes, {silent: true}]);
+                }
+                var parentNode = $("#menuTree").treeview("getNode", node.parentId);
+                setParentNodeCheck(node);
+            },
+            onNodeUnchecked: function (event, node) { //取消选中节点
+                var selectNodes = getChildNodeIdArr(node); //获取所有子节点
+                if (selectNodes) { //子节点不为空，则取消选中所有子节点
+                    $('#menuTree').treeview('uncheckNode', [selectNodes, {silent: true}]);
+                }
+            },
+            onNodeExpanded: function (event, data) {
+                if (data.nodes === undefined || data.nodes === null) {
+
+                } else if (data.tags[0] === "2") {
+                    alert("Tags 2");
+                } else {
+                    alert("1111");
+                }
             }
         });
 
@@ -78,24 +97,13 @@
             var head = {
                 id: allMenu.id,
                 text: allMenu.name,
-                icon: getMenuClass(allMenu.sysMenuType)
+                state: {checked: true}
             };
             if (allMenu.hasChild) {
                 head.nodes = getNodes(allMenu.sysMenuDtoList);
             }
             var tree = [head];
             return tree;
-        }
-
-        function getMenuClass(type) {
-            if (type === "menu") {
-                return "glyphicon glyphicon-menu-hamburger";
-            } else if (type === "page") {
-                return "glyphicon glyphicon-list-alt";
-            } else if (type === "action") {
-                return "glyphicon glyphicon-edit";
-            }
-            return "";
         }
 
         function getNodes(menus) {
@@ -105,7 +113,7 @@
                 var node = {
                     id: menu.id,
                     text: menu.name,
-                    icon: getMenuClass(menu.sysMenuType)
+                    state: {checked: true}
                 };
                 if (menu.hasChild) {
                     node.nodes = getNodes(menu.sysMenuDtoList);
@@ -115,156 +123,41 @@
             return nodes;
         }
 
-        function info() {
-            if (typeof(selectedTreeId) === "undefined") {
-                toastr.error("请选择一个菜单！");
-                return;
-            }
-            $("#div-form-title").text("详情");
-            $("#commentForm")[0].reset();
-            $.ajax({
-                url : "/sysMenu/info",
-                type : "post",
-                data: {
-                    id: selectedTreeId
-                },
-                success : function(r) {
-                    if (r.success) {
-                        var menu = r.result;
-                        var values = $("#commentForm").serializeArray();
-                        for (index in values) {
-                            var param = values[index].name;
-                            $("#" + param).val(menu[param]);
-                        }
-                        $("#sbmt").hide();
-                        $("#div-form").show();
-                    } else {
-                        toastr.error("获取菜单失败:" + r.errorDescription);
-                    }
-                }
-            });
-        }
-
-        function add() {
-            if (typeof(selectedTreeId) === "undefined") {
-                toastr.error("请选择一个菜单！");
-                return;
-            }
-            $("#div-form-title").text("新增");
-            $("#commentForm")[0].reset();
-            $("#parentId").val(selectedTreeId);
-            $("#sbmt").show();
-            $("#div-form").show();
-        }
-
-        function edit() {
-            if (typeof(selectedTreeId) === "undefined") {
-                toastr.error("请选择一个菜单！");
-                return;
-            }
-            $("#div-form-title").text("编辑");
-            $("#commentForm")[0].reset();
-            $.ajax({
-                url : "/sysMenu/info",
-                type : "post",
-                data: {
-                    id: selectedTreeId
-                },
-                success : function(r) {
-                    if (r.success) {
-                        var menu = r.result;
-                        var values = $("#commentForm").serializeArray();
-                        for (index in values) {
-                            var param = values[index].name;
-                            $("#" + param).val(menu[param]);
-                        }
-                        $("#sbmt").show();
-                        $("#div-form").show();
-                    } else {
-                        toastr.error("获取菜单失败:" + r.errorDescription);
-                    }
-                }
-            });
-        }
-
-        function del() {
-            if (typeof(selectedTreeId) === "undefined") {
-                toastr.error("请选择一个菜单！");
-                return;
-            }
-            var flag = confirm("确定要删除此菜单吗？");
-            if (!flag) {
-                return;
-            }
-            $.ajax({
-                url: "/sysMenu/del",
-                type: "post",
-                data: {
-                    "id": selectedTreeId
-                },
-                success: function (r) {
-                    if (r.success) {
-                        toastr.success("操作成功！");
-                        setTimeout(
-                            function () {
-                                toUrl('/sysMenu/index');
-                            }, 1000
-                        );
-                    } else {
-                        toastr.error("操作失败：" + r.errorDescription)
-                    }
-                }
-            });
-        }
-
-        $("#commentForm").validate({
-            submitHandler: function(form) {
-                var formData = $("#commentForm").serializeArray();
-                var jsonObj = formToJson(formData);
-                $.ajax({
-                    url : "/sysMenu/save",
-                    type : "post",
-                    dataType : "json",
-                    contentType: 'application/json;charset=utf-8',
-                    data: JSON.stringify(jsonObj),
-                    success : function(r) {
-                        if (r.success) {
-                            toastr.success("操作成功！");
-                            setTimeout(
-                                function () {
-                                    toUrl('/sysMenu/index');
-                                }, 1000
-                            );
-                        } else {
-                            toastr.error("操作失败：" + r.errorDescription)
+        function getChildNodeIdArr(node) {
+            var ts = [];
+            if (node.nodes) {
+                for (x in node.nodes) {
+                    ts.push(node.nodes[x].nodeId);
+                    if (node.nodes[x].nodes) {
+                        var getNodeDieDai = getChildNodeIdArr(node.nodes[x]);
+                        for (j in getNodeDieDai) {
+                            ts.push(getNodeDieDai[j]);
                         }
                     }
-                });
-            }
-        });
-
-        function getMenuInfo() {
-            $.ajax({
-                url: "/sysUser/delete",
-                type: "post",
-                data: {
-                    "id": id
-                },
-                success: function (r) {
-                    if (r.success) {
-                        toastr.success("操作成功！");
-                        setTimeout(
-                            function () {
-                                toUrl('/sysUser/index');
-                            }, 1000
-                        );
-                    } else {
-                        toastr.error("操作失败：" + r.errorDescription)
-                    }
                 }
-            });
+            } else {
+                ts.push(node.nodeId);
+            }
+            return ts;
         }
 
+        function setParentNodeCheck(node) {
+            var parentNode = $("#treeview-checkable").treeview("getNode", node.parentId);
+            if (parentNode.nodes) {
+                var checkedCount = 0;
+                for (x in parentNode.nodes) {
+                    if (parentNode.nodes[x].state.checked) {
+                        checkedCount++;
+                    } else {
+                        break;
+                    }
+                }
+                if (checkedCount === parentNode.nodes.length) {
+                    $("#treeview-checkable").treeview("checkNode", parentNode.nodeId);
+                    setParentNodeCheck(parentNode);
+                }
+            }
+        }
 
     </script>
 </th:block>
