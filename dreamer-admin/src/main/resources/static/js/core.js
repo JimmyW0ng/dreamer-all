@@ -27,3 +27,11 @@ function formToJson(arr) {
     }
     return obj;
 }
+
+function resetForm(formName) {
+    $(':input', formName)
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
+}

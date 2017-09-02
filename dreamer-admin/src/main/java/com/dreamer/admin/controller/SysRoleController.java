@@ -1,6 +1,7 @@
 package com.dreamer.admin.controller;
 
 import com.dreamer.admin.core.constant.Constant;
+import com.dreamer.admin.pojo.ResultDo;
 import com.dreamer.admin.pojo.dto.SysMenuDto;
 import com.dreamer.admin.pojo.dto.SysRoleDto;
 import com.dreamer.business.service.SysMenuService;
@@ -21,7 +22,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collection;
 import java.util.List;
@@ -151,8 +154,22 @@ public class SysRoleController extends BaseController {
         } else {
             model.addAttribute("sysRoleDto", new SysRoleDto());
         }
+        model.addAttribute("method", method);
         model.addAttribute("menuTree", buildMenuList(Constant.ADMIN_MENU_HEAD_ID, sysMenuService.findAll(), null));
         return PAGE_URL_PREFIX + MODULE_PREFIX + "form";
     }
 
+    /**
+     * 删除角色
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequiresPermissions("sysUser:maintenance")
+    @ResponseBody
+    public ResultDo delete(@RequestParam(value = "id", required = true) Long id) {
+        sysRoleService.deleteByIdLogical(id);
+        return ResultDo.build();
+    }
 }

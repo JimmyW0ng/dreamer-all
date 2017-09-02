@@ -40,7 +40,7 @@
                                    th:value="${name}">
                         </div>
                         <button class="btn btn-success" type="submit">查询</button>
-                        <button class="btn btn-info" type="button">重置</button>
+                        <button class="btn btn-info" type="button" onclick="resetForm('#query-form')">重置</button>
                     </form>
                     <div id="editable_wrapper" class="dataTables_wrapper form-inline" role="grid"
                          sd:page-object="${page}">
@@ -65,8 +65,10 @@
                                 <td>
                                     <a  th:href="@{'/sysRole/toForm?method=info&id='+${sysRole.id}}"  class="btn btn-success btn-xs" shiro:hasPermission="sysRole:index">查看</a>
                                     <a  th:href="@{'/sysRole/toForm?method=edit&id='+${sysRole.id}}"  class="btn btn-primary btn-xs" shiro:hasPermission="sysRole:maintenance">修改</a>
-                                    <a  th:value="${sysRole.id}" data-toggle="modal" href="#deleteModal" onclick="$('#delById').attr('href','/sysRole/delete/'+$(this).attr('value'));"
-                                        class="btn btn-danger btn-xs" shiro:hasPermission="sysRole:maintenance" >删除</a>
+                                    <button class="btn btn-danger btn-sm btn-outline" type="button"
+                                            shiro:hasPermission="sysRole:maintenance"
+                                            th:onclick="'del(' + ${sysRole.id} +')'">删除
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -114,12 +116,12 @@
 <script th:inline="javascript">
 
     function del(id) {
-        var flag = confirm("确定要删除此用户吗？");
+        var flag = confirm("确定要删除此角色吗？");
         if (!flag) {
             return;
         }
         $.ajax({
-            url: "/sysUser/delete",
+            url: "/sysRole/delete",
             type: "post",
             data: {
                 "id": id
@@ -129,7 +131,7 @@
                     toastr.success("操作成功！");
                     setTimeout(
                         function () {
-                            toUrl('/sysUser/index');
+                            toUrl('/sysRole/index');
                         }, 1000
                     );
                 } else {

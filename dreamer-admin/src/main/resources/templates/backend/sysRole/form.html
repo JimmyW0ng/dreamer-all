@@ -15,6 +15,10 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="col-sm-4">
         <div class="ibox float-e-margins">
+            <div class="ibox-title" shiro:hasPermission="sysRole:maintenance">
+                <button class="btn btn-xs btn-info" onclick="checkAll()" type="button">全选</button>
+                <button class="btn btn-xs btn-primary" onclick="unCheckAll()" type="button">清空</button>
+            </div>
             <div class="ibox-title">
                 <h5>菜单列表</h5>
             </div>
@@ -23,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8" id="div-form" style="display: none;">
+    <div class="col-sm-8" id="div-form">
         <div class="ibox float-e-margins">
             <div class="ibox-title" id="div-form-title">
                 <h5>收起</h5>
@@ -34,14 +38,17 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">角色名称：</label>
                         <div class="col-sm-8">
-                            <input id="name" name="name" type="text" class="form-control" required>
+                            <input id="name" name="name" type="text" class="form-control"
+                                   th:value="${sysRoleDto.sysRolePojo.name}" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-4 col-sm-offset-3">
-                            <button id="sbmt" class="btn btn-primary" type="submit" shiro:hasPermission="sysMenu:maintenance">
+                        <div class="col-sm-4 col-sm-offset-3" th:if="${method != 'info'}">
+                            <button id="sbmt" class="btn btn-primary" type="submit"
+                                    shiro:hasPermission="sysRole:maintenance">
                                 提交
                             </button>
+                            <button onclick="showSelectedMenus()">11</button>
                         </div>
                     </div>
                 </form>
@@ -62,103 +69,97 @@
 <th:block th:if="${menuTree != null}">
     <script th:inline="javascript">
 
-        $('#menuTree').treeview({
-            showIcon: false,
-            showCheckbox: true,
-            data: getTree(),
-            level: 2,
-            onNodeChecked: function (event, node) { //选中节点
-                var selectNodes = getChildNodeIdArr(node); //获取所有子节点
-                if (selectNodes) { //子节点不为空，则选中所有子节点
-                    $('#menuTree').treeview('checkNode', [selectNodes, {silent: true}]);
-                }
-                var parentNode = $("#menuTree").treeview("getNode", node.parentId);
-                setParentNodeCheck(node);
-            },
-            onNodeUnchecked: function (event, node) { //取消选中节点
-                var selectNodes = getChildNodeIdArr(node); //获取所有子节点
-                if (selectNodes) { //子节点不为空，则取消选中所有子节点
-                    $('#menuTree').treeview('uncheckNode', [selectNodes, {silent: true}]);
-                }
-            },
-            onNodeExpanded: function (event, data) {
-                if (data.nodes === undefined || data.nodes === null) {
+        var method = [[${method}]]
 
-                } else if (data.tags[0] === "2") {
-                    alert("Tags 2");
-                } else {
-                    alert("1111");
-                }
-            }
+        $('#menuTree').treeview({
+            data: getTree(),
+            showCheckbox: true,
+            multiSelect: true,
+            level: 2
         });
 
         function getTree() {
+            var checkFlag = false;
             var allMenu = [[${menuTree}]];
+            var menuIds = [[${sysRoleDto.menuIds}]];
             var head = {
                 id: allMenu.id,
                 text: allMenu.name,
-                state: {checked: true}
+                state: {}
             };
+            if (typeof(menuIds) != "undefined" && menuIds.length > 0) {
+                checkFlag = true;
+                head.state.checked = true;
+            }
             if (allMenu.hasChild) {
-                head.nodes = getNodes(allMenu.sysMenuDtoList);
+                head.nodes = getNodes(allMenu.sysMenuDtoList, checkFlag, menuIds);
             }
             var tree = [head];
             return tree;
         }
 
-        function getNodes(menus) {
+        function getNodes(menus, checkFlag, roleMenus) {
             var nodes = new Array();
             for (index in menus) {
                 var menu = menus[index];
                 var node = {
                     id: menu.id,
                     text: menu.name,
-                    state: {checked: true}
+                    state: {}
                 };
+                if (checkFlag) {
+                    for (index in roleMenus) {
+                        if (menu.id === roleMenus[index]) {
+                            node.state.checked = true;
+                        }
+                    }
+                }
                 if (menu.hasChild) {
-                    node.nodes = getNodes(menu.sysMenuDtoList);
+                    node.nodes = getNodes(menu.sysMenuDtoList, checkFlag, roleMenus);
                 }
                 nodes.push(node)
             }
             return nodes;
         }
 
-        function getChildNodeIdArr(node) {
-            var ts = [];
-            if (node.nodes) {
-                for (x in node.nodes) {
-                    ts.push(node.nodes[x].nodeId);
-                    if (node.nodes[x].nodes) {
-                        var getNodeDieDai = getChildNodeIdArr(node.nodes[x]);
-                        for (j in getNodeDieDai) {
-                            ts.push(getNodeDieDai[j]);
+        function showSelectedMenus() {
+            console.log($('#menuTree').treeview('getChecked'));
+        }
+
+        function unCheckAll() {
+            $('#menuTree').treeview('uncheckAll', {silent: true});
+        }
+
+        function checkAll() {
+            $('#menuTree').treeview('checkAll', {silent: true});
+        }
+
+        $("#commentForm").validate({
+            submitHandler: function (form) {
+                var formData = $("#commentForm").serializeArray();
+                var jsonObj = formToJson(formData);
+                $.ajax({
+                    url: "/sysMenu/save",
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(jsonObj),
+                    success: function (r) {
+                        if (r.success) {
+                            toastr.success("操作成功！");
+                            setTimeout(
+                                function () {
+                                    toUrl('/sysMenu/index');
+                                }, 1000
+                            );
+                        } else {
+                            toastr.error("操作失败：" + r.errorDescription)
                         }
                     }
-                }
-            } else {
-                ts.push(node.nodeId);
+                });
             }
-            return ts;
-        }
-
-        function setParentNodeCheck(node) {
-            var parentNode = $("#treeview-checkable").treeview("getNode", node.parentId);
-            if (parentNode.nodes) {
-                var checkedCount = 0;
-                for (x in parentNode.nodes) {
-                    if (parentNode.nodes[x].state.checked) {
-                        checkedCount++;
-                    } else {
-                        break;
-                    }
-                }
-                if (checkedCount === parentNode.nodes.length) {
-                    $("#treeview-checkable").treeview("checkNode", parentNode.nodeId);
-                    setParentNodeCheck(parentNode);
-                }
-            }
-        }
-
+        });
+        
     </script>
 </th:block>
 </body>

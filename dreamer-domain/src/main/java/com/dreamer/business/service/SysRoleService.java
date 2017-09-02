@@ -11,7 +11,6 @@ import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.Condition;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -71,9 +70,9 @@ public class SysRoleService {
         sysRoleRepository.deleteById(id);
     }
 
-    @CacheEvict(value = "SysMenuPojo", allEntries = true)
+    //@CacheEvict(value = "SysMenuPojo", allEntries = true)
     @Transactional(rollbackFor = Exception.class)
-    public void deleteByIdLogical(Long id) throws Exception {
+    public void deleteByIdLogical(Long id) {
         sysRoleRepository.deleteByIdLogical(id);
         sysRoleMenuRepository.deleteByRoleId(id);
     }
