@@ -1,7 +1,7 @@
 package com.dreamer.admin.controller;
 
-import com.dreamer.business.service.WcSessionTokenService;
-import com.dreamer.pojo.ResultDo;
+import com.dreamer.admin.pojo.ResultDo;
+import com.dreamer.admin.service.WcSessionTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

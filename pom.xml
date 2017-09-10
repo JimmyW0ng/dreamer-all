@@ -9,7 +9,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>dreamer-admin</module>
-        <module>dreamer-domain</module>
         <module>dreamer-common</module>
         <module>changfu-code-generator</module>
     </modules>

@@ -49,8 +49,8 @@ public class MainClass {
                         .withGenerate(new Generate().withFluentSetters(true)
                                                     .withPojos(true).withDaos(true))
                         .withTarget(new Target()
-                                .withPackageName("com.dreamer.domain")
-                                .withDirectory("dreamer-domain/src/main/java")));
+                                .withPackageName("com.dreamer.admin.domain")
+                                .withDirectory("dreamer-admin/src/main/java")));
 
         GenerationTool.generate(configuration);
 

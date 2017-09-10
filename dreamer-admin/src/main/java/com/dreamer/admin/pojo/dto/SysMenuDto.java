@@ -1,6 +1,6 @@
 package com.dreamer.admin.pojo.dto;
 
-import com.dreamer.pojo.AbstractBasePojo;
+import com.dreamer.admin.pojo.AbstractBasePojo;
 import lombok.Data;
 
 import java.util.List;

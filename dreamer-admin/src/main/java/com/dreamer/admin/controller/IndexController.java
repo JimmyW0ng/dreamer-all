@@ -1,11 +1,11 @@
 package com.dreamer.admin.controller;
 
-import com.dreamer.business.service.SysMenuService;
-import com.dreamer.business.service.SysUserService;
+import com.dreamer.admin.constant.Constant;
+import com.dreamer.admin.pojo.dto.RoleMenuDto;
+import com.dreamer.admin.pojo.po.SysUserPojo;
+import com.dreamer.admin.service.SysMenuService;
+import com.dreamer.admin.service.SysUserService;
 import com.dreamer.common.tool.CryptTools;
-import com.dreamer.constant.Constant;
-import com.dreamer.pojo.po.SysUserPojo;
-import com.dreamer.pojo.vo.RoleMenuVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -97,7 +97,7 @@ public class IndexController extends BaseController {
     public String index(Model model) {
         SysUserPojo user = (SysUserPojo) SecurityUtils.getSubject().getSession().getAttribute(Constant.CURRENT_USER);
         SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
-        List<RoleMenuVo> userMenus = sysMenuService.getUserAllMenu(user.getId());
+        List<RoleMenuDto> userMenus = sysMenuService.getUserAllMenu(user.getId());
         model.addAttribute("userMenus", userMenus);
         model.addAttribute("userName", user.getName());
         return PAGE_URL_PREFIX + "index";

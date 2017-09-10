@@ -1,15 +1,15 @@
 package com.dreamer.admin.controller;
 
+import com.dreamer.admin.constant.MessageCodeConstant;
+import com.dreamer.admin.pojo.ResultDo;
 import com.dreamer.admin.pojo.dto.SysUserDto;
-import com.dreamer.business.service.SysRoleService;
-import com.dreamer.business.service.SysUserRoleService;
-import com.dreamer.business.service.SysUserService;
+import com.dreamer.admin.pojo.po.SysUserPojo;
+import com.dreamer.admin.pojo.po.SysUserRolePojo;
+import com.dreamer.admin.service.SysRoleService;
+import com.dreamer.admin.service.SysUserRoleService;
+import com.dreamer.admin.service.SysUserService;
 import com.dreamer.common.tool.CryptTools;
 import com.dreamer.common.tool.StringTools;
-import com.dreamer.constant.MessageCodeConstant;
-import com.dreamer.pojo.ResultDo;
-import com.dreamer.pojo.po.SysUserPojo;
-import com.dreamer.pojo.po.SysUserRolePojo;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-import static com.dreamer.domain.Tables.SYS_USER;
+import static com.dreamer.admin.domain.Tables.SYS_USER;
 
 /**
  * 用户管理

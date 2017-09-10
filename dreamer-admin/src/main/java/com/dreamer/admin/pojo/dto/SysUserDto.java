@@ -1,7 +1,7 @@
 package com.dreamer.admin.pojo.dto;
 
-import com.dreamer.pojo.AbstractBasePojo;
-import com.dreamer.pojo.po.SysUserPojo;
+import com.dreamer.admin.pojo.AbstractBasePojo;
+import com.dreamer.admin.pojo.po.SysUserPojo;
 import lombok.Data;
 
 /**

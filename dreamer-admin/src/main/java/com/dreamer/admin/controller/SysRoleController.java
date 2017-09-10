@@ -1,15 +1,15 @@
 package com.dreamer.admin.controller;
 
+import com.dreamer.admin.constant.Constant;
+import com.dreamer.admin.pojo.ResultDo;
 import com.dreamer.admin.pojo.dto.SysMenuDto;
 import com.dreamer.admin.pojo.dto.SysRoleDto;
-import com.dreamer.business.service.SysMenuService;
-import com.dreamer.business.service.SysRoleService;
+import com.dreamer.admin.pojo.po.SysMenuPojo;
+import com.dreamer.admin.pojo.po.SysRolePojo;
+import com.dreamer.admin.service.SysMenuService;
+import com.dreamer.admin.service.SysRoleService;
 import com.dreamer.common.tool.CollectionsTools;
 import com.dreamer.common.tool.StringTools;
-import com.dreamer.constant.Constant;
-import com.dreamer.pojo.ResultDo;
-import com.dreamer.pojo.po.SysMenuPojo;
-import com.dreamer.pojo.po.SysRolePojo;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.dreamer.domain.Tables.SYS_ROLE;
+import static com.dreamer.admin.domain.Tables.SYS_ROLE;
 
 /**
  * 角色管理

@@ -1,11 +1,11 @@
 package com.dreamer.admin.core.realm;
 
-import com.dreamer.business.service.SysMenuService;
-import com.dreamer.business.service.SysUserService;
+import com.dreamer.admin.domain.enums.SysUserStatus;
+import com.dreamer.admin.pojo.po.SysMenuPojo;
+import com.dreamer.admin.pojo.po.SysUserPojo;
+import com.dreamer.admin.service.SysMenuService;
+import com.dreamer.admin.service.SysUserService;
 import com.dreamer.common.tool.CollectionsTools;
-import com.dreamer.domain.enums.SysUserStatus;
-import com.dreamer.pojo.po.SysMenuPojo;
-import com.dreamer.pojo.po.SysUserPojo;
 import com.google.common.collect.Lists;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
