@@ -1,8 +1,7 @@
-package com.dreamer.admin.pojo;
+package com.dreamer.pojo;
 
-import com.dreamer.admin.core.util.SpringUtil;
+import com.dreamer.common.tool.SpringUtil;
 import com.dreamer.common.tool.StringTools;
-import com.dreamer.pojo.AbstractBasePojo;
 import org.springframework.context.MessageSource;
 
 /**

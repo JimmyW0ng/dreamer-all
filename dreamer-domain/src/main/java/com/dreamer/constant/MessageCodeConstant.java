@@ -1,4 +1,4 @@
-package com.dreamer.admin.core.constant;
+package com.dreamer.constant;
 
 /**
  * Created by JW on 17/8/20.

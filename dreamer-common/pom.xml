@@ -47,6 +47,12 @@
             <artifactId>lombok</artifactId>
             <version>1.16.14</version>
         </dependency>
+        <!--hashids-->
+        <dependency>
+            <groupId>org.hashids</groupId>
+            <artifactId>hashids</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
 </project>

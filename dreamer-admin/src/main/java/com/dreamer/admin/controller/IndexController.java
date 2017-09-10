@@ -1,9 +1,9 @@
 package com.dreamer.admin.controller;
 
-import com.dreamer.admin.core.constant.Constant;
 import com.dreamer.business.service.SysMenuService;
 import com.dreamer.business.service.SysUserService;
 import com.dreamer.common.tool.CryptTools;
+import com.dreamer.constant.Constant;
 import com.dreamer.pojo.po.SysUserPojo;
 import com.dreamer.pojo.vo.RoleMenuVo;
 import lombok.extern.slf4j.Slf4j;

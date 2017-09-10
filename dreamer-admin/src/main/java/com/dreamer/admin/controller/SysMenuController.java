@@ -1,15 +1,13 @@
 package com.dreamer.admin.controller;
 
-import com.dreamer.admin.core.constant.Constant;
-import com.dreamer.admin.pojo.ResultDo;
 import com.dreamer.admin.pojo.dto.SysMenuDto;
 import com.dreamer.business.service.SysMenuService;
 import com.dreamer.common.tool.CollectionsTools;
+import com.dreamer.constant.Constant;
+import com.dreamer.pojo.ResultDo;
 import com.dreamer.pojo.po.SysMenuPojo;
-import com.dreamer.pojo.po.SysUserPojo;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,66 +31,6 @@ public class SysMenuController extends BaseController {
 
     @Autowired
     private SysMenuService sysMenuService;
-
-    /**
-     * 菜单列表
-     *
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    @RequiresPermissions("sysMenu:index")
-    public String index(Model model) {
-        List<SysMenuPojo> allMenus = sysMenuService.findAll();
-        model.addAttribute("menuTree", buildMenuList(Constant.ADMIN_MENU_HEAD_ID, allMenus));
-        return PAGE_URL_PREFIX + MODULE_PREFIX + "index";
-    }
-
-    /**
-     * 保存菜单（新增/维护）
-     *
-     * @param sysMenuPojo
-     * @return
-     */
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    @RequiresPermissions("sysMenu:maintenance")
-    @ResponseBody
-    public ResultDo save(@RequestBody SysMenuPojo sysMenuPojo) {
-        if (sysMenuPojo.getId() == null) {
-            sysMenuService.insert(sysMenuPojo);
-        } else {
-            sysMenuService.update(sysMenuPojo);
-        }
-        return ResultDo.build();
-    }
-
-    /**
-     * 菜单详情
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/info", method = RequestMethod.POST)
-    @RequiresPermissions("sysMenu:maintenance")
-    @ResponseBody
-    public ResultDo info(@RequestParam(value = "id", required = true) Long id) {
-        SysMenuPojo sysMenuPojo = sysMenuService.findById(id);
-        return ResultDo.build().setResult(sysMenuPojo);
-    }
-
-    /**
-     * 删除
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/del", method = RequestMethod.POST)
-    @RequiresPermissions("sysMenu:maintenance")
-    @ResponseBody
-    public ResultDo del(@RequestParam(value = "id", required = true) Long id) {
-        sysMenuService.deleteByIdLogical(id);
-        return ResultDo.build();
-    }
 
     /**
      * 生成菜单树状结构
@@ -155,5 +93,65 @@ public class SysMenuController extends BaseController {
             subMenuList.add(sysMenuDto);
         }
         return subMenuList;
+    }
+
+    /**
+     * 菜单列表
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequiresPermissions("sysMenu:index")
+    public String index(Model model) {
+        List<SysMenuPojo> allMenus = sysMenuService.findAll();
+        model.addAttribute("menuTree", buildMenuList(Constant.ADMIN_MENU_HEAD_ID, allMenus));
+        return PAGE_URL_PREFIX + MODULE_PREFIX + "index";
+    }
+
+    /**
+     * 保存菜单（新增/维护）
+     *
+     * @param sysMenuPojo
+     * @return
+     */
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequiresPermissions("sysMenu:maintenance")
+    @ResponseBody
+    public ResultDo save(@RequestBody SysMenuPojo sysMenuPojo) {
+        if (sysMenuPojo.getId() == null) {
+            sysMenuService.insert(sysMenuPojo);
+        } else {
+            sysMenuService.update(sysMenuPojo);
+        }
+        return ResultDo.build();
+    }
+
+    /**
+     * 菜单详情
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/info", method = RequestMethod.POST)
+    @RequiresPermissions("sysMenu:maintenance")
+    @ResponseBody
+    public ResultDo info(@RequestParam(value = "id", required = true) Long id) {
+        SysMenuPojo sysMenuPojo = sysMenuService.findById(id);
+        return ResultDo.build().setResult(sysMenuPojo);
+    }
+
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/del", method = RequestMethod.POST)
+    @RequiresPermissions("sysMenu:maintenance")
+    @ResponseBody
+    public ResultDo del(@RequestParam(value = "id", required = true) Long id) {
+        sysMenuService.deleteByIdLogical(id);
+        return ResultDo.build();
     }
 }

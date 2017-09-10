@@ -1,7 +1,7 @@
 package com.dreamer.admin.advice;
 
-import com.dreamer.admin.core.constant.MessageCodeConstant;
-import com.dreamer.admin.pojo.ResultDo;
+import com.dreamer.constant.MessageCodeConstant;
+import com.dreamer.pojo.ResultDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

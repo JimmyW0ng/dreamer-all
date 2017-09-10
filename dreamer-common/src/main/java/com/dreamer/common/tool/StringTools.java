@@ -2,6 +2,7 @@ package com.dreamer.common.tool;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
+import org.hashids.Hashids;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -1151,5 +1152,23 @@ public final class StringTools {
         }
         return map;
     }
+
+    /**
+     * Hashids生成随机字符串，具有唯一性
+     *
+     * @param input
+     * @param key
+     * @param minLength
+     * @return
+     */
+    public static String generateShortUrl(Long input, String key, int minLength) {
+        try {
+            Hashids hashids = new Hashids(key, minLength);
+            return hashids.encode(input);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
 }

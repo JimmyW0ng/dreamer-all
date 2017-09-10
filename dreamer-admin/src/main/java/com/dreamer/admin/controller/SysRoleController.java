@@ -1,13 +1,13 @@
 package com.dreamer.admin.controller;
 
-import com.dreamer.admin.core.constant.Constant;
-import com.dreamer.admin.pojo.ResultDo;
 import com.dreamer.admin.pojo.dto.SysMenuDto;
 import com.dreamer.admin.pojo.dto.SysRoleDto;
 import com.dreamer.business.service.SysMenuService;
 import com.dreamer.business.service.SysRoleService;
 import com.dreamer.common.tool.CollectionsTools;
 import com.dreamer.common.tool.StringTools;
+import com.dreamer.constant.Constant;
+import com.dreamer.pojo.ResultDo;
 import com.dreamer.pojo.po.SysMenuPojo;
 import com.dreamer.pojo.po.SysRolePojo;
 import com.google.common.collect.Lists;

@@ -1,4 +1,4 @@
-package com.dreamer.admin.core.util;
+package com.dreamer.common.tool;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -15,16 +15,16 @@ import org.springframework.stereotype.Component;
 public class SpringUtil implements ApplicationContextAware {
     private static ApplicationContext applicationContext = null;
 
+    //获取applicationContext
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if (SpringUtil.applicationContext == null) {
             SpringUtil.applicationContext = applicationContext;
         }
-    }
-
-    //获取applicationContext
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
     }
 
     //通过name获取 Bean.
