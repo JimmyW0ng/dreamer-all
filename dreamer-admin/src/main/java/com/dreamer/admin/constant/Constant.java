@@ -6,6 +6,8 @@ package com.dreamer.admin.constant;
  */
 public class Constant {
 
+    public static String KEY_SPLIT = ":";
+
     public static String CURRENT_USER = "currentUser";
 
     public static Long ADMIN_MENU_HEAD_ID = 1L;

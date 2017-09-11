@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class SpringUtil implements ApplicationContextAware {
+public class SpringTools implements ApplicationContextAware {
     private static ApplicationContext applicationContext = null;
 
     //获取applicationContext
@@ -22,8 +22,8 @@ public class SpringUtil implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        if (SpringUtil.applicationContext == null) {
-            SpringUtil.applicationContext = applicationContext;
+        if (SpringTools.applicationContext == null) {
+            SpringTools.applicationContext = applicationContext;
         }
     }
 
@@ -46,7 +46,7 @@ public class SpringUtil implements ApplicationContextAware {
     public static String messageSource(String code) {
         String temp = "";
         try {
-            temp = SpringUtil.getBean(MessageSource.class).getMessage(code, null, null);
+            temp = SpringTools.getBean(MessageSource.class).getMessage(code, null, null);
         } catch (Exception e) {
             log.error("找不到对应的 messageSource ", e);
             temp = code;
@@ -63,7 +63,7 @@ public class SpringUtil implements ApplicationContextAware {
     public static String messageSource(String code, Object[] objects) {
         String temp = "";
         try {
-            temp = SpringUtil.getBean(MessageSource.class).getMessage(code, objects, null);
+            temp = SpringTools.getBean(MessageSource.class).getMessage(code, objects, null);
         } catch (Exception e) {
             log.error("找不到对应的 messageSource ", e);
             temp = code;

@@ -1,6 +1,6 @@
 package com.dreamer.admin.pojo;
 
-import com.dreamer.common.tool.SpringUtil;
+import com.dreamer.common.tool.SpringTools;
 import com.dreamer.common.tool.StringTools;
 import org.springframework.context.MessageSource;
 
@@ -45,7 +45,7 @@ public class ResultDo<T> extends AbstractBasePojo {
      * @return
      */
     private static String messageSource(String code) {
-        return SpringUtil.getBean(MessageSource.class).getMessage(code, null, code, null);
+        return SpringTools.getBean(MessageSource.class).getMessage(code, null, code, null);
     }
 
     public String getErrorDescription() {

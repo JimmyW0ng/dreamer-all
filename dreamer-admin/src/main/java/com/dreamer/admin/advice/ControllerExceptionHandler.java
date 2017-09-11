@@ -1,4 +1,4 @@
-package com.dreamer.admin.core.advice;
+package com.dreamer.admin.advice;
 
 import com.dreamer.admin.constant.MessageCodeConstant;
 import com.dreamer.admin.pojo.ResultDo;
