@@ -8,9 +8,13 @@ public class Constant {
 
     public static String KEY_SPLIT = ":";
 
+    // backend
     public static String CURRENT_USER = "currentUser";
 
     public static Long ADMIN_MENU_HEAD_ID = 1L;
+
+    // wechat
+    public static String WECHAT_REQ_CURRENT_SESSION = "currentWechatSession";
 
     public static int WECHAT_SESSION_TIME_OUT_M = -60;
 

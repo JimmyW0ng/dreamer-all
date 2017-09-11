@@ -19,7 +19,7 @@ public class WebConfig {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
-                registry.addInterceptor(new WechatTokenInterceptor(tokenSalt)).addPathPatterns("/security/wechat/member/**");
+                registry.addInterceptor(new WechatTokenInterceptor(tokenSalt)).addPathPatterns("/security/wechat/auth/**");
             }
         };
     }

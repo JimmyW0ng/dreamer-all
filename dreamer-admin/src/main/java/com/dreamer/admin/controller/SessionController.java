@@ -1,6 +1,6 @@
 package com.dreamer.admin.controller;
 
-import com.dreamer.admin.constant.MessageCodeConstant;
+import com.dreamer.admin.constant.Constant;
 import com.dreamer.admin.pojo.ResultDo;
 import com.dreamer.admin.service.WcSessionTokenService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by JW on 17/9/2.
@@ -37,19 +39,10 @@ public class SessionController {
      *
      * @return
      */
-    @RequestMapping(value = "/wechat/member/info", method = RequestMethod.POST)
-    public ResultDo wechatMemberInfo() {
-        return ResultDo.build();
-    }
-
-    /**
-     * 异常会话返回
-     *
-     * @return
-     */
-    @RequestMapping(value = "/session/error", method = RequestMethod.GET)
-    public ResultDo sessionError() {
-        return ResultDo.build(MessageCodeConstant.ERROR_SESSION_TOKEN);
+    @RequestMapping(value = "/wechat/auth/info", method = RequestMethod.POST)
+    public ResultDo wechatMemberInfo(HttpServletRequest request) {
+        log.info("{}", request.getAttribute(Constant.WECHAT_REQ_CURRENT_SESSION));
+        return ResultDo.build().setResult("token验证成功");
     }
 
 }
