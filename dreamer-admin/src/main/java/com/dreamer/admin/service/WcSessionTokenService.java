@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.security.GeneralSecurityException;
-import java.util.UUID;
 
 /**
  * 微信会话token接口
@@ -55,11 +54,12 @@ public class WcSessionTokenService {
         }
         String sessionKey = sessionPojo.getSession_key();
         String openId = sessionPojo.getOpenid();
-        String sessionToken = UUID.randomUUID().toString();
-
+        // 目前不存储到数据库
         String randomStr = StringTools.getRandomStr(8);
         Long timeout = DateTools.addHour(DateTools.getCurrentDate(), 1).getTime();
         String key = openId + Constant.KEY_SPLIT + sessionKey + Constant.KEY_SPLIT + timeout + Constant.KEY_SPLIT + randomStr;
+        String encode = CryptTools.aesEncrypt(key, tokenSalt);
+//        String sessionToken = UUID.randomUUID().toString();
 //        WcSessionTokenPojo wcSessionTokenPojo = new WcSessionTokenPojo();
 //        wcSessionTokenPojo.setOpenId(openId);
 //        wcSessionTokenPojo.setSessionKey(sessionKey);
@@ -67,7 +67,7 @@ public class WcSessionTokenService {
 //        wcSessionTokenRepository.create(wcSessionTokenPojo);
 //        return ResultDo.build().setResult(sessionToken);
         // session先不存储到数据库
-        return ResultDo.build().setResult(CryptTools.aesEncrypt(key, tokenSalt));
+        return ResultDo.build().setResult(encode);
     }
 
 }
