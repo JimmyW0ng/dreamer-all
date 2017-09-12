@@ -13,7 +13,11 @@ public class SysDictService {
     @Autowired
     private SysDictRepository sysDictRepository;
 
-    public SysDictPojo getOneByKey(String key) {
-        return sysDictRepository.findOneByKey(key);
+    public SysDictPojo findByGroupNameAndKey(String groupName, String key) {
+        return sysDictRepository.findByGroupNameAndKey(groupName, key);
+    }
+
+    public int updateByGroupName(String groupName, String key, String value) {
+        return sysDictRepository.updateByGroupName(groupName, key, value);
     }
 }

@@ -12,4 +12,5 @@ public class WechatSessionPojo extends WechatBasePojo {
     private String session_key;
     private String unionid;
     private Integer expires_in;
+
 }

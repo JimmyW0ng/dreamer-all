@@ -135,4 +135,14 @@ public class SysDictRepository extends AbstractCRUDRepository<SysDictRecord, Lon
                   .and(SYS_DICT.KEY.like("%repayRemindMobile%"))
                   .execute();
     }
+
+    public int updateByGroupName(String groupName, String key, String value) {
+        return dslContext.update(SYS_DICT)
+                         .set(SYS_DICT.VALUE, value)
+                         .where(SYS_DICT.GROUP_NAME.eq(groupName))
+                         .and(SYS_DICT.KEY.eq(key))
+                         .and(SYS_DICT.STATUS.eq(SysDictStatus.enable))
+                         .and(SYS_DICT.DEL_FLAG.eq(false))
+                         .execute();
+    }
 }

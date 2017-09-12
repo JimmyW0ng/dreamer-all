@@ -1,6 +1,7 @@
 package com.dreamer.admin.service;
 
 import com.dreamer.admin.constant.Constant;
+import com.dreamer.admin.constant.MessageCodeConstant;
 import com.dreamer.admin.pojo.ResultDo;
 import com.dreamer.admin.pojo.wechat.WechatSessionPojo;
 import com.dreamer.admin.repository.WcSessionTokenRepository;
@@ -10,6 +11,7 @@ import com.dreamer.common.tool.StringTools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -44,6 +46,9 @@ public class WcSessionTokenService {
         String url = String.format(Constant.WECHAT_URL_SESSION, appId, secret, code);
         ResponseEntity<WechatSessionPojo> entity = restTemplate.getForEntity(url, WechatSessionPojo.class);
         log.info("微信获取session返回：{}", entity);
+        if (!HttpStatus.OK.equals(entity.getStatusCode())) {
+            return ResultDo.build(MessageCodeConstant.ERROR_WECHAT_HTTP_REQUEST);
+        }
         WechatSessionPojo sessionPojo = entity.getBody();
         if (!entity.getBody().isSuccess()) {
             return ResultDo.build(sessionPojo.getErrcode()).setErrorDescription(sessionPojo.getErrmsg());
