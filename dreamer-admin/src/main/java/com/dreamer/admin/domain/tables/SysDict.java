@@ -34,7 +34,7 @@ public class SysDict extends TableImpl<SysDictRecord> {
      * The reference instance of <code>dreamer.sys_dict</code>
      */
     public static final SysDict SYS_DICT = new SysDict();
-    private static final long serialVersionUID = 1297216908;
+    private static final long serialVersionUID = 1781705098;
     /**
      * The column <code>dreamer.sys_dict.id</code>.
      */

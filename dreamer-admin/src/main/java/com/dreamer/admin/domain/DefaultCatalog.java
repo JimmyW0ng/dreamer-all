@@ -30,7 +30,7 @@ public class DefaultCatalog extends CatalogImpl {
      * The reference instance of <code></code>
      */
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
-    private static final long serialVersionUID = -123910320;
+    private static final long serialVersionUID = 1571672722;
     /**
      * The schema <code>dreamer</code>.
      */

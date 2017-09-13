@@ -38,7 +38,6 @@ public class Keys {
     public static final Identity<SysRoleMenuRecord, Long> IDENTITY_SYS_ROLE_MENU = Identities0.IDENTITY_SYS_ROLE_MENU;
     public static final Identity<SysUserRecord, Long> IDENTITY_SYS_USER = Identities0.IDENTITY_SYS_USER;
     public static final Identity<SysUserRoleRecord, Long> IDENTITY_SYS_USER_ROLE = Identities0.IDENTITY_SYS_USER_ROLE;
-    public static final Identity<WcSessionTokenRecord, Long> IDENTITY_WC_SESSION_TOKEN = Identities0.IDENTITY_WC_SESSION_TOKEN;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -53,7 +52,6 @@ public class Keys {
     public static final UniqueKey<SysUserRecord> KEY_SYS_USER_PRIMARY = UniqueKeys0.KEY_SYS_USER_PRIMARY;
     public static final UniqueKey<SysUserRecord> KEY_SYS_USER_SYS_USER_LOGIN_NAME = UniqueKeys0.KEY_SYS_USER_SYS_USER_LOGIN_NAME;
     public static final UniqueKey<SysUserRoleRecord> KEY_SYS_USER_ROLE_PRIMARY = UniqueKeys0.KEY_SYS_USER_ROLE_PRIMARY;
-    public static final UniqueKey<WcSessionTokenRecord> KEY_WC_SESSION_TOKEN_PRIMARY = UniqueKeys0.KEY_WC_SESSION_TOKEN_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -72,7 +70,6 @@ public class Keys {
         public static Identity<SysRoleMenuRecord, Long> IDENTITY_SYS_ROLE_MENU = createIdentity(SysRoleMenu.SYS_ROLE_MENU, SysRoleMenu.SYS_ROLE_MENU.ID);
         public static Identity<SysUserRecord, Long> IDENTITY_SYS_USER = createIdentity(SysUser.SYS_USER, SysUser.SYS_USER.ID);
         public static Identity<SysUserRoleRecord, Long> IDENTITY_SYS_USER_ROLE = createIdentity(SysUserRole.SYS_USER_ROLE, SysUserRole.SYS_USER_ROLE.ID);
-        public static Identity<WcSessionTokenRecord, Long> IDENTITY_WC_SESSION_TOKEN = createIdentity(WcSessionToken.WC_SESSION_TOKEN, WcSessionToken.WC_SESSION_TOKEN.ID);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
@@ -85,6 +82,5 @@ public class Keys {
         public static final UniqueKey<SysUserRecord> KEY_SYS_USER_PRIMARY = createUniqueKey(SysUser.SYS_USER, "KEY_sys_user_PRIMARY", SysUser.SYS_USER.ID);
         public static final UniqueKey<SysUserRecord> KEY_SYS_USER_SYS_USER_LOGIN_NAME = createUniqueKey(SysUser.SYS_USER, "KEY_sys_user_sys_user_login_name", SysUser.SYS_USER.LOGIN_NAME);
         public static final UniqueKey<SysUserRoleRecord> KEY_SYS_USER_ROLE_PRIMARY = createUniqueKey(SysUserRole.SYS_USER_ROLE, "KEY_sys_user_role_PRIMARY", SysUserRole.SYS_USER_ROLE.ID, SysUserRole.SYS_USER_ROLE.SYS_USER_ID, SysUserRole.SYS_USER_ROLE.SYS_ROLE_ID);
-        public static final UniqueKey<WcSessionTokenRecord> KEY_WC_SESSION_TOKEN_PRIMARY = createUniqueKey(WcSessionToken.WC_SESSION_TOKEN, "KEY_wc_session_token_PRIMARY", WcSessionToken.WC_SESSION_TOKEN.ID);
     }
 }

@@ -56,9 +56,4 @@ public class Tables {
      * 用户-角色
      */
     public static final SysUserRole SYS_USER_ROLE = com.dreamer.admin.domain.tables.SysUserRole.SYS_USER_ROLE;
-
-    /**
-     * 微信会话token表
-     */
-    public static final WcSessionToken WC_SESSION_TOKEN = com.dreamer.admin.domain.tables.WcSessionToken.WC_SESSION_TOKEN;
 }

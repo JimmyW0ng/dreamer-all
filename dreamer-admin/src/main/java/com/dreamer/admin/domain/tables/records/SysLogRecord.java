@@ -28,7 +28,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysLogRecord extends UpdatableRecordImpl<SysLogRecord> implements Record12<Long, String, String, String, Long, String, String, String, String, String, String, Timestamp> {
 
-    private static final long serialVersionUID = 733780577;
+    private static final long serialVersionUID = -166964065;
 
     /**
      * Create a detached SysLogRecord

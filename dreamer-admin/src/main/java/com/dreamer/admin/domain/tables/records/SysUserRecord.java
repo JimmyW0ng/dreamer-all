@@ -29,7 +29,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements Record16<Long, String, String, String, String, String, String, String, SysUserStatus, String, Timestamp, String, Timestamp, Timestamp, String, Boolean> {
 
-    private static final long serialVersionUID = 1890003059;
+    private static final long serialVersionUID = 871076178;
 
     /**
      * Create a detached SysUserRecord

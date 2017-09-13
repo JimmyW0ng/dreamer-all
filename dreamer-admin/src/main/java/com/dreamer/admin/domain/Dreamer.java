@@ -32,7 +32,7 @@ public class Dreamer extends SchemaImpl {
      * The reference instance of <code>dreamer</code>
      */
     public static final Dreamer DREAMER = new Dreamer();
-    private static final long serialVersionUID = 952473713;
+    private static final long serialVersionUID = 368175709;
     /**
      * 字典表
      */
@@ -69,11 +69,6 @@ public class Dreamer extends SchemaImpl {
     public final SysUserRole SYS_USER_ROLE = com.dreamer.admin.domain.tables.SysUserRole.SYS_USER_ROLE;
 
     /**
-     * 微信会话token表
-     */
-    public final WcSessionToken WC_SESSION_TOKEN = com.dreamer.admin.domain.tables.WcSessionToken.WC_SESSION_TOKEN;
-
-    /**
      * No further instances allowed
      */
     private Dreamer() {
@@ -104,7 +99,6 @@ public class Dreamer extends SchemaImpl {
                 SysRole.SYS_ROLE,
                 SysRoleMenu.SYS_ROLE_MENU,
                 SysUser.SYS_USER,
-                SysUserRole.SYS_USER_ROLE,
-                WcSessionToken.WC_SESSION_TOKEN);
+                SysUserRole.SYS_USER_ROLE);
     }
 }

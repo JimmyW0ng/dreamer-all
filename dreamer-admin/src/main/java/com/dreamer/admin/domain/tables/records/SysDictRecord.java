@@ -29,7 +29,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements Record13<Long, String, String, String, String, String, Integer, SysDictStatus, Timestamp, Timestamp, String, Boolean, Long> {
 
-    private static final long serialVersionUID = -1260415984;
+    private static final long serialVersionUID = 400400623;
 
     /**
      * Create a detached SysDictRecord

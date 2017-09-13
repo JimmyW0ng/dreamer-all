@@ -33,7 +33,7 @@ public class SysLog extends TableImpl<SysLogRecord> {
      * The reference instance of <code>dreamer.sys_log</code>
      */
     public static final SysLog SYS_LOG = new SysLog();
-    private static final long serialVersionUID = -562305654;
+    private static final long serialVersionUID = -662810870;
     /**
      * The column <code>dreamer.sys_log.id</code>. 编号
      */

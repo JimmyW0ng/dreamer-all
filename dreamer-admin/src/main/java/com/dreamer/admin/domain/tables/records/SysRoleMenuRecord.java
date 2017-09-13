@@ -26,7 +26,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysRoleMenuRecord extends UpdatableRecordImpl<SysRoleMenuRecord> implements Record3<Long, Long, Long> {
 
-    private static final long serialVersionUID = 2044696718;
+    private static final long serialVersionUID = 1094480400;
 
     /**
      * Create a detached SysRoleMenuRecord

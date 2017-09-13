@@ -32,7 +32,7 @@ public class SysRoleMenu extends TableImpl<SysRoleMenuRecord> {
      * The reference instance of <code>dreamer.sys_role_menu</code>
      */
     public static final SysRoleMenu SYS_ROLE_MENU = new SysRoleMenu();
-    private static final long serialVersionUID = -1779069041;
+    private static final long serialVersionUID = -119114225;
     /**
      * The column <code>dreamer.sys_role_menu.id</code>.
      */

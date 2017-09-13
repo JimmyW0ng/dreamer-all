@@ -33,7 +33,7 @@ public class SysRole extends TableImpl<SysRoleRecord> {
      * The reference instance of <code>dreamer.sys_role</code>
      */
     public static final SysRole SYS_ROLE = new SysRole();
-    private static final long serialVersionUID = -1350805504;
+    private static final long serialVersionUID = -28958336;
     /**
      * The column <code>dreamer.sys_role.id</code>. 编号
      */

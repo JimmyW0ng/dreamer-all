@@ -30,7 +30,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements Record15<Long, Long, SysMenuType, String, String, String, String, Integer, SysMenuStatus, String, Timestamp, Timestamp, String, Boolean, Long> {
 
-    private static final long serialVersionUID = -357740588;
+    private static final long serialVersionUID = 1755762294;
 
     /**
      * Create a detached SysMenuRecord

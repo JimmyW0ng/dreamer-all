@@ -26,7 +26,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysUserRoleRecord extends UpdatableRecordImpl<SysUserRoleRecord> implements Record3<Long, Long, Long> {
 
-    private static final long serialVersionUID = 281105006;
+    private static final long serialVersionUID = -669111312;
 
     /**
      * Create a detached SysUserRoleRecord

@@ -35,7 +35,7 @@ public class SysMenu extends TableImpl<SysMenuRecord> {
      * The reference instance of <code>dreamer.sys_menu</code>
      */
     public static final SysMenu SYS_MENU = new SysMenu();
-    private static final long serialVersionUID = -1769225620;
+    private static final long serialVersionUID = -1062854198;
     /**
      * The column <code>dreamer.sys_menu.id</code>. 编号
      */

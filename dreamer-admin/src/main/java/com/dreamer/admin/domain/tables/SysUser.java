@@ -34,7 +34,7 @@ public class SysUser extends TableImpl<SysUserRecord> {
      * The reference instance of <code>dreamer.sys_user</code>
      */
     public static final SysUser SYS_USER = new SysUser();
-    private static final long serialVersionUID = -2102412403;
+    private static final long serialVersionUID = -1374104275;
     /**
      * The column <code>dreamer.sys_user.id</code>. 编号
      */

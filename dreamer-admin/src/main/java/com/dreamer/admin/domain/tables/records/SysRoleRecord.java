@@ -28,7 +28,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements Record8<Long, String, String, Timestamp, String, Timestamp, String, Boolean> {
 
-    private static final long serialVersionUID = 931298811;
+    private static final long serialVersionUID = 1645594681;
 
     /**
      * Create a detached SysRoleRecord
