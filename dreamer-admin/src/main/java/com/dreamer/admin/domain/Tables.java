@@ -23,6 +23,16 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
+     * 文件表
+     */
+    public static final BscFile BSC_FILE = com.dreamer.admin.domain.tables.BscFile.BSC_FILE;
+
+    /**
+     * 机构信息表
+     */
+    public static final OgnInfo OGN_INFO = com.dreamer.admin.domain.tables.OgnInfo.OGN_INFO;
+
+    /**
      * 字典表
      */
     public static final SysDict SYS_DICT = com.dreamer.admin.domain.tables.SysDict.SYS_DICT;
@@ -56,4 +66,9 @@ public class Tables {
      * 用户-角色
      */
     public static final SysUserRole SYS_USER_ROLE = com.dreamer.admin.domain.tables.SysUserRole.SYS_USER_ROLE;
+
+    /**
+     * 微信会话token表
+     */
+    public static final WcSessionToken WC_SESSION_TOKEN = com.dreamer.admin.domain.tables.WcSessionToken.WC_SESSION_TOKEN;
 }

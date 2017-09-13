@@ -32,7 +32,17 @@ public class Dreamer extends SchemaImpl {
      * The reference instance of <code>dreamer</code>
      */
     public static final Dreamer DREAMER = new Dreamer();
-    private static final long serialVersionUID = 368175709;
+    private static final long serialVersionUID = 1789963991;
+    /**
+     * 文件表
+     */
+    public final BscFile BSC_FILE = com.dreamer.admin.domain.tables.BscFile.BSC_FILE;
+
+    /**
+     * 机构信息表
+     */
+    public final OgnInfo OGN_INFO = com.dreamer.admin.domain.tables.OgnInfo.OGN_INFO;
+
     /**
      * 字典表
      */
@@ -69,6 +79,11 @@ public class Dreamer extends SchemaImpl {
     public final SysUserRole SYS_USER_ROLE = com.dreamer.admin.domain.tables.SysUserRole.SYS_USER_ROLE;
 
     /**
+     * 微信会话token表
+     */
+    public final WcSessionToken WC_SESSION_TOKEN = com.dreamer.admin.domain.tables.WcSessionToken.WC_SESSION_TOKEN;
+
+    /**
      * No further instances allowed
      */
     private Dreamer() {
@@ -93,12 +108,15 @@ public class Dreamer extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
+                BscFile.BSC_FILE,
+                OgnInfo.OGN_INFO,
                 SysDict.SYS_DICT,
                 SysLog.SYS_LOG,
                 SysMenu.SYS_MENU,
                 SysRole.SYS_ROLE,
                 SysRoleMenu.SYS_ROLE_MENU,
                 SysUser.SYS_USER,
-                SysUserRole.SYS_USER_ROLE);
+                SysUserRole.SYS_USER_ROLE,
+                WcSessionToken.WC_SESSION_TOKEN);
     }
 }
