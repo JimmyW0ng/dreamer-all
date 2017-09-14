@@ -32,11 +32,16 @@ public class Dreamer extends SchemaImpl {
      * The reference instance of <code>dreamer</code>
      */
     public static final Dreamer DREAMER = new Dreamer();
-    private static final long serialVersionUID = 1789963991;
+    private static final long serialVersionUID = 2108201504;
     /**
      * 文件表
      */
     public final BscFile BSC_FILE = com.dreamer.admin.domain.tables.BscFile.BSC_FILE;
+
+    /**
+     * The table <code>dreamer.ogn_course</code>.
+     */
+    public final OgnCourse OGN_COURSE = com.dreamer.admin.domain.tables.OgnCourse.OGN_COURSE;
 
     /**
      * 机构信息表
@@ -109,6 +114,7 @@ public class Dreamer extends SchemaImpl {
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
                 BscFile.BSC_FILE,
+                OgnCourse.OGN_COURSE,
                 OgnInfo.OGN_INFO,
                 SysDict.SYS_DICT,
                 SysLog.SYS_LOG,

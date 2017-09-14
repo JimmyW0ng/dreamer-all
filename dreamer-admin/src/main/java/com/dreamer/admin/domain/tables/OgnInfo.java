@@ -34,7 +34,7 @@ public class OgnInfo extends TableImpl<OgnInfoRecord> {
      * The reference instance of <code>dreamer.ogn_info</code>
      */
     public static final OgnInfo OGN_INFO = new OgnInfo();
-    private static final long serialVersionUID = -111519897;
+    private static final long serialVersionUID = 371146149;
     /**
      * The column <code>dreamer.ogn_info.id</code>. 主键
      */
@@ -71,6 +71,26 @@ public class OgnInfo extends TableImpl<OgnInfoRecord> {
      * The column <code>dreamer.ogn_info.orgen_url</code>. 机构官方网址
      */
     public final TableField<OgnInfoRecord, String> ORGEN_URL = createField("orgen_url", org.jooq.impl.SQLDataType.VARCHAR.length(32), this, "机构官方网址");
+    /**
+     * The column <code>dreamer.ogn_info.remarks</code>. 备注信息
+     */
+    public final TableField<OgnInfoRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
+    /**
+     * The column <code>dreamer.ogn_info.create_at</code>. 创建时间
+     */
+    public final TableField<OgnInfoRecord, Timestamp> CREATE_AT = createField("create_at", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "创建时间");
+    /**
+     * The column <code>dreamer.ogn_info.update_at</code>. 更新时间
+     */
+    public final TableField<OgnInfoRecord, Timestamp> UPDATE_AT = createField("update_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "更新时间");
+    /**
+     * The column <code>dreamer.ogn_info.del_flag</code>. 删除标志
+     */
+    public final TableField<OgnInfoRecord, Boolean> DEL_FLAG = createField("del_flag", org.jooq.impl.SQLDataType.BIT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("b'0'", org.jooq.impl.SQLDataType.BIT)), this, "删除标志");
+    /**
+     * The column <code>dreamer.ogn_info.version</code>.
+     */
+    public final TableField<OgnInfoRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * Create a <code>dreamer.ogn_info</code> table reference
@@ -132,6 +152,14 @@ public class OgnInfo extends TableImpl<OgnInfoRecord> {
     @Override
     public List<UniqueKey<OgnInfoRecord>> getKeys() {
         return Arrays.<UniqueKey<OgnInfoRecord>>asList(Keys.KEY_OGN_INFO_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TableField<OgnInfoRecord, Long> getRecordVersion() {
+        return VERSION;
     }
 
     /**

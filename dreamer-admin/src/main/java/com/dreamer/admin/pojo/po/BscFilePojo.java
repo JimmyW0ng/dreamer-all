@@ -18,10 +18,12 @@ public class BscFilePojo extends AbstractBasePojo {
     private String fileUrl;
     private BscFileBizType bizType;
     private Long sourceId;
+    private Integer order;
     private BscFileFileStatus fileStatus;
     private Timestamp createAt;
     private Timestamp updateAt;
     private String remarks;
     private Boolean delFlag;
+    private Long version;
 
 }

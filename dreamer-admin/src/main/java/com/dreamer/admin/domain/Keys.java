@@ -47,6 +47,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<BscFileRecord> KEY_BSC_FILE_PRIMARY = UniqueKeys0.KEY_BSC_FILE_PRIMARY;
+    public static final UniqueKey<OgnCourseRecord> KEY_OGN_COURSE_PRIMARY = UniqueKeys0.KEY_OGN_COURSE_PRIMARY;
     public static final UniqueKey<OgnInfoRecord> KEY_OGN_INFO_PRIMARY = UniqueKeys0.KEY_OGN_INFO_PRIMARY;
     public static final UniqueKey<SysDictRecord> KEY_SYS_DICT_PRIMARY = UniqueKeys0.KEY_SYS_DICT_PRIMARY;
     public static final UniqueKey<SysDictRecord> KEY_SYS_DICT_SYS_DICT_GROUPNAME_KEY = UniqueKeys0.KEY_SYS_DICT_SYS_DICT_GROUPNAME_KEY;
@@ -83,6 +84,7 @@ public class Keys {
 
     private static class UniqueKeys0 extends AbstractKeys {
         public static final UniqueKey<BscFileRecord> KEY_BSC_FILE_PRIMARY = createUniqueKey(BscFile.BSC_FILE, "KEY_bsc_file_PRIMARY", BscFile.BSC_FILE.ID);
+        public static final UniqueKey<OgnCourseRecord> KEY_OGN_COURSE_PRIMARY = createUniqueKey(OgnCourse.OGN_COURSE, "KEY_ogn_course_PRIMARY", OgnCourse.OGN_COURSE.ID);
         public static final UniqueKey<OgnInfoRecord> KEY_OGN_INFO_PRIMARY = createUniqueKey(OgnInfo.OGN_INFO, "KEY_ogn_info_PRIMARY", OgnInfo.OGN_INFO.ID);
         public static final UniqueKey<SysDictRecord> KEY_SYS_DICT_PRIMARY = createUniqueKey(SysDict.SYS_DICT, "KEY_sys_dict_PRIMARY", SysDict.SYS_DICT.ID);
         public static final UniqueKey<SysDictRecord> KEY_SYS_DICT_SYS_DICT_GROUPNAME_KEY = createUniqueKey(SysDict.SYS_DICT, "KEY_sys_dict_sys_dict_groupname_key", SysDict.SYS_DICT.GROUP_NAME, SysDict.SYS_DICT.KEY);

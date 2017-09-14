@@ -35,7 +35,7 @@ public class BscFile extends TableImpl<BscFileRecord> {
      * The reference instance of <code>dreamer.bsc_file</code>
      */
     public static final BscFile BSC_FILE = new BscFile();
-    private static final long serialVersionUID = -1800327029;
+    private static final long serialVersionUID = 762252500;
     /**
      * The column <code>dreamer.bsc_file.id</code>. 主键
      */
@@ -49,13 +49,17 @@ public class BscFile extends TableImpl<BscFileRecord> {
      */
     public final TableField<BscFileRecord, String> FILE_URL = createField("file_url", org.jooq.impl.SQLDataType.VARCHAR.length(255).nullable(false), this, "文件url");
     /**
-     * The column <code>dreamer.bsc_file.biz_type</code>. 业务类型：机构banner
+     * The column <code>dreamer.bsc_file.biz_type</code>. 业务类型：机构banner；课程banner；
      */
-    public final TableField<BscFileRecord, BscFileBizType> BIZ_TYPE = createField("biz_type", org.jooq.util.mysql.MySQLDataType.VARCHAR.asEnumDataType(com.dreamer.admin.domain.enums.BscFileBizType.class), this, "业务类型：机构banner");
+    public final TableField<BscFileRecord, BscFileBizType> BIZ_TYPE = createField("biz_type", org.jooq.util.mysql.MySQLDataType.VARCHAR.asEnumDataType(com.dreamer.admin.domain.enums.BscFileBizType.class), this, "业务类型：机构banner；课程banner；");
     /**
      * The column <code>dreamer.bsc_file.source_id</code>. 业务ID
      */
     public final TableField<BscFileRecord, Long> SOURCE_ID = createField("source_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "业务ID");
+    /**
+     * The column <code>dreamer.bsc_file.order</code>.
+     */
+    public final TableField<BscFileRecord, Integer> ORDER = createField("order", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
     /**
      * The column <code>dreamer.bsc_file.file_status</code>. 文件状态：可用；不可用
      */
@@ -76,6 +80,10 @@ public class BscFile extends TableImpl<BscFileRecord> {
      * The column <code>dreamer.bsc_file.del_flag</code>. 删除标志
      */
     public final TableField<BscFileRecord, Boolean> DEL_FLAG = createField("del_flag", org.jooq.impl.SQLDataType.BIT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("b'0'", org.jooq.impl.SQLDataType.BIT)), this, "删除标志");
+    /**
+     * The column <code>dreamer.bsc_file.version</code>.
+     */
+    public final TableField<BscFileRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * Create a <code>dreamer.bsc_file</code> table reference
@@ -137,6 +145,14 @@ public class BscFile extends TableImpl<BscFileRecord> {
     @Override
     public List<UniqueKey<BscFileRecord>> getKeys() {
         return Arrays.<UniqueKey<BscFileRecord>>asList(Keys.KEY_BSC_FILE_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TableField<BscFileRecord, Long> getRecordVersion() {
+        return VERSION;
     }
 
     /**

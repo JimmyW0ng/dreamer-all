@@ -28,6 +28,11 @@ public class Tables {
     public static final BscFile BSC_FILE = com.dreamer.admin.domain.tables.BscFile.BSC_FILE;
 
     /**
+     * The table <code>dreamer.ogn_course</code>.
+     */
+    public static final OgnCourse OGN_COURSE = com.dreamer.admin.domain.tables.OgnCourse.OGN_COURSE;
+
+    /**
      * 机构信息表
      */
     public static final OgnInfo OGN_INFO = com.dreamer.admin.domain.tables.OgnInfo.OGN_INFO;

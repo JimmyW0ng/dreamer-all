@@ -33,7 +33,7 @@ public class WcSessionToken extends TableImpl<WcSessionTokenRecord> {
      * The reference instance of <code>dreamer.wc_session_token</code>
      */
     public static final WcSessionToken WC_SESSION_TOKEN = new WcSessionToken();
-    private static final long serialVersionUID = 1434271795;
+    private static final long serialVersionUID = 1218367330;
     /**
      * The column <code>dreamer.wc_session_token.id</code>. 主键
      */
@@ -51,9 +51,25 @@ public class WcSessionToken extends TableImpl<WcSessionTokenRecord> {
      */
     public final TableField<WcSessionTokenRecord, String> SESSION_KEY = createField("session_key", org.jooq.impl.SQLDataType.VARCHAR.length(255).nullable(false), this, "微信会话密钥");
     /**
-     * The column <code>dreamer.wc_session_token.create_time</code>. 创建时间
+     * The column <code>dreamer.wc_session_token.remarks</code>. 备注信息
      */
-    public final TableField<WcSessionTokenRecord, Timestamp> CREATE_TIME = createField("create_time", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "创建时间");
+    public final TableField<WcSessionTokenRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
+    /**
+     * The column <code>dreamer.wc_session_token.create_at</code>. 创建时间
+     */
+    public final TableField<WcSessionTokenRecord, Timestamp> CREATE_AT = createField("create_at", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "创建时间");
+    /**
+     * The column <code>dreamer.wc_session_token.update_at</code>. 更新时间
+     */
+    public final TableField<WcSessionTokenRecord, Timestamp> UPDATE_AT = createField("update_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "更新时间");
+    /**
+     * The column <code>dreamer.wc_session_token.del_flag</code>. 删除标志
+     */
+    public final TableField<WcSessionTokenRecord, Boolean> DEL_FLAG = createField("del_flag", org.jooq.impl.SQLDataType.BIT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("b'0'", org.jooq.impl.SQLDataType.BIT)), this, "删除标志");
+    /**
+     * The column <code>dreamer.wc_session_token.version</code>.
+     */
+    public final TableField<WcSessionTokenRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * Create a <code>dreamer.wc_session_token</code> table reference
@@ -115,6 +131,14 @@ public class WcSessionToken extends TableImpl<WcSessionTokenRecord> {
     @Override
     public List<UniqueKey<WcSessionTokenRecord>> getKeys() {
         return Arrays.<UniqueKey<WcSessionTokenRecord>>asList(Keys.KEY_WC_SESSION_TOKEN_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TableField<WcSessionTokenRecord, Long> getRecordVersion() {
+        return VERSION;
     }
 
     /**

@@ -20,5 +20,10 @@ public class OgnInfoPojo extends AbstractBasePojo {
     private String organPhone;
     private String organEmail;
     private String orgenUrl;
+    private String remarks;
+    private Timestamp createAt;
+    private Timestamp updateAt;
+    private Boolean delFlag;
+    private Long version;
 
 }
