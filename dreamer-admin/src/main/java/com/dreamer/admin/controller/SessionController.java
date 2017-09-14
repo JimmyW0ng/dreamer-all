@@ -2,6 +2,7 @@ package com.dreamer.admin.controller;
 
 import com.dreamer.admin.constant.Constant;
 import com.dreamer.admin.pojo.ResultDo;
+import com.dreamer.admin.service.OgnInfoService;
 import com.dreamer.admin.service.WcSessionTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class SessionController extends BaseController {
 
     @Autowired
     private WcSessionTokenService wcSessionTokenService;
+    @Autowired
+    private OgnInfoService ognInfoService;
 
     /**
      * 创建微信会话
@@ -79,14 +82,14 @@ public class SessionController extends BaseController {
     }
 
     /**
-     * 获取微信用户信息
+     * 获取微信端机构详情
      *
      * @return
      */
-    @RequestMapping(value = "/wechat/auth/info", method = RequestMethod.POST)
-    public ResultDo wechatMemberInfo(HttpServletRequest request) {
+    @RequestMapping(value = "/wechat/auth/ogn/info", method = RequestMethod.POST)
+    public ResultDo wechatOgnInfo(@RequestParam("ognId") Long ognId, HttpServletRequest request) {
         log.info("{}", request.getAttribute(Constant.WECHAT_REQ_CURRENT_SESSION));
-        return ResultDo.build().setResult("token验证成功");
+        return ognInfoService.getOgnDetail(ognId);
     }
 
 }

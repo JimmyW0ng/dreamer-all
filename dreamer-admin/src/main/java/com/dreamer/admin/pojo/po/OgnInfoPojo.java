@@ -1,6 +1,7 @@
 package com.dreamer.admin.pojo.po;
 
 import com.dreamer.admin.pojo.AbstractBasePojo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 @Data
 public class OgnInfoPojo extends AbstractBasePojo {
 
+    @JsonIgnore
     private Long id;
     private String organName;
     private String organEnglishName;
