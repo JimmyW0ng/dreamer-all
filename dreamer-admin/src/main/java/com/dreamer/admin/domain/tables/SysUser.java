@@ -34,7 +34,7 @@ public class SysUser extends TableImpl<SysUserRecord> {
      * The reference instance of <code>dreamer.sys_user</code>
      */
     public static final SysUser SYS_USER = new SysUser();
-    private static final long serialVersionUID = -1374104275;
+    private static final long serialVersionUID = 1241863612;
     /**
      * The column <code>dreamer.sys_user.id</code>. 编号
      */
@@ -92,9 +92,9 @@ public class SysUser extends TableImpl<SysUserRecord> {
      */
     public final TableField<SysUserRecord, Timestamp> UPDATE_AT = createField("update_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "更新时间");
     /**
-     * The column <code>dreamer.sys_user.remarks</code>. 备注信息
+     * The column <code>dreamer.sys_user.remark</code>. 备注信息
      */
-    public final TableField<SysUserRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
+    public final TableField<SysUserRecord, String> REMARK = createField("remark", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
     /**
      * The column <code>dreamer.sys_user.del_flag</code>. 删除标志
      */

@@ -30,7 +30,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements Record15<Long, Long, SysMenuType, String, String, String, String, Integer, SysMenuStatus, String, Timestamp, Timestamp, String, Boolean, Long> {
 
-    private static final long serialVersionUID = 1755762294;
+    private static final long serialVersionUID = 601216679;
 
     /**
      * Create a detached SysMenuRecord
@@ -42,7 +42,7 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     /**
      * Create a detached, initialised SysMenuRecord
      */
-    public SysMenuRecord(Long id, Long parentId, SysMenuType type, String name, String href, String target, String icon, Integer sort, SysMenuStatus status, String permission, Timestamp createAt, Timestamp updateAt, String remarks, Boolean delFlag, Long version) {
+    public SysMenuRecord(Long id, Long parentId, SysMenuType type, String name, String href, String target, String icon, Integer sort, SysMenuStatus status, String permission, Timestamp createAt, Timestamp updateAt, String remark, Boolean delFlag, Long version) {
         super(SysMenu.SYS_MENU);
 
         set(0, id);
@@ -57,7 +57,7 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
         set(9, permission);
         set(10, createAt);
         set(11, updateAt);
-        set(12, remarks);
+        set(12, remark);
         set(13, delFlag);
         set(14, version);
     }
@@ -243,16 +243,16 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
     }
 
     /**
-     * Getter for <code>dreamer.sys_menu.remarks</code>. 备注信息
+     * Getter for <code>dreamer.sys_menu.remark</code>. 备注信息
      */
-    public String getRemarks() {
+    public String getRemark() {
         return (String) get(12);
     }
 
     /**
-     * Setter for <code>dreamer.sys_menu.remarks</code>. 备注信息
+     * Setter for <code>dreamer.sys_menu.remark</code>. 备注信息
      */
-    public SysMenuRecord setRemarks(String value) {
+    public SysMenuRecord setRemark(String value) {
         set(12, value);
         return this;
     }
@@ -420,7 +420,7 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
      */
     @Override
     public Field<String> field13() {
-        return SysMenu.SYS_MENU.REMARKS;
+        return SysMenu.SYS_MENU.REMARK;
     }
 
     /**
@@ -540,7 +540,7 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
      */
     @Override
     public String value13() {
-        return getRemarks();
+        return getRemark();
     }
 
     /**
@@ -672,7 +672,7 @@ public class SysMenuRecord extends UpdatableRecordImpl<SysMenuRecord> implements
      */
     @Override
     public SysMenuRecord value13(String value) {
-        setRemarks(value);
+        setRemark(value);
         return this;
     }
 

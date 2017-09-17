@@ -29,7 +29,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements Record13<Long, String, String, String, String, String, Integer, SysDictStatus, Timestamp, Timestamp, String, Boolean, Long> {
 
-    private static final long serialVersionUID = 400400623;
+    private static final long serialVersionUID = -1178739200;
 
     /**
      * Create a detached SysDictRecord
@@ -41,7 +41,7 @@ public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements
     /**
      * Create a detached, initialised SysDictRecord
      */
-    public SysDictRecord(Long id, String label, String groupName, String key, String value, String description, Integer sort, SysDictStatus status, Timestamp createAt, Timestamp updateAt, String remarks, Boolean delFlag, Long version) {
+    public SysDictRecord(Long id, String label, String groupName, String key, String value, String description, Integer sort, SysDictStatus status, Timestamp createAt, Timestamp updateAt, String remark, Boolean delFlag, Long version) {
         super(SysDict.SYS_DICT);
 
         set(0, id);
@@ -54,7 +54,7 @@ public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements
         set(7, status);
         set(8, createAt);
         set(9, updateAt);
-        set(10, remarks);
+        set(10, remark);
         set(11, delFlag);
         set(12, version);
     }
@@ -150,14 +150,14 @@ public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements
     }
 
     /**
-     * Getter for <code>dreamer.sys_dict.sort</code>. ??????
+     * Getter for <code>dreamer.sys_dict.sort</code>. 排序
      */
     public Integer getSort() {
         return (Integer) get(6);
     }
 
     /**
-     * Setter for <code>dreamer.sys_dict.sort</code>. ??????
+     * Setter for <code>dreamer.sys_dict.sort</code>. 排序
      */
     public SysDictRecord setSort(Integer value) {
         set(6, value);
@@ -210,16 +210,16 @@ public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements
     }
 
     /**
-     * Getter for <code>dreamer.sys_dict.remarks</code>. 备注
+     * Getter for <code>dreamer.sys_dict.remark</code>. 备注
      */
-    public String getRemarks() {
+    public String getRemark() {
         return (String) get(10);
     }
 
     /**
-     * Setter for <code>dreamer.sys_dict.remarks</code>. 备注
+     * Setter for <code>dreamer.sys_dict.remark</code>. 备注
      */
-    public SysDictRecord setRemarks(String value) {
+    public SysDictRecord setRemark(String value) {
         set(10, value);
         return this;
     }
@@ -371,7 +371,7 @@ public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements
      */
     @Override
     public Field<String> field11() {
-        return SysDict.SYS_DICT.REMARKS;
+        return SysDict.SYS_DICT.REMARK;
     }
 
     /**
@@ -475,7 +475,7 @@ public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements
      */
     @Override
     public String value11() {
-        return getRemarks();
+        return getRemark();
     }
 
     /**
@@ -589,7 +589,7 @@ public class SysDictRecord extends UpdatableRecordImpl<SysDictRecord> implements
      */
     @Override
     public SysDictRecord value11(String value) {
-        setRemarks(value);
+        setRemark(value);
         return this;
     }
 

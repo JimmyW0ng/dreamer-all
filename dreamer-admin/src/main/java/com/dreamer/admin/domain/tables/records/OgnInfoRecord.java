@@ -28,7 +28,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({"all", "unchecked", "rawtypes"})
 public class OgnInfoRecord extends UpdatableRecordImpl<OgnInfoRecord> implements Record14<Long, String, String, String, String, Timestamp, String, String, String, String, Timestamp, Timestamp, Boolean, Long> {
 
-    private static final long serialVersionUID = 1198107613;
+    private static final long serialVersionUID = -1224677642;
 
     /**
      * Create a detached OgnInfoRecord
@@ -40,7 +40,7 @@ public class OgnInfoRecord extends UpdatableRecordImpl<OgnInfoRecord> implements
     /**
      * Create a detached, initialised OgnInfoRecord
      */
-    public OgnInfoRecord(Long id, String organName, String organEnglishName, String organAddress, String organShortIntroduce, Timestamp organCreateDate, String organPhone, String organEmail, String orgenUrl, String remarks, Timestamp createAt, Timestamp updateAt, Boolean delFlag, Long version) {
+    public OgnInfoRecord(Long id, String organName, String organEnglishName, String organAddress, String organShortIntroduce, Timestamp organCreateDate, String organPhone, String organEmail, String orgenUrl, String remark, Timestamp createAt, Timestamp updateAt, Boolean delFlag, Long version) {
         super(OgnInfo.OGN_INFO);
 
         set(0, id);
@@ -52,7 +52,7 @@ public class OgnInfoRecord extends UpdatableRecordImpl<OgnInfoRecord> implements
         set(6, organPhone);
         set(7, organEmail);
         set(8, orgenUrl);
-        set(9, remarks);
+        set(9, remark);
         set(10, createAt);
         set(11, updateAt);
         set(12, delFlag);
@@ -195,16 +195,16 @@ public class OgnInfoRecord extends UpdatableRecordImpl<OgnInfoRecord> implements
     }
 
     /**
-     * Getter for <code>dreamer.ogn_info.remarks</code>. 备注信息
+     * Getter for <code>dreamer.ogn_info.remark</code>. 备注信息
      */
-    public String getRemarks() {
+    public String getRemark() {
         return (String) get(9);
     }
 
     /**
-     * Setter for <code>dreamer.ogn_info.remarks</code>. 备注信息
+     * Setter for <code>dreamer.ogn_info.remark</code>. 备注信息
      */
-    public OgnInfoRecord setRemarks(String value) {
+    public OgnInfoRecord setRemark(String value) {
         set(9, value);
         return this;
     }
@@ -378,7 +378,7 @@ public class OgnInfoRecord extends UpdatableRecordImpl<OgnInfoRecord> implements
      */
     @Override
     public Field<String> field10() {
-        return OgnInfo.OGN_INFO.REMARKS;
+        return OgnInfo.OGN_INFO.REMARK;
     }
 
     /**
@@ -490,7 +490,7 @@ public class OgnInfoRecord extends UpdatableRecordImpl<OgnInfoRecord> implements
      */
     @Override
     public String value10() {
-        return getRemarks();
+        return getRemark();
     }
 
     /**
@@ -611,7 +611,7 @@ public class OgnInfoRecord extends UpdatableRecordImpl<OgnInfoRecord> implements
      */
     @Override
     public OgnInfoRecord value10(String value) {
-        setRemarks(value);
+        setRemark(value);
         return this;
     }
 

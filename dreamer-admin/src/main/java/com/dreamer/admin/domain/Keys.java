@@ -32,6 +32,8 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<BscFileRecord, Long> IDENTITY_BSC_FILE = Identities0.IDENTITY_BSC_FILE;
+    public static final Identity<CstCourseCatalogRecord, Long> IDENTITY_CST_COURSE_CATALOG = Identities0.IDENTITY_CST_COURSE_CATALOG;
+    public static final Identity<OgnCourseRecord, Long> IDENTITY_OGN_COURSE = Identities0.IDENTITY_OGN_COURSE;
     public static final Identity<OgnInfoRecord, Long> IDENTITY_OGN_INFO = Identities0.IDENTITY_OGN_INFO;
     public static final Identity<SysDictRecord, Long> IDENTITY_SYS_DICT = Identities0.IDENTITY_SYS_DICT;
     public static final Identity<SysLogRecord, Long> IDENTITY_SYS_LOG = Identities0.IDENTITY_SYS_LOG;
@@ -47,6 +49,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<BscFileRecord> KEY_BSC_FILE_PRIMARY = UniqueKeys0.KEY_BSC_FILE_PRIMARY;
+    public static final UniqueKey<CstCourseCatalogRecord> KEY_CST_COURSE_CATALOG_PRIMARY = UniqueKeys0.KEY_CST_COURSE_CATALOG_PRIMARY;
     public static final UniqueKey<OgnCourseRecord> KEY_OGN_COURSE_PRIMARY = UniqueKeys0.KEY_OGN_COURSE_PRIMARY;
     public static final UniqueKey<OgnInfoRecord> KEY_OGN_INFO_PRIMARY = UniqueKeys0.KEY_OGN_INFO_PRIMARY;
     public static final UniqueKey<SysDictRecord> KEY_SYS_DICT_PRIMARY = UniqueKeys0.KEY_SYS_DICT_PRIMARY;
@@ -71,6 +74,8 @@ public class Keys {
 
     private static class Identities0 extends AbstractKeys {
         public static Identity<BscFileRecord, Long> IDENTITY_BSC_FILE = createIdentity(BscFile.BSC_FILE, BscFile.BSC_FILE.ID);
+        public static Identity<CstCourseCatalogRecord, Long> IDENTITY_CST_COURSE_CATALOG = createIdentity(CstCourseCatalog.CST_COURSE_CATALOG, CstCourseCatalog.CST_COURSE_CATALOG.ID);
+        public static Identity<OgnCourseRecord, Long> IDENTITY_OGN_COURSE = createIdentity(OgnCourse.OGN_COURSE, OgnCourse.OGN_COURSE.ID);
         public static Identity<OgnInfoRecord, Long> IDENTITY_OGN_INFO = createIdentity(OgnInfo.OGN_INFO, OgnInfo.OGN_INFO.ID);
         public static Identity<SysDictRecord, Long> IDENTITY_SYS_DICT = createIdentity(SysDict.SYS_DICT, SysDict.SYS_DICT.ID);
         public static Identity<SysLogRecord, Long> IDENTITY_SYS_LOG = createIdentity(SysLog.SYS_LOG, SysLog.SYS_LOG.ID);
@@ -84,6 +89,7 @@ public class Keys {
 
     private static class UniqueKeys0 extends AbstractKeys {
         public static final UniqueKey<BscFileRecord> KEY_BSC_FILE_PRIMARY = createUniqueKey(BscFile.BSC_FILE, "KEY_bsc_file_PRIMARY", BscFile.BSC_FILE.ID);
+        public static final UniqueKey<CstCourseCatalogRecord> KEY_CST_COURSE_CATALOG_PRIMARY = createUniqueKey(CstCourseCatalog.CST_COURSE_CATALOG, "KEY_cst_course_catalog_PRIMARY", CstCourseCatalog.CST_COURSE_CATALOG.ID);
         public static final UniqueKey<OgnCourseRecord> KEY_OGN_COURSE_PRIMARY = createUniqueKey(OgnCourse.OGN_COURSE, "KEY_ogn_course_PRIMARY", OgnCourse.OGN_COURSE.ID);
         public static final UniqueKey<OgnInfoRecord> KEY_OGN_INFO_PRIMARY = createUniqueKey(OgnInfo.OGN_INFO, "KEY_ogn_info_PRIMARY", OgnInfo.OGN_INFO.ID);
         public static final UniqueKey<SysDictRecord> KEY_SYS_DICT_PRIMARY = createUniqueKey(SysDict.SYS_DICT, "KEY_sys_dict_PRIMARY", SysDict.SYS_DICT.ID);

@@ -33,7 +33,7 @@ public class WcSessionToken extends TableImpl<WcSessionTokenRecord> {
      * The reference instance of <code>dreamer.wc_session_token</code>
      */
     public static final WcSessionToken WC_SESSION_TOKEN = new WcSessionToken();
-    private static final long serialVersionUID = 1218367330;
+    private static final long serialVersionUID = 197332097;
     /**
      * The column <code>dreamer.wc_session_token.id</code>. 主键
      */
@@ -69,7 +69,7 @@ public class WcSessionToken extends TableImpl<WcSessionTokenRecord> {
     /**
      * The column <code>dreamer.wc_session_token.version</code>.
      */
-    public final TableField<WcSessionTokenRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<WcSessionTokenRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
      * Create a <code>dreamer.wc_session_token</code> table reference

@@ -35,7 +35,7 @@ public class BscFile extends TableImpl<BscFileRecord> {
      * The reference instance of <code>dreamer.bsc_file</code>
      */
     public static final BscFile BSC_FILE = new BscFile();
-    private static final long serialVersionUID = 762252500;
+    private static final long serialVersionUID = -717612884;
     /**
      * The column <code>dreamer.bsc_file.id</code>. 主键
      */
@@ -73,9 +73,9 @@ public class BscFile extends TableImpl<BscFileRecord> {
      */
     public final TableField<BscFileRecord, Timestamp> UPDATE_AT = createField("update_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "更新时间");
     /**
-     * The column <code>dreamer.bsc_file.remarks</code>. 备注信息
+     * The column <code>dreamer.bsc_file.remark</code>. 备注信息
      */
-    public final TableField<BscFileRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
+    public final TableField<BscFileRecord, String> REMARK = createField("remark", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
     /**
      * The column <code>dreamer.bsc_file.del_flag</code>. 删除标志
      */
@@ -83,7 +83,7 @@ public class BscFile extends TableImpl<BscFileRecord> {
     /**
      * The column <code>dreamer.bsc_file.version</code>.
      */
-    public final TableField<BscFileRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<BscFileRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
      * Create a <code>dreamer.bsc_file</code> table reference

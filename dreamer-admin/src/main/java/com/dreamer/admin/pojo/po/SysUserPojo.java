@@ -33,7 +33,7 @@ public class SysUserPojo extends AbstractBasePojo {
     private String avatars;
     private Timestamp createAt;
     private Timestamp updateAt;
-    private String remarks;
+    private String remark;
     private Boolean delFlag;
 
 }

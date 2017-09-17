@@ -10,21 +10,16 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 
-/**
- * 角色表
- */
 @Data
-public class SysRolePojo extends AbstractBasePojo {
-
-    private static final long serialVersionUID = -1100170357;
+public class CstCourseCatalogPojo extends AbstractBasePojo {
 
     private Long id;
-    private String name;
-    private String createBy;
+    private Long parentId;
+    private String label;
     private Timestamp createAt;
-    private String updateBy;
     private Timestamp updateAt;
     private String remark;
     private Boolean delFlag;
+    private Long version;
 
 }

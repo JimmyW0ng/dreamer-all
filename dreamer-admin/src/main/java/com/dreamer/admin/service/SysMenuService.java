@@ -175,7 +175,7 @@ public class SysMenuService {
             pojo.setCreateAt(null);
             pojo.setUpdateAt(null);
             pojo.setDelFlag(null);
-            pojo.setRemarks(null);
+            pojo.setRemark(null);
             Collection<Condition> condition = Lists.newArrayList();
             condition.add(SYS_MENU.PARENT_ID.eq(pojo.getId()));
             condition.add(SYS_MENU.DEL_FLAG.eq(false));
@@ -184,7 +184,7 @@ public class SysMenuService {
                 pagePojo.setCreateAt(null);
                 pagePojo.setUpdateAt(null);
                 pagePojo.setDelFlag(null);
-                pagePojo.setRemarks(null);
+                pagePojo.setRemark(null);
                 Collection<Condition> actionCondition = Lists.newArrayList();
                 actionCondition.add(SYS_MENU.PARENT_ID.eq(pagePojo.getId()));
                 actionCondition.add(SYS_MENU.DEL_FLAG.eq(false));
@@ -193,7 +193,7 @@ public class SysMenuService {
                     actionPojo.setCreateAt(null);
                     actionPojo.setUpdateAt(null);
                     actionPojo.setDelFlag(null);
-                    actionPojo.setRemarks(null);
+                    actionPojo.setRemark(null);
                 });
                 pagePojo.setList(actionlist);
             });

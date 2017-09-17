@@ -28,7 +28,12 @@ public class Tables {
     public static final BscFile BSC_FILE = com.dreamer.admin.domain.tables.BscFile.BSC_FILE;
 
     /**
-     * The table <code>dreamer.ogn_course</code>.
+     * The table <code>dreamer.cst_course_catalog</code>.
+     */
+    public static final CstCourseCatalog CST_COURSE_CATALOG = com.dreamer.admin.domain.tables.CstCourseCatalog.CST_COURSE_CATALOG;
+
+    /**
+     * 机构课程表
      */
     public static final OgnCourse OGN_COURSE = com.dreamer.admin.domain.tables.OgnCourse.OGN_COURSE;
 

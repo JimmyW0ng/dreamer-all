@@ -28,7 +28,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements Record8<Long, String, String, Timestamp, String, Timestamp, String, Boolean> {
 
-    private static final long serialVersionUID = 1645594681;
+    private static final long serialVersionUID = 488822232;
 
     /**
      * Create a detached SysRoleRecord
@@ -40,7 +40,7 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     /**
      * Create a detached, initialised SysRoleRecord
      */
-    public SysRoleRecord(Long id, String name, String createBy, Timestamp createAt, String updateBy, Timestamp updateAt, String remarks, Boolean delFlag) {
+    public SysRoleRecord(Long id, String name, String createBy, Timestamp createAt, String updateBy, Timestamp updateAt, String remark, Boolean delFlag) {
         super(SysRole.SYS_ROLE);
 
         set(0, id);
@@ -49,7 +49,7 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
         set(3, createAt);
         set(4, updateBy);
         set(5, updateAt);
-        set(6, remarks);
+        set(6, remark);
         set(7, delFlag);
     }
 
@@ -144,16 +144,16 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
     }
 
     /**
-     * Getter for <code>dreamer.sys_role.remarks</code>. 备注信息
+     * Getter for <code>dreamer.sys_role.remark</code>. 备注信息
      */
-    public String getRemarks() {
+    public String getRemark() {
         return (String) get(6);
     }
 
     /**
-     * Setter for <code>dreamer.sys_role.remarks</code>. 备注信息
+     * Setter for <code>dreamer.sys_role.remark</code>. 备注信息
      */
-    public SysRoleRecord setRemarks(String value) {
+    public SysRoleRecord setRemark(String value) {
         set(6, value);
         return this;
     }
@@ -258,7 +258,7 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
      */
     @Override
     public Field<String> field7() {
-        return SysRole.SYS_ROLE.REMARKS;
+        return SysRole.SYS_ROLE.REMARK;
     }
 
     /**
@@ -322,7 +322,7 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
      */
     @Override
     public String value7() {
-        return getRemarks();
+        return getRemark();
     }
 
     /**
@@ -392,7 +392,7 @@ public class SysRoleRecord extends UpdatableRecordImpl<SysRoleRecord> implements
      */
     @Override
     public SysRoleRecord value7(String value) {
-        setRemarks(value);
+        setRemark(value);
         return this;
     }
 

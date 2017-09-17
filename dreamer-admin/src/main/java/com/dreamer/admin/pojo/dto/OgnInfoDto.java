@@ -2,6 +2,7 @@ package com.dreamer.admin.pojo.dto;
 
 import com.dreamer.admin.pojo.AbstractBasePojo;
 import com.dreamer.admin.pojo.po.BscFilePojo;
+import com.dreamer.admin.pojo.po.OgnCoursePojo;
 import com.dreamer.admin.pojo.po.OgnInfoPojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,7 @@ import java.util.List;
 public class OgnInfoDto extends AbstractBasePojo {
 
     private OgnInfoPojo ognInfoPojo;
-    private List<BscFilePojo> bscFilePojo;
+    private List<BscFilePojo> ognBanners;
+    private List<OgnCoursePojo> ognCourses;
 
 }

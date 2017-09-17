@@ -34,7 +34,7 @@ public class SysDict extends TableImpl<SysDictRecord> {
      * The reference instance of <code>dreamer.sys_dict</code>
      */
     public static final SysDict SYS_DICT = new SysDict();
-    private static final long serialVersionUID = 1781705098;
+    private static final long serialVersionUID = 1645036886;
     /**
      * The column <code>dreamer.sys_dict.id</code>.
      */
@@ -60,9 +60,9 @@ public class SysDict extends TableImpl<SysDictRecord> {
      */
     public final TableField<SysDictRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR.length(1024), this, "描述");
     /**
-     * The column <code>dreamer.sys_dict.sort</code>. ??????
+     * The column <code>dreamer.sys_dict.sort</code>. 排序
      */
-    public final TableField<SysDictRecord, Integer> SORT = createField("sort", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "??????");
+    public final TableField<SysDictRecord, Integer> SORT = createField("sort", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "排序");
     /**
      * The column <code>dreamer.sys_dict.status</code>.
      */
@@ -76,9 +76,9 @@ public class SysDict extends TableImpl<SysDictRecord> {
      */
     public final TableField<SysDictRecord, Timestamp> UPDATE_AT = createField("update_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "更新时间");
     /**
-     * The column <code>dreamer.sys_dict.remarks</code>. 备注
+     * The column <code>dreamer.sys_dict.remark</code>. 备注
      */
-    public final TableField<SysDictRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(256), this, "备注");
+    public final TableField<SysDictRecord, String> REMARK = createField("remark", org.jooq.impl.SQLDataType.VARCHAR.length(256), this, "备注");
     /**
      * The column <code>dreamer.sys_dict.del_flag</code>. 删除标记
      */
@@ -86,7 +86,7 @@ public class SysDict extends TableImpl<SysDictRecord> {
     /**
      * The column <code>dreamer.sys_dict.version</code>.
      */
-    public final TableField<SysDictRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<SysDictRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
      * Create a <code>dreamer.sys_dict</code> table reference

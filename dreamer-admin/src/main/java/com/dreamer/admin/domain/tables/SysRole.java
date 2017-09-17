@@ -33,7 +33,7 @@ public class SysRole extends TableImpl<SysRoleRecord> {
      * The reference instance of <code>dreamer.sys_role</code>
      */
     public static final SysRole SYS_ROLE = new SysRole();
-    private static final long serialVersionUID = -28958336;
+    private static final long serialVersionUID = -1440277843;
     /**
      * The column <code>dreamer.sys_role.id</code>. 编号
      */
@@ -59,9 +59,9 @@ public class SysRole extends TableImpl<SysRoleRecord> {
      */
     public final TableField<SysRoleRecord, Timestamp> UPDATE_AT = createField("update_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "更新时间");
     /**
-     * The column <code>dreamer.sys_role.remarks</code>. 备注信息
+     * The column <code>dreamer.sys_role.remark</code>. 备注信息
      */
-    public final TableField<SysRoleRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
+    public final TableField<SysRoleRecord, String> REMARK = createField("remark", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
     /**
      * The column <code>dreamer.sys_role.del_flag</code>. 删除标记
      */

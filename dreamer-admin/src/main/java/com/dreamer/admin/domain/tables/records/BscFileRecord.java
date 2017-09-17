@@ -30,7 +30,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({"all", "unchecked", "rawtypes"})
 public class BscFileRecord extends UpdatableRecordImpl<BscFileRecord> implements Record12<Long, String, String, BscFileBizType, Long, Integer, BscFileFileStatus, Timestamp, Timestamp, String, Boolean, Long> {
 
-    private static final long serialVersionUID = -140489675;
+    private static final long serialVersionUID = -1864757098;
 
     /**
      * Create a detached BscFileRecord
@@ -42,7 +42,7 @@ public class BscFileRecord extends UpdatableRecordImpl<BscFileRecord> implements
     /**
      * Create a detached, initialised BscFileRecord
      */
-    public BscFileRecord(Long id, String fileName, String fileUrl, BscFileBizType bizType, Long sourceId, Integer order, BscFileFileStatus fileStatus, Timestamp createAt, Timestamp updateAt, String remarks, Boolean delFlag, Long version) {
+    public BscFileRecord(Long id, String fileName, String fileUrl, BscFileBizType bizType, Long sourceId, Integer order, BscFileFileStatus fileStatus, Timestamp createAt, Timestamp updateAt, String remark, Boolean delFlag, Long version) {
         super(BscFile.BSC_FILE);
 
         set(0, id);
@@ -54,7 +54,7 @@ public class BscFileRecord extends UpdatableRecordImpl<BscFileRecord> implements
         set(6, fileStatus);
         set(7, createAt);
         set(8, updateAt);
-        set(9, remarks);
+        set(9, remark);
         set(10, delFlag);
         set(11, version);
     }
@@ -195,16 +195,16 @@ public class BscFileRecord extends UpdatableRecordImpl<BscFileRecord> implements
     }
 
     /**
-     * Getter for <code>dreamer.bsc_file.remarks</code>. 备注信息
+     * Getter for <code>dreamer.bsc_file.remark</code>. 备注信息
      */
-    public String getRemarks() {
+    public String getRemark() {
         return (String) get(9);
     }
 
     /**
-     * Setter for <code>dreamer.bsc_file.remarks</code>. 备注信息
+     * Setter for <code>dreamer.bsc_file.remark</code>. 备注信息
      */
-    public BscFileRecord setRemarks(String value) {
+    public BscFileRecord setRemark(String value) {
         set(9, value);
         return this;
     }
@@ -348,7 +348,7 @@ public class BscFileRecord extends UpdatableRecordImpl<BscFileRecord> implements
      */
     @Override
     public Field<String> field10() {
-        return BscFile.BSC_FILE.REMARKS;
+        return BscFile.BSC_FILE.REMARK;
     }
 
     /**
@@ -444,7 +444,7 @@ public class BscFileRecord extends UpdatableRecordImpl<BscFileRecord> implements
      */
     @Override
     public String value10() {
-        return getRemarks();
+        return getRemark();
     }
 
     /**
@@ -549,7 +549,7 @@ public class BscFileRecord extends UpdatableRecordImpl<BscFileRecord> implements
      */
     @Override
     public BscFileRecord value10(String value) {
-        setRemarks(value);
+        setRemark(value);
         return this;
     }
 

@@ -33,7 +33,8 @@ public class OgnCoursePojo extends AbstractBasePojo {
     private Timestamp onlineTime;
     private Timestamp enterTimeStart;
     private Timestamp enterTimeEnd;
-    private String remarks;
+    private String headImage;
+    private String remark;
     private Timestamp createAt;
     private Timestamp updateAt;
     private Boolean delFlag;

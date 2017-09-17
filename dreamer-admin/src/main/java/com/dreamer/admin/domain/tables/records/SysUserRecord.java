@@ -29,7 +29,7 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements Record16<Long, String, String, String, String, String, String, String, SysUserStatus, String, Timestamp, String, Timestamp, Timestamp, String, Boolean> {
 
-    private static final long serialVersionUID = 871076178;
+    private static final long serialVersionUID = -1635432415;
 
     /**
      * Create a detached SysUserRecord
@@ -41,7 +41,7 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     /**
      * Create a detached, initialised SysUserRecord
      */
-    public SysUserRecord(Long id, String loginName, String password, String no, String name, String email, String phone, String mobile, SysUserStatus status, String loginIp, Timestamp loginTime, String avatars, Timestamp createAt, Timestamp updateAt, String remarks, Boolean delFlag) {
+    public SysUserRecord(Long id, String loginName, String password, String no, String name, String email, String phone, String mobile, SysUserStatus status, String loginIp, Timestamp loginTime, String avatars, Timestamp createAt, Timestamp updateAt, String remark, Boolean delFlag) {
         super(SysUser.SYS_USER);
 
         set(0, id);
@@ -58,7 +58,7 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
         set(11, avatars);
         set(12, createAt);
         set(13, updateAt);
-        set(14, remarks);
+        set(14, remark);
         set(15, delFlag);
     }
 
@@ -273,16 +273,16 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
     }
 
     /**
-     * Getter for <code>dreamer.sys_user.remarks</code>. 备注信息
+     * Getter for <code>dreamer.sys_user.remark</code>. 备注信息
      */
-    public String getRemarks() {
+    public String getRemark() {
         return (String) get(14);
     }
 
     /**
-     * Setter for <code>dreamer.sys_user.remarks</code>. 备注信息
+     * Setter for <code>dreamer.sys_user.remark</code>. 备注信息
      */
-    public SysUserRecord setRemarks(String value) {
+    public SysUserRecord setRemark(String value) {
         set(14, value);
         return this;
     }
@@ -451,7 +451,7 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
      */
     @Override
     public Field<String> field15() {
-        return SysUser.SYS_USER.REMARKS;
+        return SysUser.SYS_USER.REMARK;
     }
 
     /**
@@ -579,7 +579,7 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
      */
     @Override
     public String value15() {
-        return getRemarks();
+        return getRemark();
     }
 
     /**
@@ -721,7 +721,7 @@ public class SysUserRecord extends UpdatableRecordImpl<SysUserRecord> implements
      */
     @Override
     public SysUserRecord value15(String value) {
-        setRemarks(value);
+        setRemark(value);
         return this;
     }
 

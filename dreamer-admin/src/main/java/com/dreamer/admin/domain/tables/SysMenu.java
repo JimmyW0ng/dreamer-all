@@ -35,7 +35,7 @@ public class SysMenu extends TableImpl<SysMenuRecord> {
      * The reference instance of <code>dreamer.sys_menu</code>
      */
     public static final SysMenu SYS_MENU = new SysMenu();
-    private static final long serialVersionUID = -1062854198;
+    private static final long serialVersionUID = 1667121041;
     /**
      * The column <code>dreamer.sys_menu.id</code>. 编号
      */
@@ -85,17 +85,17 @@ public class SysMenu extends TableImpl<SysMenuRecord> {
      */
     public final TableField<SysMenuRecord, Timestamp> UPDATE_AT = createField("update_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "更新时间");
     /**
-     * The column <code>dreamer.sys_menu.remarks</code>. 备注信息
+     * The column <code>dreamer.sys_menu.remark</code>. 备注信息
      */
-    public final TableField<SysMenuRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
+    public final TableField<SysMenuRecord, String> REMARK = createField("remark", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
     /**
      * The column <code>dreamer.sys_menu.del_flag</code>. 删除标记
      */
-    public final TableField<SysMenuRecord, Boolean> DEL_FLAG = createField("del_flag", org.jooq.impl.SQLDataType.BIT.nullable(false), this, "删除标记");
+    public final TableField<SysMenuRecord, Boolean> DEL_FLAG = createField("del_flag", org.jooq.impl.SQLDataType.BIT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("b'0'", org.jooq.impl.SQLDataType.BIT)), this, "删除标记");
     /**
      * The column <code>dreamer.sys_menu.version</code>.
      */
-    public final TableField<SysMenuRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<SysMenuRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
      * Create a <code>dreamer.sys_menu</code> table reference

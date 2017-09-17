@@ -41,7 +41,7 @@ public class SysMenuPojo extends AbstractBasePojo {
     private String permission;
     private Timestamp createAt;
     private Timestamp updateAt;
-    private String remarks;
+    private String remark;
     private Boolean delFlag;
     private Long version;
 

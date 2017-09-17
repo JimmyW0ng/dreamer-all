@@ -29,7 +29,7 @@ public class SysDictPojo extends AbstractBasePojo {
     private SysDictStatus status;
     private Timestamp createAt;
     private Timestamp updateAt;
-    private String remarks;
+    private String remark;
     private Boolean delFlag;
     private Long version;
 

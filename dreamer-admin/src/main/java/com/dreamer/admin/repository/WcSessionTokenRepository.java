@@ -28,7 +28,7 @@ public class WcSessionTokenRepository extends AbstractCRUDRepository<WcSessionTo
      */
     public int deleteTimeoutToken(Timestamp outTime) {
         return dslContext.deleteFrom(WC_SESSION_TOKEN)
-                .where(WC_SESSION_TOKEN.CREATE_TIME.le(outTime))
+                .where(WC_SESSION_TOKEN.CREATE_AT.le(outTime))
                 .execute();
     }
 }

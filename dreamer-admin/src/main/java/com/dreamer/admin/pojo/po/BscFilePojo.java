@@ -27,7 +27,7 @@ public class BscFilePojo extends AbstractBasePojo {
     @JsonIgnore
     private Timestamp updateAt;
     @JsonIgnore
-    private String remarks;
+    private String remark;
     @JsonIgnore
     private Boolean delFlag;
     private Long version;

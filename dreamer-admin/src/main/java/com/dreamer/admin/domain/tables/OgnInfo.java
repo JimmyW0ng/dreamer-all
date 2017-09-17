@@ -34,7 +34,7 @@ public class OgnInfo extends TableImpl<OgnInfoRecord> {
      * The reference instance of <code>dreamer.ogn_info</code>
      */
     public static final OgnInfo OGN_INFO = new OgnInfo();
-    private static final long serialVersionUID = 371146149;
+    private static final long serialVersionUID = 19179415;
     /**
      * The column <code>dreamer.ogn_info.id</code>. 主键
      */
@@ -72,9 +72,9 @@ public class OgnInfo extends TableImpl<OgnInfoRecord> {
      */
     public final TableField<OgnInfoRecord, String> ORGEN_URL = createField("orgen_url", org.jooq.impl.SQLDataType.VARCHAR.length(32), this, "机构官方网址");
     /**
-     * The column <code>dreamer.ogn_info.remarks</code>. 备注信息
+     * The column <code>dreamer.ogn_info.remark</code>. 备注信息
      */
-    public final TableField<OgnInfoRecord, String> REMARKS = createField("remarks", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
+    public final TableField<OgnInfoRecord, String> REMARK = createField("remark", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "备注信息");
     /**
      * The column <code>dreamer.ogn_info.create_at</code>. 创建时间
      */
@@ -90,7 +90,7 @@ public class OgnInfo extends TableImpl<OgnInfoRecord> {
     /**
      * The column <code>dreamer.ogn_info.version</code>.
      */
-    public final TableField<OgnInfoRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<OgnInfoRecord, Long> VERSION = createField("version", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
      * Create a <code>dreamer.ogn_info</code> table reference

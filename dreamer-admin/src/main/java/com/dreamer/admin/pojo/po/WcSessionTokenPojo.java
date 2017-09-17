@@ -15,7 +15,7 @@ public class WcSessionTokenPojo extends AbstractBasePojo {
     private String sessionToken;
     private String openId;
     private String sessionKey;
-    private String remarks;
+    private String remark;
     private Timestamp createAt;
     private Timestamp updateAt;
     private Boolean delFlag;
